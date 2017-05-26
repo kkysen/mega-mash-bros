@@ -13,4 +13,10 @@ public class Hurtbox extends Box {
         return intersectionArea(hitbox) * hitbox.damage * DAMAGE_SCALE;
     }
     
+    public float collide(final Hitbox hitbox) {
+        final float damage = damageTakenBy(hitbox);
+        hitbox.player.attack(damage);
+        return damage;
+    }
+    
 }

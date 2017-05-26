@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Hitbox extends Box {
     
+    public final Player player;
+    
     final float damage;
     
 }
