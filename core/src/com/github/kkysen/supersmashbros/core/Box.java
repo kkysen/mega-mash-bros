@@ -5,14 +5,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 
-import lombok.RequiredArgsConstructor;
-
 /**
  * 
  * 
  * @author Khyber Sen
  */
-@RequiredArgsConstructor
 public class Box implements Poolable {
     
     private static final Pool<Rectangle> pool = new Pool<Rectangle>() {
@@ -24,7 +21,15 @@ public class Box implements Poolable {
         
     };
     
-    private Rectangle rectangle;
+    private final Rectangle rectangle;
+    
+    public Box(final Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+    
+    public Box() {
+        this(pool.obtain());
+    }
     
     @Override
     public void reset() {

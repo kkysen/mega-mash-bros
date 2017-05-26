@@ -21,13 +21,19 @@ public class World implements Renderable, Disposable {
     
     private boolean renderedStatics = false;
     private final Texture background;
-    private final Sprite platform;
+    private final Platform platform;
+    
+    public World(final Texture background, final Sprite platform, final Player... players) {
+        this.background = background;
+        this.platform = new Platform(platform);
+        this.players = new Array<>(players);
+    }
     
     @Override
     public void render(final Batch batch) {
         if (!renderedStatics) {
             batch.draw(background, 0, 0);
-            platform.draw(batch);
+            platform.render(batch);
             renderedStatics = true;
         }
         for (int i = 0; i < players.size; i++) {
