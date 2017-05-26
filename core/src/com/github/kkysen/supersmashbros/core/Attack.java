@@ -1,5 +1,7 @@
 package com.github.kkysen.supersmashbros.core;
 
+import com.github.kkysen.supersmashbros.actions.Action;
+
 /**
  * 
  * 

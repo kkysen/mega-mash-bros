@@ -3,7 +3,7 @@ package com.github.kkysen.supersmashbros.players;
 import java.util.EnumMap;
 
 import com.github.kkysen.libgdx.util.KeyBinding;
-import com.github.kkysen.supersmashbros.core.Action;
+import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.core.Player;
 
 /**

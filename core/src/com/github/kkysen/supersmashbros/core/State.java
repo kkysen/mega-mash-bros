@@ -33,7 +33,7 @@ public abstract class State implements Renderable, Poolable {
     public void render(final Batch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
         final Texture frame = animation.getKeyFrame(stateTime);
-        batch.draw(frame, position.x, position.y); // FIXME type T
+        batch.draw(frame, position.x, position.y);
         // TODO
     }
     

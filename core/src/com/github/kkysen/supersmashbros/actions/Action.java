@@ -1,7 +1,9 @@
-package com.github.kkysen.supersmashbros.core;
+package com.github.kkysen.supersmashbros.actions;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.github.kkysen.libgdx.util.KeyBinding;
+import com.github.kkysen.supersmashbros.core.State;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,8 +13,10 @@ import lombok.RequiredArgsConstructor;
  * @author Khyber Sen
  */
 @RequiredArgsConstructor
-public abstract class Action {
+public class Action {
     
+    private final State state;
+    public final KeyBinding keyBinding;
     private final float cooldown;
     
     private float elapsedTime;
@@ -24,9 +28,7 @@ public abstract class Action {
             return state;
         }
         elapsedTime = 0;
-        return newState();
+        return state;
     }
-    
-    protected abstract State newState();
     
 }

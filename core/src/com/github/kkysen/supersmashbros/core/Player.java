@@ -11,26 +11,21 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
 import com.github.kkysen.libgdx.util.KeyBinding;
 import com.github.kkysen.libgdx.util.Renderable;
+import com.github.kkysen.supersmashbros.actions.Action;
 
 /**
  * 
  * 
  * @author Khyber Sen
  */
-public class Player implements Renderable {
+public abstract class Player implements Renderable {
     
     private static final float WINNING_POINTS = 100; // FIXME
     
     private static final float FORCE_MULTIPLIER = 1; // FIXME
     private static final float POINTS_MULTIPLIER = 1; // FIXME
     
-    private static final EnumMap<KeyBinding, Action> COMMON_ACTIONS = new EnumMap<>(
-            KeyBinding.class);
-    static {
-        
-    }
-    
-    private final EnumMap<KeyBinding, Action> actions = COMMON_ACTIONS.clone();
+    private final EnumMap<KeyBinding, Action> actions = new EnumMap<>(KeyBinding.class);
     
     private final String name;
     private final int id;
@@ -48,10 +43,12 @@ public class Player implements Renderable {
     protected Player(final String name, final int id) {
         this.name = name;
         this.id = id;
-        addActions(actions);
+        for (final Action action : getActions()) {
+            actions.put(action.keyBinding, action);
+        }
     }
     
-    protected void addActions(final EnumMap<KeyBinding, Action> actions) {}
+    protected abstract Action[] getActions();
     
     public boolean isAlive(final Rectangle bounds) {
         return bounds.contains(state.position);
