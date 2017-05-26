@@ -19,4 +19,9 @@ public class Hurtbox extends Box {
         return damage;
     }
     
+    @Override
+    public boolean update() {
+        return true; // TODO
+    }
+    
 }

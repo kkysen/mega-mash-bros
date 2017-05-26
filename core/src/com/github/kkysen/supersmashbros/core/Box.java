@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Pools;
  * 
  * @author Khyber Sen
  */
-public class Box implements Poolable {
+public abstract class Box implements Poolable {
     
     private static final Pool<Rectangle> pool = Pools.get(Rectangle.class);
     
@@ -47,5 +47,10 @@ public class Box implements Poolable {
         final Rectangle intersection = intersect(box);
         return intersection == null ? 0 : intersection.area();
     }
+    
+    /**
+     * @return true if the box still exists, false if it should be removed
+     */
+    public abstract boolean update();
     
 }

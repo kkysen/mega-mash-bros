@@ -17,7 +17,7 @@ public abstract class Action {
     
     private float elapsedTime;
     
-    public State<?> execute(final State<?> state, final Vector2 acceleration,
+    public State execute(final State state, final Vector2 acceleration,
             final Vector2 velocity) {
         if (elapsedTime < cooldown) {
             elapsedTime += Gdx.graphics.getDeltaTime();
@@ -27,6 +27,6 @@ public abstract class Action {
         return newState();
     }
     
-    protected abstract State<?> newState();
+    protected abstract State newState();
     
 }

@@ -1,6 +1,7 @@
 package com.github.kkysen.supersmashbros.core;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -14,18 +15,15 @@ import com.github.kkysen.libgdx.util.Renderable;
  * @author Khyber Sen
  * @param <T> animation frame type
  */
-public abstract class State<T> implements Renderable, Poolable {
+public abstract class State implements Renderable, Poolable {
     
     private float stateTime = 0;
     
     public final Vector2 position = new Vector2();
     
-    private final Animation<T> animation;
+    private final Animation<Texture> animation;
     
-    public final Array<Hitbox> hitboxes = new Array<>();
-    public final Array<Hurtbox> hurtboxes = new Array<>();
-    
-    protected abstract Animation<T> getAnimation();
+    protected abstract Animation<Texture> getAnimation();
     
     protected State() {
         animation = getAnimation();
@@ -34,8 +32,16 @@ public abstract class State<T> implements Renderable, Poolable {
     @Override
     public void render(final Batch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
-        final T frame = animation.getKeyFrame(stateTime);
+        final Texture frame = animation.getKeyFrame(stateTime);
         batch.draw(frame, position.x, position.y); // FIXME type T
+        // TODO
+    }
+    
+    public void addHitboxes(final Array<Hitbox> hitboxes) {
+        // TODO
+    }
+    
+    public void addHurtboxes(final Array<Hurtbox> hurtboxes) {
         // TODO
     }
     

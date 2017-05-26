@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Renderable;
 
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.ExtensionMethod;
 
 /**
@@ -18,7 +17,6 @@ import lombok.experimental.ExtensionMethod;
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)
-@RequiredArgsConstructor
 public class World implements Renderable, Disposable {
     
     private final Array<Player> players;
@@ -45,6 +43,10 @@ public class World implements Renderable, Disposable {
         for (int i = 0; i < players.size; i++) {
             final Player player = players.removeIndex(i);
             player.update(players);
+            if (player.hasWon()) {
+                finishGame();
+                return;
+            }
             if (player.isAlive(bounds)) {
                 players.add(player);
                 players.swap(i, players.size - 1);
@@ -55,6 +57,10 @@ public class World implements Renderable, Disposable {
             player.checkHitPlatform(platform);
             player.render(batch);
         }
+    }
+    
+    private void finishGame() {
+        // TODO
     }
     
     @Override
