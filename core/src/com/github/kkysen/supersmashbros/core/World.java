@@ -6,15 +6,18 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Renderable;
 
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.ExtensionMethod;
 
 /**
  * 
  * 
  * @author Khyber Sen
  */
+@ExtensionMethod(ExtensionMethods.class)
 @RequiredArgsConstructor
 public class World implements Renderable, Disposable {
     
@@ -49,6 +52,7 @@ public class World implements Renderable, Disposable {
                 // already removed from array
                 player.kill();
             }
+            player.checkHitPlatform(platform);
             player.render(batch);
         }
     }

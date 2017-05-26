@@ -11,11 +11,19 @@ import com.github.kkysen.libgdx.util.Renderable;
  */
 public class Platform extends Box implements Renderable {
     
-    private final Sprite sprite;
+    private static final float DEFAULT_FRICTION = 0.5f; // FIXME
     
-    public Platform(final Sprite sprite) {
+    private final Sprite sprite;
+    public final float friction;
+    
+    public Platform(final Sprite sprite, final float friction) {
         super(sprite.getBoundingRectangle());
         this.sprite = sprite;
+        this.friction = friction;
+    }
+    
+    public Platform(final Sprite sprite) {
+        this(sprite, DEFAULT_FRICTION);
     }
     
     @Override

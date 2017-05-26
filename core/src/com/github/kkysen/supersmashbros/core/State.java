@@ -18,12 +18,12 @@ public abstract class State<T> implements Renderable, Poolable {
     
     private float stateTime = 0;
     
-    final Vector2 position = new Vector2();
+    public final Vector2 position = new Vector2();
     
     private final Animation<T> animation;
     
-    final Array<Hitbox> hitboxes = new Array<>();
-    final Array<Hurtbox> hurtboxes = new Array<>();
+    public final Array<Hitbox> hitboxes = new Array<>();
+    public final Array<Hurtbox> hurtboxes = new Array<>();
     
     protected abstract Animation<T> getAnimation();
     

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import com.badlogic.gdx.utils.Pools;
 
 /**
  * 
@@ -12,16 +13,9 @@ import com.badlogic.gdx.utils.Pool.Poolable;
  */
 public class Box implements Poolable {
     
-    private static final Pool<Rectangle> pool = new Pool<Rectangle>() {
-        
-        @Override
-        public Rectangle newObject() {
-            return new Rectangle();
-        }
-        
-    };
+    private static final Pool<Rectangle> pool = Pools.get(Rectangle.class);
     
-    private final Rectangle rectangle;
+    public final Rectangle rectangle;
     
     public Box(final Rectangle rectangle) {
         this.rectangle = rectangle;

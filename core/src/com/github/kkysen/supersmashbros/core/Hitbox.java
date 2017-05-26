@@ -12,6 +12,6 @@ public class Hitbox extends Box {
     
     public final Player player;
     
-    final float damage;
+    public final float damage;
     
 }

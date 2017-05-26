@@ -53,6 +53,26 @@ public class Player implements Renderable {
         points += damage * POINTS_MULTIPLIER;
     }
     
+    public void checkHitPlatform(final Platform platform) {
+        final Rectangle bounds = platform.rectangle;
+        final Vector2 position = state.position;
+        if (bounds.contains(position)) {
+            position.y = bounds.y + bounds.height;
+            velocity.y = 0;
+            acceleration.y = 0;
+            acceleration.x *= platform.friction;
+        }
+    }
+    
+    private void impulse(final float damage, final float angle) {
+        acceleration.setAngle(angle);
+        acceleration.set(1, 1);
+        acceleration.scl(damage * FORCE_MULTIPLIER);
+        final float deltaTime = Gdx.graphics.getDeltaTime();
+        velocity.mulAdd(acceleration, deltaTime);
+        state.position.mulAdd(velocity, deltaTime);
+    }
+    
     private void checkForHits(final Array<Player> enemies) {
         for (final Hurtbox hurtbox : hurtboxes()) {
             for (final Player enemy : enemies) {
@@ -60,11 +80,7 @@ public class Player implements Renderable {
                     final float damage = hurtbox.collide(hitbox);
                     final float angle = 0; // FIXME
                     // Stanley, I'm not sure how the angle should be calculated
-                    acceleration.setAngle(angle);
-                    acceleration.scl(damage * FORCE_MULTIPLIER);
-                    final float deltaTime = Gdx.graphics.getDeltaTime();
-                    velocity.mulAdd(acceleration, deltaTime);
-                    state.position.mulAdd(velocity, deltaTime);
+                    impulse(damage, angle);
                 }
             }
         }
