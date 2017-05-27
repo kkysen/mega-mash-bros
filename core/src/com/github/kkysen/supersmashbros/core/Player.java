@@ -18,12 +18,16 @@ import com.github.kkysen.supersmashbros.actions.Action;
  * 
  * @author Khyber Sen
  */
+
+//TODO move hitboxes into attack. calculations that use dmg form hitbox use it from attack
 public abstract class Player implements Renderable {
     
     private static final float WINNING_POINTS = 100; // FIXME
     
     private static final float FORCE_MULTIPLIER = 1; // FIXME
     private static final float POINTS_MULTIPLIER = 1; // FIXME
+    
+    private float percentage = 0;
     
     private final EnumMap<KeyBinding, Action> actions = new EnumMap<>(KeyBinding.class);
     
@@ -58,7 +62,7 @@ public abstract class Player implements Renderable {
         return points >= WINNING_POINTS;
     }
     
-    public void attack(final float damage) {
+    public void attacked(final float damage) {
         points += damage * POINTS_MULTIPLIER;
     }
     
@@ -85,8 +89,11 @@ public abstract class Player implements Renderable {
     private void checkForHits(final Array<Player> enemies) {
         for (final Hurtbox hurtbox : hurtboxes) {
             for (final Player enemy : enemies) {
-                for (final Hitbox hitbox : enemy.hitboxes) {
-                    final float damage = hurtbox.collide(hitbox);
+                for (final Action action : enemy.actions.values()) {
+                	if (action instanceof Attack) {
+                		final float damage = hurtbox.collide(action);
+                	}
+                    
                     final float angle = 0; // FIXME
                     // Stanley, I'm not sure how the angle should be calculated
                     impulse(damage, angle);
