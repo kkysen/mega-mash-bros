@@ -9,26 +9,27 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
+import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.KeyBinding;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.supersmashbros.actions.Action;
+
+import lombok.experimental.ExtensionMethod;
 
 /**
  * 
  * 
  * @author Khyber Sen
  */
-
-//TODO move hitboxes into attack. calculations that use dmg form hitbox use it from attack
+@ExtensionMethod(ExtensionMethods.class)
 public abstract class Player implements Renderable {
+    
+    // TODO move hitboxes into attack. calculations that use dmg form hitbox use it from attack
     
     private static final float WINNING_POINTS = 100; // FIXME
     
     private static final float FORCE_MULTIPLIER = 1; // FIXME
     private static final float POINTS_MULTIPLIER = 1; // FIXME
-    
-    private float percentage = 0;
-    //private float weight;
     
     private final EnumMap<KeyBinding, Action> actions = new EnumMap<>(KeyBinding.class);
     
@@ -46,16 +47,24 @@ public abstract class Player implements Renderable {
     private final Vector2 acceleration = new Vector2();
     private final Vector2 velocity = new Vector2();
     
-    private final float points = 0;
+    // I think these two, points and percentage, are the same
+    
+    private float points = 0;
+    
+    private float percentage = 0;
+    //private float weight;
     
     protected Player(final String name, final int id) {
         this.name = name;
         this.id = id;
+        
+        // FIXME, not sure how this should work
         for (final Action action : getActions()) {
             actions.put(action.keyBinding, action);
         }
     }
     
+    // FIXME, see right above
     protected abstract Action[] getActions();
     
     public boolean isAlive(final Rectangle bounds) {
@@ -72,6 +81,10 @@ public abstract class Player implements Renderable {
         percentage += damage
     }*/
     
+    public void attack(final float damage) {
+        points += damage * POINTS_MULTIPLIER;
+    }
+    
     public void attacked(final Action action, final float damage) {
         percentage += damage;
         impulse(damage, action.getAngle(), action.getKnockBack());
@@ -81,10 +94,9 @@ public abstract class Player implements Renderable {
         final Rectangle bounds = platform.rectangle;
         final Vector2 position = state.position;
         if (bounds.contains(position)) {
-            position.y = bounds.y + bounds.height;
-            velocity.y = 0;
-            acceleration.y = 0;
-            acceleration.x *= platform.friction;
+            position.y = bounds.maxY();
+            velocity.set(0, 0);
+            acceleration.set(0, 0);
         }
     }
     
@@ -146,11 +158,18 @@ public abstract class Player implements Renderable {
         }
     }
     
+    private void move() {
+        final float deltaTime = Gdx.graphics.getDeltaTime();
+        velocity.mulAdd(acceleration, deltaTime);
+        state.position.mulAdd(velocity, deltaTime);
+    }
+    
     public void update(final Array<Player> enemies) {
         updateBoxes(hitboxes);
         updateBoxes(hurtboxes);
         checkForHits(enemies);
         checkForActions();
+        move();
     }
     
     public void kill() {

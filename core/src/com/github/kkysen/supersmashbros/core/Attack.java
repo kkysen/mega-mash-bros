@@ -13,12 +13,12 @@ import com.github.kkysen.supersmashbros.actions.Action;
  */
 //An attack has hitboxes
 public abstract class Attack extends Action {
-	protected float dmg;
-	protected float angle;
-	protected float knockback;
-	
-	private boolean inCooldown;
-	
+    
+    protected float dmg;
+    protected float angle;
+    protected float knockback;
+    
+    private final boolean inCooldown;
     
     /*public Attack(final float cooldown, final float startup, Hitbox... boxes) {
     	Array<Hitbox> a = new Array();
@@ -27,7 +27,7 @@ public abstract class Attack extends Action {
     }*/
     
     public Attack(final KeyBinding key, final float startup, final float duration,
-    		final float cooldown, Array<Hitbox> boxes) {
+            final float cooldown, final Array<Hitbox> boxes) {
         super(null, key, boxes, startup, duration, cooldown);
         inCooldown = false;
     }
@@ -35,35 +35,32 @@ public abstract class Attack extends Action {
     @Override
     public State execute(final State state, final Vector2 acceleration,
             final Vector2 velocity) {
-    	
-    	if (elapsedTime < startup) {
-    		elapsedTime += Gdx.graphics.getDeltaTime();
-    		return state;
-    	}
-    	else if (elapsedTime < duration) {
-    		//Perform attack
-    	}
-    	else if (elapsedTime < cooldown) {
-    		elapsedTime += Gdx.graphics.getDeltaTime();
-    		return state;
-    	}
-    	
-    	
-    	return state;
+        
+        if (elapsedTime < startup) {
+            elapsedTime += Gdx.graphics.getDeltaTime();
+            return state;
+        } else if (elapsedTime < duration) {
+            //Perform attack
+        } else if (elapsedTime < cooldown) {
+            elapsedTime += Gdx.graphics.getDeltaTime();
+            return state;
+        }
+        
+        return state;
     }
     
     @Override
     public float getBaseDmg() {
-    	return dmg;
+        return dmg;
     }
     
     @Override
     public float getAngle() {
-    	return angle;
+        return angle;
     }
     
     @Override
     public float getKnockBack() {
-    	return knockback;
+        return knockback;
     }
 }

@@ -26,17 +26,17 @@ public abstract class Action {
     
     private final @Getter Array<Hitbox> hitboxes;
     
-    protected Action(final State st, final KeyBinding binding, final Array<Hitbox> h,
-            final float s, final float d, final float c) {
-        state = st;
-        keyBinding = binding;
-        hitboxes = h;
-        startup = s;
-        duration = s + d;
-        cooldown = s + d + c;
-    }
-    
     protected float elapsedTime;
+    
+    protected Action(final State state, final KeyBinding binding, final Array<Hitbox> hitboxes,
+            final float startup, final float duration, final float cooldown) {
+        this.state = state;
+        keyBinding = binding;
+        this.hitboxes = hitboxes;
+        this.startup = startup;
+        this.duration = startup + duration;
+        this.cooldown = startup + duration + cooldown;
+    }
     
     public State execute(final State state, final Vector2 acceleration,
             final Vector2 velocity) {

@@ -12,6 +12,8 @@ public class Hitbox extends Box {
     
     public final Player player;
     
+    public final float damage;
+    
     @Override
     public boolean update() {
         return true; // TODO
