@@ -12,13 +12,16 @@ import com.github.kkysen.supersmashbros.actions.Action;
 public abstract class Attack extends Action {
 	public float dmg;
 	public float angle;
-	public Array<Hitbox> hitboxes;
+	
     
-    public Attack(final float cooldown, final float startup, Hitbox... boxes) {
-        super(null, null, cooldown, startup);
-        
-        hitboxes = new Array();
-        for (Hitbox h : boxes) hitboxes.add(h);
+    /*public Attack(final float cooldown, final float startup, Hitbox... boxes) {
+    	Array<Hitbox> a = new Array();
+    	for (Hitbox h : boxes) a.add(h);
+    	this(cooldown, startup, a);
+    }*/
+    
+    public Attack(final float cooldown, final float startup, Array<Hitbox> boxes) {
+        super(null, null, cooldown, startup, boxes);
     }
     
 }

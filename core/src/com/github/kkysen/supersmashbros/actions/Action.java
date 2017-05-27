@@ -5,9 +5,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.github.kkysen.libgdx.util.KeyBinding;
 import com.github.kkysen.supersmashbros.core.Hitbox;
-import com.github.kkysen.supersmashbros.core.List;
 import com.github.kkysen.supersmashbros.core.State;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -16,11 +16,14 @@ import lombok.RequiredArgsConstructor;
  * @author Khyber Sen
  */
 @RequiredArgsConstructor
-public class Action {
+public abstract class Action {
     private final State state;
     public final KeyBinding keyBinding;
     private final float startup;
     private final float cooldown;
+    
+    @Getter
+    private final Array<Hitbox> hitboxes;
     
     private float elapsedTime;
     
@@ -33,5 +36,4 @@ public class Action {
         elapsedTime = 0;
         return state;
     }
-    
 }

@@ -15,10 +15,9 @@ public class Hurtbox extends Box {
         return intersectionArea(hitbox) * hitbox.damage * DAMAGE_SCALE;
     }
     
-    public float collide(final Attack attack) {
-    	//Assuming each move has only one hitbox for now
-        final float damage = damageTakenBy(attack.hitboxes.get(0));
-        attack.hitboxes.get(0).player.attacked(damage);
+    public float collide(final Action action, final Hitbox hitbox) {
+        final float damage = damageTakenBy(hitbox);
+        hitbox.player.attacked(damage);
         return damage;
     }
     

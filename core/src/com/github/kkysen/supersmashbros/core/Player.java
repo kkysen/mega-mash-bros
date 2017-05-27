@@ -36,6 +36,9 @@ public abstract class Player implements Renderable {
     
     private State state;
     
+    /**
+     * Hitboxes retrieved from attacks, empty when not attacking
+     * */
     private final Array<Hitbox> hitboxes = new Array<>();
     private final Array<Hurtbox> hurtboxes = new Array<>();
     
@@ -62,6 +65,7 @@ public abstract class Player implements Renderable {
         return points >= WINNING_POINTS;
     }
     
+    //Points based on damage dealt (???)
     public void attacked(final float damage) {
         points += damage * POINTS_MULTIPLIER;
     }
@@ -90,9 +94,11 @@ public abstract class Player implements Renderable {
         for (final Hurtbox hurtbox : hurtboxes) {
             for (final Player enemy : enemies) {
                 for (final Action action : enemy.actions.values()) {
-                	if (action instanceof Attack) {
-                		final float damage = hurtbox.collide(action);
-                	}
+                	//Assuming one move for now
+                	//Would normally have to choose which hitbox is most relevant
+                	float damage = 0;
+                	if (action.getHitboxes().size > 0)
+                		damage = hurtbox.collide(action, action.getHitboxes().first());
                     
                     final float angle = 0; // FIXME
                     // Stanley, I'm not sure how the angle should be calculated
