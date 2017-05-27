@@ -13,5 +13,11 @@ public class Jump extends Action {
     public Jump(final State state) {
         super(state, KeyBinding.JUMP, 2);
     }
+
+    //Jumping doesn't deal damage
+	@Override
+	public float getBaseDmg() {
+		return 0;
+	}
     
 }

@@ -28,6 +28,7 @@ public abstract class Player implements Renderable {
     private static final float POINTS_MULTIPLIER = 1; // FIXME
     
     private float percentage = 0;
+    //private float weight;
     
     private final EnumMap<KeyBinding, Action> actions = new EnumMap<>(KeyBinding.class);
     
@@ -66,8 +67,15 @@ public abstract class Player implements Renderable {
     }
     
     //Points based on damage dealt (???)
-    public void attacked(final float damage) {
+    /*public void attacked(final float damage) {
         points += damage * POINTS_MULTIPLIER;
+        percentage += damage
+    }*/
+    
+    
+    public void attacked(final Action action, final float damage) {
+        percentage += damage;
+        impulse(damage, action.getAngle(), action.getKnockBack());
     }
     
     public void checkHitPlatform(final Platform platform) {
@@ -81,10 +89,14 @@ public abstract class Player implements Renderable {
         }
     }
     
-    private void impulse(final float damage, final float angle) {
+    private void impulse(final float damage, final float angle, final float knockback) {
         acceleration.setAngle(angle);
         acceleration.set(1, 1);
-        acceleration.scl(damage * FORCE_MULTIPLIER);
+        
+        //the actual formula for this is long, we can tweak this as needed
+        //I just made this up
+        acceleration.scl(knockback + (percentage * damage)/2);
+        
         final float deltaTime = Gdx.graphics.getDeltaTime();
         velocity.mulAdd(acceleration, deltaTime);
         state.position.mulAdd(velocity, deltaTime);
@@ -96,13 +108,13 @@ public abstract class Player implements Renderable {
                 for (final Action action : enemy.actions.values()) {
                 	//Assuming one move for now
                 	//Would normally have to choose which hitbox is most relevant
-                	float damage = 0;
-                	if (action.getHitboxes().size > 0)
-                		damage = hurtbox.collide(action, action.getHitboxes().first());
-                    
-                    final float angle = 0; // FIXME
-                    // Stanley, I'm not sure how the angle should be calculated
-                    impulse(damage, angle);
+                	
+                	if (action.getHitboxes().size > 0) {
+                		float damage = hurtbox.damageTakenBy(action,
+                				action.getHitboxes().first());
+                    	attacked(action, damage);
+                	}
+                		
                 }
             }
         }
