@@ -39,14 +39,14 @@ public abstract class Player implements Renderable {
     
     /**
      * Hitboxes retrieved from attacks, empty when not attacking
-     * */
+     */
     private final Array<Hitbox> hitboxes = new Array<>();
     private final Array<Hurtbox> hurtboxes = new Array<>();
     
     private final Vector2 acceleration = new Vector2();
     private final Vector2 velocity = new Vector2();
     
-    private float points = 0;
+    private final float points = 0;
     
     protected Player(final String name, final int id) {
         this.name = name;
@@ -72,7 +72,6 @@ public abstract class Player implements Renderable {
         percentage += damage
     }*/
     
-    
     public void attacked(final Action action, final float damage) {
         percentage += damage;
         impulse(damage, action.getAngle(), action.getKnockBack());
@@ -95,7 +94,7 @@ public abstract class Player implements Renderable {
         
         //the actual formula for this is long, we can tweak this as needed
         //I just made this up
-        acceleration.scl(knockback + (percentage * damage)/2);
+        acceleration.scl(knockback + percentage * damage * 0.5f);
         
         final float deltaTime = Gdx.graphics.getDeltaTime();
         velocity.mulAdd(acceleration, deltaTime);
@@ -105,16 +104,24 @@ public abstract class Player implements Renderable {
     private void checkForHits(final Array<Player> enemies) {
         for (final Hurtbox hurtbox : hurtboxes) {
             for (final Player enemy : enemies) {
+                
+                // what used to be here
+                /*for (Hitbox hitbox : enemy.hitboxes) {
+                    float damage = hurtbox.collide(hitbox);
+                    float angle = 0; // FIXME
+                    impulse(damage, angle);
+                }*/
+                
                 for (final Action action : enemy.actions.values()) {
-                	//Assuming one move for now
-                	//Would normally have to choose which hitbox is most relevant
-                	
-                	if (action.getHitboxes().size > 0) {
-                		float damage = hurtbox.damageTakenBy(action,
-                				action.getHitboxes().first());
-                    	attacked(action, damage);
-                	}
-                		
+                    //Assuming one move for now
+                    //Would normally have to choose which hitbox is most relevant
+                    
+                    if (action.getHitboxes().size > 0) {
+                        final float damage = hurtbox.damageTakenBy(action,
+                                action.getHitboxes().first());
+                        attacked(action, damage);
+                    }
+                    
                 }
             }
         }

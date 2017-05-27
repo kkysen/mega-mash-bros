@@ -31,4 +31,9 @@ public class Platform extends Box implements Renderable {
         sprite.draw(batch);
     }
     
+    @Override
+    public boolean update() {
+        return true;
+    }
+    
 }

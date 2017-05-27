@@ -8,7 +8,6 @@ import com.github.kkysen.supersmashbros.core.Hitbox;
 import com.github.kkysen.supersmashbros.core.State;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 
@@ -17,26 +16,25 @@ import lombok.RequiredArgsConstructor;
  */
 //@RequiredArgsConstructor
 public abstract class Action {
+    
     private final State state;
     public final KeyBinding keyBinding;
+    
     protected final float startup;
     protected final float duration;
     protected final float cooldown;
     
-    @Getter
-    private final Array<Hitbox> hitboxes;
+    private final @Getter Array<Hitbox> hitboxes;
     
     protected Action(final State st, final KeyBinding binding, final Array<Hitbox> h,
-    		final float s, final float d, final float c) {
-    	state = st;
-    	keyBinding = binding;
-    	hitboxes = h;
-    	startup = s;
-    	duration = s+d;
-    	cooldown = s+d+c;
+            final float s, final float d, final float c) {
+        state = st;
+        keyBinding = binding;
+        hitboxes = h;
+        startup = s;
+        duration = s + d;
+        cooldown = s + d + c;
     }
-    
-    
     
     protected float elapsedTime;
     
@@ -51,6 +49,9 @@ public abstract class Action {
     }
     
     public abstract float getBaseDmg();
+    
     public abstract float getAngle();
+    
     public abstract float getKnockBack();
+    
 }
