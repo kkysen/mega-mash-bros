@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.github.kkysen.supersmashbros.core.Platform;
 import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.World;
 
@@ -30,14 +29,13 @@ public class SuperSmashBros extends ApplicationAdapter {
     private World world;
     
     private Player createPlayer() {
-        
-        return new Player(actions, states, "Player 1", 1);
+        return null; // TODO
+        //return new Player(actions, states, "Player 1", 1);
     }
     
     private World createWorld() {
         final Texture background = new Texture(open(ASSETS.resolve("background.png")));
-        final Platform platform = new Platform(
-                new Sprite(new Texture(open(ASSETS.resolve("platform")))));
+        final Sprite platform = new Sprite(new Texture(open(ASSETS.resolve("platform"))));
         final Sprite player = new Sprite(new Texture(open(ASSETS.resolve("player.png"))));
         return new World(background, platform, createPlayer());
     }

@@ -7,7 +7,7 @@ package com.github.kkysen.supersmashbros.players;
  */
 public enum PlayerType {
     
-    private final String name;
+    //private final String name;
     //private final
     
 }

@@ -1,8 +1,5 @@
 package com.github.kkysen.supersmashbros.players;
 
-import java.util.EnumMap;
-
-import com.github.kkysen.libgdx.util.KeyBinding;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.core.Player;
 
@@ -17,9 +14,13 @@ public class Mario extends Player {
         super(name, id);
     }
     
+    /**
+     * @see com.github.kkysen.supersmashbros.core.Player#getActions()
+     */
     @Override
-    protected void addActions(final EnumMap<KeyBinding, Action> actions) {
-        
+    protected Action[] getActions() {
+        // TODO Auto-generated method stub
+        return null;
     }
     
 }

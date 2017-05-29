@@ -1,5 +1,6 @@
 package com.github.kkysen.libgdx.util;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pools;
@@ -34,6 +35,19 @@ public class ExtensionMethods {
         position.x = rectangle.maxX();
         position.y = rectangle.maxY();
         return position;
+    }
+    
+    public static void accelerate(final Vector2 acceleration, final Vector2 velocity,
+            final Vector2 position) {
+        final float deltaTime = Gdx.graphics.getDeltaTime();
+        velocity.mulAdd(acceleration, deltaTime);
+        position.mulAdd(velocity, deltaTime);
+    }
+    
+    public static void setAngleAndLength(final Vector2 vector, final float angle,
+            final float length) {
+        vector.x = length * (float) Math.cos(angle);
+        vector.y = length * (float) Math.sin(angle);
     }
     
 }

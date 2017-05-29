@@ -6,43 +6,53 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Pool.Poolable;
 import com.github.kkysen.libgdx.util.Renderable;
 
 /**
  * 
  * 
  * @author Khyber Sen
- * @param <T> animation frame type
  */
-public abstract class State implements Renderable, Poolable {
+public class State implements Renderable {
     
-    private float stateTime = 0;
+    private final Player player;
+    
+    private float elapsedTime = 0;
+    private final Animation<Texture> animation;
     
     public final Vector2 position = new Vector2();
     
-    private final Animation<Texture> animation;
-    
-    protected abstract Animation<Texture> getAnimation();
-    
-    protected State() {
-        animation = getAnimation();
+    protected State(final Player player, final Animation<Texture> animation) {
+        this.player = player;
+        this.animation = animation;
     }
     
     @Override
     public void render(final Batch batch) {
-        stateTime += Gdx.graphics.getDeltaTime();
-        final Texture frame = animation.getKeyFrame(stateTime);
+        elapsedTime += Gdx.graphics.getDeltaTime();
+        final Texture frame = animation.getKeyFrame(elapsedTime);
         batch.draw(frame, position.x, position.y);
         // TODO
     }
     
+    protected Hitbox newHitbox(final float lifetime, final float damage) {
+        return new Hitbox(player, lifetime, damage);
+    }
+    
     public void addHitboxes(final Array<Hitbox> hitboxes) {
+        // probably shouldn't delete any hitboxes
+        final float lifetime = 0; // FIXME
+        final float damage = 0; // FIXME
+        hitboxes.add(newHitbox(lifetime, damage));
+        // set hitbox.rectangle
+        // set hitbox.damage
+        // set hitbox.acceleration
+        // set hitbox.velocity
         // TODO
     }
     
     public void addHurtboxes(final Array<Hurtbox> hurtboxes) {
-        // TODO
+        // TODO see addHitboxes above
     }
     
 }
