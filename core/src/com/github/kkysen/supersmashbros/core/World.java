@@ -16,7 +16,7 @@ import lombok.experimental.ExtensionMethod;
  * The {@link World} class is the main class encompassing the whole game. It
  * contains a {@link #background} {@link Texture} and a single rectangular
  * {@link #platform}. It also has an {@link Array}&lt;{@link Player}&gt; for all
- * the {@link Player}s, although I assume it will normally just be two
+ * the {@link #players}, although I assume it will normally just be two
  * {@link #players}. When the {@link World} is rendered, it loops through all
  * the {@link #players}, updating them, checking if anyone won the game yet,
  * checking if anyone died by falling off, checking if they hit the
