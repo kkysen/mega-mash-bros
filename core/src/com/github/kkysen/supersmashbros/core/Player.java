@@ -184,7 +184,6 @@ public abstract class Player implements Renderable, Loggable {
         for (final Hurtbox hurtbox : hurtboxes) {
             for (final Player enemy : enemies) {
                 log(this + " checking for hits by " + enemy);
-                // what used to be here
                 for (final Hitbox hitbox : enemy.hitboxes) {
                     final float damage = hurtbox.collide(hitbox);
                     final float angle = 0; // FIXME
@@ -229,7 +228,7 @@ public abstract class Player implements Renderable, Loggable {
         }
     }
     
-    private void checkOnPlatform() {
+    private void checkIfOnPlatform() {
         final Rectangle bounds = world.platform.bounds;
         if (bounds.contains(position)) {
             log(this + " hit platform and stopped");
@@ -252,7 +251,7 @@ public abstract class Player implements Renderable, Loggable {
         log(this + " updating hurtboxes");
         updateBoxes(hurtboxes);
         takeHits(enemies);
-        checkOnPlatform();
+        checkIfOnPlatform();
         executeActions();
         move();
     }
