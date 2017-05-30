@@ -59,4 +59,13 @@ public class ExtensionMethods {
         vector.y = length * (float) Math.sin(angle);
     }
     
+    public static <T> boolean contains(final T[] a, final T value) {
+        for (final T t : a) {
+            if (value.equals(t)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

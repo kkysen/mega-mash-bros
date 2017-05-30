@@ -208,10 +208,12 @@ public abstract class Player implements Renderable, Loggable {
     private void executeActions() {
         log(this + " checking for called actions");
         for (int i = 0; i < actions.length; i++) {
+            final Action action = actions[i];
+            action.update();
             if (KeyBinding.get(i).isPressed(input)) {
-                log(this + " pressed " + KeyBinding.get(i));
-                log(this + " " + actions[i] + "ing");
-                state = actions[i].execute(this);
+                error(this + " pressed " + KeyBinding.get(i));
+                error(this + " tried calling " + action);
+                state = action.execute(this);
             }
         }
     }
@@ -240,7 +242,7 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     private void move() {
-        error(this + " moving at " + velocity);
+        log(this + " moving at " + velocity);
         acceleration.accelerate(velocity, position);
     }
     

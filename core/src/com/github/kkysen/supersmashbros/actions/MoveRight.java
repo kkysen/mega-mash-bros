@@ -12,7 +12,7 @@ import com.github.kkysen.supersmashbros.core.State;
 public class MoveRight extends Move {
     
     public MoveRight(final State state, final float duration, final float speed) {
-        super(state, KeyBinding.RIGHT, duration, 0, speed);
+        super(state, KeyBinding.RIGHT, new State[] {}, 0, duration, 0, speed);
     }
     
     @Override

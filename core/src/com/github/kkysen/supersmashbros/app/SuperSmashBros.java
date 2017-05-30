@@ -3,6 +3,7 @@ package com.github.kkysen.supersmashbros.app;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -49,6 +50,7 @@ public class SuperSmashBros extends ApplicationAdapter {
         camera.setToOrtho(false, WIDTH, HEIGHT);
         batch = new SpriteBatch();
         world = createWorld();
+        Gdx.app.setLogLevel(Application.LOG_ERROR);
     }
     
     @Override

@@ -16,16 +16,17 @@ public abstract class Attack extends Action {
     public final float angle;
     public final float knockback;
     
-    public Attack(final State state, final KeyBinding keyBinding, final float duration,
-            final float cooldown, final float damage, final float angle, final float knockback) {
-        super(state, keyBinding, duration, cooldown);
+    public Attack(final State state, final KeyBinding keyBinding, final State[] impossiblePreStates,
+            final float startup, final float duration, final float cooldown, final float damage,
+            final float angle, final float knockback) {
+        super(state, keyBinding, impossiblePreStates, startup, duration, cooldown);
         this.damage = damage;
         this.angle = angle;
         this.knockback = knockback;
     }
     
     @Override
-    protected abstract void modifyState(final State state, Vector2 position);
+    protected abstract void attack(final State state, Vector2 position);
     
     @Override
     protected final void move(final Vector2 velocity) {}

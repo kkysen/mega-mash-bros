@@ -32,8 +32,8 @@ public class Mario extends Player {
         super("Mario", input, state, new Action[] {
             new MoveLeft(state, 1f, 10f),
             new MoveRight(state, 1f, 10f),
-            new Jump(state, 1f, 1f, 50f),
-            new SmashAttack(state, 2f, 3f, 5f, 5f),
+            new Jump(state, 1f, 0.5f, 50f),
+            new SmashAttack(state, 0, 2f, 3f, 5f, 5f),
         });
     }
     

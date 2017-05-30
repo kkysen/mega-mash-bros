@@ -12,7 +12,7 @@ import com.github.kkysen.supersmashbros.core.State;
 public class Jump extends Move {
     
     public Jump(final State state, final float duration, final float cooldown, final float speed) {
-        super(state, KeyBinding.JUMP, duration, cooldown, speed);
+        super(state, KeyBinding.JUMP, new State[] {}, 0, duration, cooldown, speed);
     }
     
     @Override

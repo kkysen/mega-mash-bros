@@ -37,7 +37,7 @@ public class World implements Renderable, Disposable, Loggable {
     public final Rectangle bounds;
     public final Platform platform;
     
-    public final float gravity = -9.8f; // FIXME
+    public final float gravity = -100; // FIXME
     
     private final Array<Player> players;
     

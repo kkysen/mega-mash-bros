@@ -6,13 +6,15 @@ import com.github.kkysen.supersmashbros.core.State;
 
 public class SmashAttack extends Attack {
     
-    public SmashAttack(final State state, final float duration, final float cooldown,
+    public SmashAttack(final State state, final float startup, final float duration,
+            final float cooldown,
             final float damage, final float knockback) {
-        super(state, KeyBinding.MAIN_ATTACK, duration, cooldown, damage, 180, knockback);
+        super(state, KeyBinding.MAIN_ATTACK, new State[] {}, startup, duration, cooldown, damage,
+                180, knockback);
     }
     
     @Override
-    protected void modifyState(final State state, final Vector2 position) {
+    protected void attack(final State state, final Vector2 position) {
         state.addHitbox(state.newHitbox(duration, damage, position, 10f, 10f, 5f, 0f));
     }
     

@@ -30,7 +30,7 @@ public class UserKeyInput extends KeyInput implements InputProcessor {
     
     @Override
     public boolean keyUp(final int keyCode) {
-        System.out.println(Key.get(keyCode) + " pressed");
+        System.out.println(Key.get(keyCode) + " released");
         releaseKey(keyCode);
         return false;
     }
