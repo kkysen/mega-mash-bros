@@ -9,6 +9,8 @@ public class DesktopLauncher {
     public static void main(final String[] arg) {
         final LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.title = SuperSmashBros.TITLE;
+        config.width = SuperSmashBros.WIDTH;
+        config.height = SuperSmashBros.HEIGHT;
         new LwjglApplication(new SuperSmashBros(), config);
     }
     

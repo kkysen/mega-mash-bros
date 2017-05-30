@@ -17,6 +17,7 @@ public class Jump extends Move {
     
     @Override
     protected void move(final Vector2 velocity) {
+        error("someone jumped");
         velocity.y += speed;
     }
     

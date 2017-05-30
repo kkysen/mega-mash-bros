@@ -1,6 +1,6 @@
 package com.github.kkysen.supersmashbros.players;
 
-import static com.github.kkysen.supersmashbros.app.SuperSmashBros.openAsset;
+import static com.github.kkysen.supersmashbros.app.SuperSmashBros.asset;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -22,7 +22,7 @@ import com.github.kkysen.supersmashbros.core.State;
 public class Mario extends Player {
     
     private static final State state = new State(new Animation<>(0.1f,
-            new Texture(openAsset("mario.png"))));
+            new Texture(asset("mario.png"))));
     
     public static Mario userControlled() {
         return new Mario(UserKeyInput.get());
@@ -30,9 +30,9 @@ public class Mario extends Player {
     
     public Mario(final KeyInput input) {
         super("Mario", input, state, new Action[] {
-            new MoveLeft(state, 1f, 1f),
-            new MoveRight(state, 1f, 1f),
-            new Jump(state, 1f, 2f, 1f),
+            new MoveLeft(state, 1f, 10f),
+            new MoveRight(state, 1f, 10f),
+            new Jump(state, 1f, 1f, 50f),
             new SmashAttack(state, 2f, 3f, 5f, 5f),
         });
     }

@@ -13,4 +13,8 @@ public interface Loggable {
         Gdx.app.log(getClass().getSimpleName(), message);
     }
     
+    public default void error(final String message) {
+        Gdx.app.error(getClass().getSimpleName(), message);
+    }
+    
 }

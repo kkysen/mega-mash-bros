@@ -40,7 +40,7 @@ public class KeyInput {
     
     public boolean isPressed(final Key... keys) {
         for (final Key key : keys) {
-            if (!pressedKeysSet[key.keycode]) {
+            if (!pressedKeysSet[key.keyCode]) {
                 return false;
             }
         }

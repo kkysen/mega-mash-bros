@@ -1,5 +1,6 @@
 package com.github.kkysen.libgdx.util.keys;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
 /**
@@ -10,6 +11,9 @@ import com.badlogic.gdx.InputProcessor;
 public class UserKeyInput extends KeyInput implements InputProcessor {
     
     private static final UserKeyInput INSTANCE = new UserKeyInput();
+    static {
+        Gdx.input.setInputProcessor(INSTANCE);
+    }
     
     public static UserKeyInput get() {
         return INSTANCE;
@@ -18,14 +22,16 @@ public class UserKeyInput extends KeyInput implements InputProcessor {
     private UserKeyInput() {}
     
     @Override
-    public boolean keyDown(final int keycode) {
-        pressKey(keycode);
+    public boolean keyDown(final int keyCode) {
+        System.out.println(Key.get(keyCode) + " pressed");
+        pressKey(keyCode);
         return true;
     }
     
     @Override
-    public boolean keyUp(final int keycode) {
-        releaseKey(keycode);
+    public boolean keyUp(final int keyCode) {
+        System.out.println(Key.get(keyCode) + " pressed");
+        releaseKey(keyCode);
         return false;
     }
     

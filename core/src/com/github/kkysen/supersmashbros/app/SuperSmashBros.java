@@ -1,6 +1,5 @@
 package com.github.kkysen.supersmashbros.app;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -18,6 +17,9 @@ import com.github.kkysen.supersmashbros.players.Mario;
 public class SuperSmashBros extends ApplicationAdapter {
     
     public static final String TITLE = "Super Smash Bros";
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 800;
+    
     private static final Path ASSETS = Paths.get("").toAbsolutePath().getParent()
             .resolve("core/assets");
     
@@ -25,7 +27,7 @@ public class SuperSmashBros extends ApplicationAdapter {
         return Gdx.files.internal(path.toString());
     }
     
-    public static FileHandle openAsset(final String path) {
+    public static FileHandle asset(final String path) {
         return open(ASSETS.resolve(path));
     }
     
@@ -36,19 +38,17 @@ public class SuperSmashBros extends ApplicationAdapter {
     
     private World createWorld() {
         System.out.println(ASSETS.toAbsolutePath());
-        final Texture background = new Texture(open(ASSETS.resolve("background.jpg")));
-        final Sprite platform = new Sprite(new Texture(open(ASSETS.resolve("platform.png"))));
-        return new World(background, platform, Mario.userControlled());
+        final Texture background = new Texture(asset("background.jpg"));
+        final Sprite platform = new Sprite(new Texture(asset("platform.png")));
+        return new World(WIDTH, HEIGHT, background, platform, Mario.userControlled());
     }
     
     @Override
     public void create() {
         camera = new OrthographicCamera();
+        camera.setToOrtho(false, WIDTH, HEIGHT);
         batch = new SpriteBatch();
         world = createWorld();
-        batch.begin();
-        world.renderStatic(batch);
-        batch.end();
     }
     
     @Override
@@ -56,18 +56,21 @@ public class SuperSmashBros extends ApplicationAdapter {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
-        batch.setProjectionMatrix(camera.combined);
+        //batch.setProjectionMatrix(camera.combined);
         batch.begin();
         world.render(batch);
         batch.end();
-        pause();
-        try {
-            System.in.read();
-        } catch (final IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if (world.gameOver) {
+            pause();
         }
-        resume();
+        //        pause();
+        //        try {
+        //            System.in.read();
+        //        } catch (final IOException e) {
+        //            // TODO Auto-generated catch block
+        //            e.printStackTrace();
+        //        }
+        //        resume();
     }
     
     @Override

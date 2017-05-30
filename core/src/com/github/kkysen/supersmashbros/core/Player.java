@@ -1,8 +1,6 @@
 package com.github.kkysen.supersmashbros.core;
 
-import java.util.EnumMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
@@ -69,7 +67,7 @@ public abstract class Player implements Renderable, Loggable {
     public World world;
     
     public final KeyInput input;
-    private final EnumMap<KeyBinding, Action> actions = new EnumMap<>(KeyBinding.class);
+    private final Action[] actions = new Action[KeyBinding.values().length];
     
     private final String name;
     private final int id;
@@ -102,7 +100,7 @@ public abstract class Player implements Renderable, Loggable {
         state.setPlayer(this);
         // FIXME, not sure how this should work
         for (final Action action : actions) {
-            this.actions.put(action.keyBinding, action);
+            this.actions[action.keyBinding.ordinal()] = action;
         }
     }
     
@@ -209,11 +207,11 @@ public abstract class Player implements Renderable, Loggable {
     
     private void executeActions() {
         log(this + " checking for called actions");
-        for (final Entry<KeyBinding, Action> attackEntry : actions.entrySet()) {
-            if (attackEntry.getKey().isPressed(input)) {
-                log(this + " pressed " + attackEntry.getKey());
-                log(this + " " + attackEntry.getValue() + "ing");
-                state = attackEntry.getValue().execute(this);
+        for (int i = 0; i < actions.length; i++) {
+            if (KeyBinding.get(i).isPressed(input)) {
+                log(this + " pressed " + KeyBinding.get(i));
+                log(this + " " + actions[i] + "ing");
+                state = actions[i].execute(this);
             }
         }
     }
@@ -234,6 +232,7 @@ public abstract class Player implements Renderable, Loggable {
             log(this + " hit platform and stopped");
             position.y = bounds.maxY();
             velocity.y = 0;
+            velocity.x = 0;
             acceleration.y = 0;
         } else {
             acceleration.y = world.gravity;
@@ -241,7 +240,7 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     private void move() {
-        log(this + " moving");
+        error(this + " moving at " + velocity);
         acceleration.accelerate(velocity, position);
     }
     
@@ -257,6 +256,7 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     public final void kill() {
+        error(this + " was killed");
         // TODO
     }
     

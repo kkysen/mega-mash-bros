@@ -25,8 +25,8 @@ public class ExtensionMethods {
     
     public static Rectangle setPositionAndSize(final Rectangle rectangle, final Vector2 center,
             final float width, final float height) {
-        rectangle.x = (float) (center.x - width * 0.5);
-        rectangle.y = (float) (center.y - height * 0.5);
+        rectangle.x = center.x - width * 0.5f;
+        rectangle.y = center.y - height * 0.5f;
         rectangle.width = width;
         rectangle.height = height;
         return rectangle;

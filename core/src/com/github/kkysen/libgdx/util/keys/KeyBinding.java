@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.ByteArray;
  */
 public enum KeyBinding {
     
-    NONE(Key.ANY_KEY),
     LEFT(Key.A),
     RIGHT(Key.D),
     JUMP(Key.W),
@@ -30,7 +29,7 @@ public enum KeyBinding {
             key = null;
             this.keys = new byte[keys.length];
             for (int i = 0; i < keys.length; i++) {
-                this.keys[i] = (byte) keys[i].keycode;
+                this.keys[i] = (byte) keys[i].keyCode;
             }
         }
     }
@@ -49,6 +48,12 @@ public enum KeyBinding {
             }
         }
         return true;
+    }
+    
+    private static final KeyBinding[] VALUES = values();
+    
+    public static KeyBinding get(final int ordinal) {
+        return VALUES[ordinal];
     }
     
 }

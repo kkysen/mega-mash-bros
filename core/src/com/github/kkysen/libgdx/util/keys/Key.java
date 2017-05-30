@@ -1,7 +1,5 @@
 package com.github.kkysen.libgdx.util.keys;
 
-import com.badlogic.gdx.Input.Keys;
-
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -12,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Key {
     
-    ANY_KEY(-1),
     NUM_0(7),
     NUM_1(8),
     NUM_2(9),
@@ -171,6 +168,17 @@ public enum Key {
     F12(255),
     ;
     
-    final int keycode;
+    final int keyCode;
+    
+    private static final Key[] KEYS = new Key[256];
+    static {
+        for (final Key key : values()) {
+            KEYS[key.keyCode] = key;
+        }
+    }
+    
+    public static Key get(final int keyCode) {
+        return KEYS[keyCode];
+    }
     
 }
