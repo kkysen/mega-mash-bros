@@ -8,18 +8,18 @@ import com.badlogic.gdx.InputProcessor;
  * 
  * @author Khyber Sen
  */
-public class UserKeyInput extends KeyInput implements InputProcessor {
+public class User extends Controller implements InputProcessor {
     
-    private static final UserKeyInput INSTANCE = new UserKeyInput();
+    private static final User INSTANCE = new User();
     static {
         Gdx.input.setInputProcessor(INSTANCE);
     }
     
-    public static UserKeyInput get() {
+    public static User get() {
         return INSTANCE;
     }
     
-    private UserKeyInput() {}
+    private User() {}
     
     @Override
     public boolean keyDown(final int keyCode) {

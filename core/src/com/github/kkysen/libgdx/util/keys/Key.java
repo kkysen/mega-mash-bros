@@ -3,7 +3,7 @@ package com.github.kkysen.libgdx.util.keys;
 import lombok.RequiredArgsConstructor;
 
 /**
- * clone of {@link KeyInput} as an Enum
+ * clone of {@link Controller} as an Enum
  * 
  * @author Khyber Sen
  */

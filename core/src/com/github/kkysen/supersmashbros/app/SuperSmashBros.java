@@ -41,7 +41,8 @@ public class SuperSmashBros extends ApplicationAdapter {
         System.out.println(ASSETS.toAbsolutePath());
         final Texture background = new Texture(asset("background.jpg"));
         final Sprite platform = new Sprite(new Texture(asset("platform.png")));
-        return new World(WIDTH, HEIGHT, background, platform, Mario.userControlled());
+        return new World(WIDTH, HEIGHT, background, platform, Mario.userControlled(),
+                Mario.randomlyControlled());
     }
     
     @Override

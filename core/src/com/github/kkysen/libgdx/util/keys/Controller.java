@@ -7,14 +7,14 @@ import com.badlogic.gdx.utils.ByteArray;
  * 
  * @author Khyber Sen
  */
-public class KeyInput {
+public class Controller {
     
     private static final int NUM_KEYS = 256;
     
     private final boolean[] pressedKeysSet = new boolean[NUM_KEYS];
     private final ByteArray pressedKeys = new ByteArray(4);
     
-    protected KeyInput() {}
+    protected Controller() {}
     
     public void pressKey(final int keyCode) {
         pressedKeysSet[keyCode] = true;

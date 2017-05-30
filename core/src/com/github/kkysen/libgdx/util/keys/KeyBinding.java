@@ -1,5 +1,6 @@
 package com.github.kkysen.libgdx.util.keys;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ByteArray;
 
 /**
@@ -34,7 +35,7 @@ public enum KeyBinding {
         }
     }
     
-    public boolean isPressed(final KeyInput input) {
+    public boolean isPressed(final Controller input) {
         if (key != null) {
             return input.isPressed(key);
         }
@@ -51,9 +52,14 @@ public enum KeyBinding {
     }
     
     private static final KeyBinding[] VALUES = values();
+    public static final int COUNT = VALUES.length;
     
     public static KeyBinding get(final int ordinal) {
         return VALUES[ordinal];
+    }
+    
+    public static KeyBinding random() {
+        return VALUES[MathUtils.random(VALUES.length)];
     }
     
 }

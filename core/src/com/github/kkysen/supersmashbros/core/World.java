@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
+import com.github.kkysen.supersmashbros.ai.AI;
 
 import lombok.experimental.ExtensionMethod;
 
@@ -84,7 +85,7 @@ public class World implements Renderable, Disposable, Loggable {
             final Player player = players.removeIndex(i);
             log("updating " + player);
             if (player.isAI()) {
-                ((AIKeyInput) player.input).makeDecisions(player, players);
+                ((AI) player.controller).makeDecisions(player, players);
             }
             player.update(players);
             if (player.hasWon()) {

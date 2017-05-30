@@ -11,9 +11,10 @@ import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
-import com.github.kkysen.libgdx.util.keys.KeyInput;
+import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
+import com.github.kkysen.supersmashbros.ai.AI;
 
 import lombok.experimental.ExtensionMethod;
 
@@ -66,7 +67,7 @@ public abstract class Player implements Renderable, Loggable {
     
     public World world;
     
-    public final KeyInput input;
+    public final Controller controller;
     private final Action[] actions = new Action[KeyBinding.values().length];
     
     private final String name;
@@ -91,11 +92,11 @@ public abstract class Player implements Renderable, Loggable {
     private float percentage = 0;
     //private float weight;
     
-    protected Player(final String name, final KeyInput input, final State state,
+    protected Player(final String name, final Controller input, final State state,
             final Action[] actions) {
         this.name = name;
         id = ++numPlayers;
-        this.input = input;
+        this.controller = input;
         this.state = state;
         state.setPlayer(this);
         // FIXME, not sure how this should work
@@ -134,7 +135,7 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     public final boolean isAI() {
-        return input instanceof AIKeyInput;
+        return controller instanceof AI;
     }
     
     //Points based on damage dealt (???)
@@ -210,7 +211,7 @@ public abstract class Player implements Renderable, Loggable {
         for (int i = 0; i < actions.length; i++) {
             final Action action = actions[i];
             action.update();
-            if (KeyBinding.get(i).isPressed(input)) {
+            if (KeyBinding.get(i).isPressed(controller)) {
                 error(this + " pressed " + KeyBinding.get(i));
                 error(this + " tried calling " + action);
                 state = action.execute(this);

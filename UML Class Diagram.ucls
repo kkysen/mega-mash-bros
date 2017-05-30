@@ -221,8 +221,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="23" language="java" name="com.github.kkysen.libgdx.util.keys.KeyInput" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/libgdx/util/keys/KeyInput.java" binary="false" 
+  <class id="23" language="java" name="com.github.kkysen.libgdx.util.keys.Controller" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/libgdx/util/keys/Controller.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="444" y="-1012"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -231,9 +231,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="com.github.kkysen.libgdx.util.keys.UserKeyInput" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/libgdx/util/keys/UserKeyInput.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="24" language="java" name="com.github.kkysen.libgdx.util.keys.User" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/libgdx/util/keys/User.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1199" y="-733"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -241,9 +240,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="com.github.kkysen.supersmashbros.core.AIKeyInput" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/core/AIKeyInput.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="25" language="java" name="com.github.kkysen.supersmashbros.ai.AI" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/ai/AI.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1240" y="-460"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -289,7 +287,7 @@
   </realization>  
   <association id="30">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="31" name="input">        
+      <attribute id="31" name="controller">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="32" minimum="0" maximum="1">        
@@ -447,106 +445,106 @@
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="23"/>  
   </dependency>  
-  <dependency id="70">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="19"/>  
-  </dependency>  
-  <association id="71">    
+  <association id="70">    
     <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="72" name="state">        
+      <attribute id="71" name="state">        
         <position height="0" width="0" x="26" y="70"/>      
       </attribute>      
-      <multiplicity id="73" minimum="0" maximum="1">        
+      <multiplicity id="72" minimum="0" maximum="1">        
         <position height="0" width="0" x="26" y="70"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="74">    
+  <association id="73">    
     <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="75" name="INSTANCE">        
+      <attribute id="74" name="INSTANCE">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="76" minimum="0" maximum="1">        
+      <multiplicity id="75" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="24" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="77">    
+  <dependency id="76">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
-  <dependency id="78">    
+  <dependency id="77">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="15"/>  
   </dependency>  
-  <association id="79">    
+  <association id="78">    
     <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="80" name="key">        
+      <attribute id="79" name="key">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="81" minimum="0" maximum="1">        
+      <multiplicity id="80" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="21" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="82">    
+  <dependency id="81">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="15"/>  
   </dependency>  
-  <generalization id="83">    
+  <generalization id="82">    
     <end type="SOURCE" refId="17"/>    
     <end type="TARGET" refId="26"/>  
   </generalization>  
-  <dependency id="84">    
+  <dependency id="83">    
     <end type="SOURCE" refId="28"/>    
     <end type="TARGET" refId="22"/>  
   </dependency>  
-  <association id="85">    
+  <association id="84">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="86" name="world">        
+      <attribute id="85" name="world">        
         <position height="0" width="0" x="-2" y="124"/>      
       </attribute>      
-      <multiplicity id="87" minimum="0" maximum="1">        
+      <multiplicity id="86" minimum="0" maximum="1">        
         <position height="0" width="0" x="-2" y="124"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="88">    
+  <dependency id="87">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="22"/>  
   </dependency>  
-  <dependency id="89">    
+  <dependency id="88">    
     <end type="SOURCE" refId="27"/>    
     <end type="TARGET" refId="22"/>  
   </dependency>  
-  <association id="90">    
+  <association id="89">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="91" name="player">        
+      <attribute id="90" name="player">        
         <position height="0" width="0" x="-6" y="186"/>      
       </attribute>      
-      <multiplicity id="92" minimum="0" maximum="1">        
+      <multiplicity id="91" minimum="0" maximum="1">        
         <position height="0" width="0" x="-6" y="186"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="93">    
+  <dependency id="92">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="25"/>  
   </dependency>  
-  <realization id="94">    
+  <realization id="93">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="9"/>  
   </realization>  
+  <dependency id="94">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
   <generalization id="95">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
@@ -564,8 +562,8 @@
     <end type="TARGET" refId="3"/>  
   </dependency>  
   <dependency id="99">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="24"/>  
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="15"/>  
   </dependency>  
   <generalization id="100">    
     <end type="SOURCE" refId="19"/>    
@@ -583,128 +581,136 @@
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="4"/>  
   </dependency>  
-  <dependency id="104">    
+  <association id="104">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="105" name="impossiblePreStates"/>      
+      <multiplicity id="106" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="107">    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <generalization id="105">    
+  <generalization id="108">    
     <end type="SOURCE" refId="27"/>    
     <end type="TARGET" refId="26"/>  
   </generalization>  
-  <dependency id="106">    
+  <dependency id="109">    
     <end type="SOURCE" refId="17"/>    
     <end type="TARGET" refId="22"/>  
   </dependency>  
-  <dependency id="107">    
+  <dependency id="110">    
     <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="16"/>  
   </dependency>  
-  <dependency id="108">    
+  <dependency id="111">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="109">    
+  <dependency id="112">    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="22"/>  
   </dependency>  
-  <dependency id="110">    
+  <dependency id="113">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="15"/>  
   </dependency>  
-  <dependency id="111">    
+  <dependency id="114">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <dependency id="112">    
+  <dependency id="115">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <dependency id="113">    
+  <dependency id="116">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <dependency id="114">    
+  <dependency id="117">    
     <end type="SOURCE" refId="27"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="115">    
+  <dependency id="118">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="22"/>  
   </dependency>  
-  <dependency id="116">    
+  <dependency id="119">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <dependency id="117">    
+  <dependency id="120">    
     <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="8"/>  
   </dependency>  
-  <realization id="118">    
+  <realization id="121">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="14"/>  
   </realization>  
-  <realization id="119">    
+  <realization id="122">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="9"/>  
   </realization>  
-  <association id="120">    
+  <association id="123">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="121" name="actions">        
+      <attribute id="124" name="actions">        
         <position height="0" width="0" x="6" y="98"/>      
       </attribute>      
-      <multiplicity id="122" minimum="0" maximum="2147483647">        
+      <multiplicity id="125" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="6" y="98"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="123">    
+  <dependency id="126">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <dependency id="124">    
+  <dependency id="127">    
     <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="28"/>  
   </dependency>  
-  <realization id="125">    
+  <realization id="128">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="14"/>  
   </realization>  
-  <dependency id="126">    
+  <dependency id="129">    
     <end type="SOURCE" refId="28"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <association id="127">    
+  <association id="130">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="128" name="state">        
+      <attribute id="131" name="state">        
         <position height="0" width="0" x="-31" y="537"/>      
       </attribute>      
-      <multiplicity id="129" minimum="0" maximum="1">        
+      <multiplicity id="132" minimum="0" maximum="1">        
         <position height="0" width="0" x="-31" y="537"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="130">    
+  <realization id="133">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="9"/>  
   </realization>  
-  <generalization id="131">    
+  <generalization id="134">    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <dependency id="132">    
+  <dependency id="135">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="13"/>  
   </dependency>  
-  <association id="133">    
+  <association id="136">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="134" name="keyBinding">        
+      <attribute id="137" name="keyBinding">        
         <position height="0" width="0" x="6" y="42"/>      
       </attribute>      
-      <multiplicity id="135" minimum="0" maximum="1">        
+      <multiplicity id="138" minimum="0" maximum="1">        
         <position height="0" width="0" x="6" y="42"/>      
       </multiplicity>    
     </end>    
