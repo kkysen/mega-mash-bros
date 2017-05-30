@@ -52,6 +52,9 @@ public class World implements Renderable, Disposable, Loggable {
         for (int i = 0; i < players.size; i++) {
             final Player player = players.removeIndex(i);
             log("updating " + player);
+            if (player.isAI()) {
+                ((AIKeyInput) player.input).makeDecisions(player, players);
+            }
             player.update(players);
             if (player.hasWon()) {
                 log(player + " has won");

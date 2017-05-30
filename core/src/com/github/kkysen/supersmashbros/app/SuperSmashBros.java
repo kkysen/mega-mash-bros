@@ -36,7 +36,6 @@ public class SuperSmashBros extends ApplicationAdapter {
     private World createWorld() {
         final Texture background = new Texture(open(ASSETS.resolve("background.png")));
         final Sprite platform = new Sprite(new Texture(open(ASSETS.resolve("platform"))));
-        final Sprite player = new Sprite(new Texture(open(ASSETS.resolve("player.png"))));
         return new World(background, platform, createPlayer());
     }
     

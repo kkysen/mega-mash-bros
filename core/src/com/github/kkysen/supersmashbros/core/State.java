@@ -39,6 +39,7 @@ public class State implements Renderable {
         return new Hitbox(player, lifetime, damage);
     }
     
+    // should be abstract
     public void addHitboxes(final Array<Hitbox> hitboxes) {
         // probably shouldn't delete any hitboxes
         final float lifetime = 0; // FIXME
@@ -51,6 +52,7 @@ public class State implements Renderable {
         // TODO
     }
     
+    // should be abstract
     public void addHurtboxes(final Array<Hurtbox> hurtboxes) {
         // TODO see addHitboxes above
     }

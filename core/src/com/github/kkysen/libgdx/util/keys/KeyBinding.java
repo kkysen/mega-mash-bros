@@ -1,4 +1,4 @@
-package com.github.kkysen.libgdx.util;
+package com.github.kkysen.libgdx.util.keys;
 
 import com.badlogic.gdx.utils.ByteArray;
 
@@ -11,12 +11,10 @@ public enum KeyBinding {
     
     NONE(Key.ANY_KEY),
     JUMP(Key.SPACE),
-    
-    MAIN_ATTACK(),
     ;
     
     private final Key key;
-    private final byte[] keys;
+    final byte[] keys;
     
     private KeyBinding(final Key... keys) {
         if (keys.length == 0) {
@@ -34,11 +32,11 @@ public enum KeyBinding {
         }
     }
     
-    public boolean isPressed() {
+    public boolean isPressed(final KeyInput input) {
         if (key != null) {
-            return Keys.get().isPressed(key);
+            return input.isPressed(key);
         }
-        final ByteArray pressedKeys = Keys.get().getKeysPressed();
+        final ByteArray pressedKeys = input.getKeysPressed();
         if (keys.length > pressedKeys.size) {
             return false;
         }

@@ -10,9 +10,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
-import com.github.kkysen.libgdx.util.KeyBinding;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
+import com.github.kkysen.libgdx.util.keys.KeyBinding;
+import com.github.kkysen.libgdx.util.keys.KeyInput;
 import com.github.kkysen.supersmashbros.actions.Action;
 
 import lombok.experimental.ExtensionMethod;
@@ -62,21 +63,22 @@ public abstract class Player implements Renderable, Loggable {
     private static final float FORCE_MULTIPLIER = 1; // FIXME
     private static final float POINTS_MULTIPLIER = 1; // FIXME
     
+    public final KeyInput input;
     private final EnumMap<KeyBinding, Action> actions = new EnumMap<>(KeyBinding.class);
     
     private final String name;
     private final int id;
     
-    private State state;
+    protected State state;
     
     /**
      * Hitboxes retrieved from attacks, empty when not attacking
      */
-    private final Array<Hitbox> hitboxes = new Array<>();
-    private final Array<Hurtbox> hurtboxes = new Array<>();
+    protected final Array<Hitbox> hitboxes = new Array<>();
+    protected final Array<Hurtbox> hurtboxes = new Array<>();
     
-    private final Vector2 acceleration = new Vector2();
-    private final Vector2 velocity = new Vector2();
+    protected final Vector2 acceleration = new Vector2();
+    protected final Vector2 velocity = new Vector2();
     
     // I think these two, points and percentage, are the same
     
@@ -85,18 +87,16 @@ public abstract class Player implements Renderable, Loggable {
     private float percentage = 0;
     //private float weight;
     
-    protected Player(final String name, final int id) {
+    protected Player(final String name, final int id, final KeyInput input,
+            final Action[] actions) {
         this.name = name;
         this.id = id;
-        
+        this.input = input;
         // FIXME, not sure how this should work
-        for (final Action action : getActions()) {
-            actions.put(action.keyBinding, action);
+        for (final Action action : actions) {
+            this.actions.put(action.keyBinding, action);
         }
     }
-    
-    // FIXME, see right above
-    protected abstract Action[] getActions();
     
     @Override
     public String toString() {
@@ -109,7 +109,7 @@ public abstract class Player implements Renderable, Loggable {
      * 
      * @param bounds the rectangular bounds of the {@link World} in which this
      *            {@link Player} must stay.
-     * @return true if this {@link Player} is within @param bounds and thus is
+     * @return true if this {@link Player} is within the bounds and thus is
      *         still alive
      */
     public final boolean isAlive(final Rectangle bounds) {
@@ -118,13 +118,18 @@ public abstract class Player implements Renderable, Loggable {
     
     /**
      * Determines if this {@link Player} has won the game based off of how many
-     * points (may be changed to equivalent percentage) it has gained, which are
-     * gained by attacking other {@link Player}'s.
+     * {@link #points} (may be changed to equivalent {@link #percentage}) it has
+     * gained, which are
+     * gained by attacking other {@link Player}s.
      * 
      * @return true if this {@link Player} has won the game
      */
     public final boolean hasWon() {
         return points >= WINNING_POINTS;
+    }
+    
+    public final boolean isAI() {
+        return input instanceof AIKeyInput;
     }
     
     //Points based on damage dealt (???)
@@ -135,7 +140,7 @@ public abstract class Player implements Renderable, Loggable {
     
     /**
      * Allows this {@link Player} to update its own stats when one of its
-     * {@link Hitbox}es successfully attacked another {@link Player}'s
+     * {@link #hitboxes} successfully attacked another {@link Player}'s
      * {@link Hurtbox}.
      * 
      * @param damage the amount of damage this Player inflicted in its attack
@@ -179,7 +184,7 @@ public abstract class Player implements Renderable, Loggable {
         acceleration.accelerate(velocity, state.position);
     }
     
-    private void checkForHits(final Array<Player> enemies) {
+    private void takeHits(final Array<Player> enemies) {
         for (final Hurtbox hurtbox : hurtboxes) {
             for (final Player enemy : enemies) {
                 log(this + " checking for hits by " + enemy);
@@ -207,10 +212,10 @@ public abstract class Player implements Renderable, Loggable {
         }
     }
     
-    private void checkForActions() {
+    private void executeActions() {
         log(this + " checking for called actions");
         for (final Entry<KeyBinding, Action> attackEntry : actions.entrySet()) {
-            if (attackEntry.getKey().isPressed()) {
+            if (attackEntry.getKey().isPressed(input)) {
                 log(this + " pressed " + attackEntry.getKey());
                 log(this + " " + attackEntry.getValue() + "ing");
                 state = attackEntry.getValue().execute(state, acceleration, velocity);
@@ -240,8 +245,8 @@ public abstract class Player implements Renderable, Loggable {
         updateBoxes(hitboxes);
         log(this + " updating hurtboxes");
         updateBoxes(hurtboxes);
-        checkForHits(enemies);
-        checkForActions();
+        takeHits(enemies);
+        executeActions();
         move();
     }
     
