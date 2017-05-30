@@ -1,28 +1,19 @@
 package com.github.kkysen.supersmashbros.actions;
 
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
-import com.github.kkysen.supersmashbros.core.Hitbox;
 import com.github.kkysen.supersmashbros.core.State;
 
 public class SmashAttack extends Attack {
     
-    /**
-     * @param state
-     * @param binding
-     * @param hitboxes
-     * @param startup
-     * @param duration
-     * @param cooldown
-     * @param baseDamage
-     * @param angle
-     * @param knockback
-     */
-    public SmashAttack(final State state, final KeyBinding binding, final Array<Hitbox> hitboxes,
-            final float startup, final float duration, final float cooldown, final float baseDamage,
-            final float angle, final float knockback) {
-        super(state, binding, hitboxes, startup, duration, cooldown, baseDamage, angle, knockback);
-        // TODO Auto-generated constructor stub
+    public SmashAttack(final State state, final float duration, final float cooldown,
+            final float damage, final float knockback) {
+        super(state, KeyBinding.MAIN_ATTACK, duration, cooldown, damage, 180, knockback);
+    }
+    
+    @Override
+    protected void modifyState(final State state, final Vector2 position) {
+        state.addHitbox(state.newHitbox(duration, damage, position, 10f, 10f, 5f, 0f));
     }
     
 }

@@ -29,26 +29,36 @@ public class World implements Renderable, Disposable, Loggable {
     
     private final Array<Player> players;
     
-    private boolean renderedStatics = false;
     private final Texture background;
-    private final Rectangle bounds;
-    private final Platform platform;
+    public final Rectangle bounds;
+    public final Platform platform;
+    
+    public final float gravity = 9.8f; // FIXME
     
     public World(final Texture background, final Sprite platform, final Player... players) {
         this.background = background;
         bounds = new Rectangle(0, 0, background.getWidth(), background.getHeight());
         this.platform = new Platform(platform);
         this.players = new Array<>(players);
+        for (final Player player : players) {
+            player.world = this;
+        }
+    }
+    
+    @Override
+    public String toString() {
+        return "World";
+    }
+    
+    public void renderStatic(final Batch batch) {
+        log("rendering background and platform");
+        batch.draw(background, 0, 0);
+        platform.render(batch);
     }
     
     @Override
     public void render(final Batch batch) {
-        if (!renderedStatics) {
-            log("rendered background and platform");
-            batch.draw(background, 0, 0);
-            platform.render(batch);
-            renderedStatics = true;
-        }
+        log("rendering " + this);
         for (int i = 0; i < players.size; i++) {
             final Player player = players.removeIndex(i);
             log("updating " + player);
@@ -61,7 +71,7 @@ public class World implements Renderable, Disposable, Loggable {
                 finishGame();
                 return;
             }
-            if (player.isAlive(bounds)) {
+            if (player.isAlive()) {
                 players.add(player);
                 players.swap(i, players.size - 1);
             } else {
@@ -69,7 +79,6 @@ public class World implements Renderable, Disposable, Loggable {
                 // already removed from array
                 player.kill();
             }
-            player.checkHitPlatform(platform);
             log(player + " rendered");
             player.render(batch);
         }

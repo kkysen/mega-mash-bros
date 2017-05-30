@@ -10,7 +10,10 @@ import com.badlogic.gdx.utils.ByteArray;
 public enum KeyBinding {
     
     NONE(Key.ANY_KEY),
-    JUMP(Key.SPACE),
+    LEFT(Key.A),
+    RIGHT(Key.D),
+    JUMP(Key.W),
+    MAIN_ATTACK(Key.SPACE),
     ;
     
     private final Key key;

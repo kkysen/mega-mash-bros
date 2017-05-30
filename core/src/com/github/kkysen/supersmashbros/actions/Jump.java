@@ -1,8 +1,7 @@
 package com.github.kkysen.supersmashbros.actions;
 
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
-import com.github.kkysen.supersmashbros.core.Hitbox;
 import com.github.kkysen.supersmashbros.core.State;
 
 /**
@@ -10,24 +9,15 @@ import com.github.kkysen.supersmashbros.core.State;
  * 
  * @author Khyber Sen
  */
-public class Jump extends Action {
+public class Jump extends Move {
     
-    /**
-     * @param state
-     * @param binding
-     * @param hitboxes
-     * @param startup
-     * @param duration
-     * @param cooldown
-     * @param baseDamage
-     * @param angle
-     * @param knockback
-     */
-    public Jump(final State state, final KeyBinding binding, final Array<Hitbox> hitboxes,
-            final float startup, final float duration, final float cooldown, final float baseDamage,
-            final float angle, final float knockback) {
-        super(state, binding, hitboxes, startup, duration, cooldown, 0, 0, 0);
-        // TODO Auto-generated constructor stub
+    public Jump(final State state, final float duration, final float cooldown, final float speed) {
+        super(state, KeyBinding.JUMP, duration, cooldown, speed);
+    }
+    
+    @Override
+    protected void move(final Vector2 velocity) {
+        velocity.y += speed;
     }
     
 }

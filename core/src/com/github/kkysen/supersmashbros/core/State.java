@@ -5,26 +5,32 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
+import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Renderable;
+
+import lombok.experimental.ExtensionMethod;
 
 /**
  * 
  * 
  * @author Khyber Sen
  */
+@ExtensionMethod(ExtensionMethods.class)
 public class State implements Renderable {
     
-    private final Player player;
+    private Player player;
+    public Vector2 position;
     
     private float elapsedTime = 0;
     private final Animation<Texture> animation;
     
-    public final Vector2 position = new Vector2();
-    
-    protected State(final Player player, final Animation<Texture> animation) {
-        this.player = player;
+    public State(final Animation<Texture> animation) {
         this.animation = animation;
+    }
+    
+    public void setPlayer(final Player player) {
+        this.player = player;
+        position = player.position;
     }
     
     @Override
@@ -35,26 +41,20 @@ public class State implements Renderable {
         // TODO
     }
     
-    protected Hitbox newHitbox(final float lifetime, final float damage) {
-        return new Hitbox(player, lifetime, damage);
+    public Hitbox newHitbox(final float lifetime, final float damage, final Vector2 center,
+            final float width, final float height, final float vx, final float vy) {
+        final Hitbox hitbox = new Hitbox(player, lifetime, damage);
+        hitbox.bounds.setPositionAndSize(center, width, height);
+        hitbox.velocity.set(vx, vy);
+        return hitbox;
     }
     
-    // should be abstract
-    public void addHitboxes(final Array<Hitbox> hitboxes) {
-        // probably shouldn't delete any hitboxes
-        final float lifetime = 0; // FIXME
-        final float damage = 0; // FIXME
-        hitboxes.add(newHitbox(lifetime, damage));
-        // set hitbox.rectangle
-        // set hitbox.damage
-        // set hitbox.acceleration
-        // set hitbox.velocity
-        // TODO
+    public void addHitbox(final Hitbox hitbox) {
+        player.hitboxes.add(hitbox);
     }
     
-    // should be abstract
-    public void addHurtboxes(final Array<Hurtbox> hurtboxes) {
-        // TODO see addHitboxes above
+    public void addHurtbox(final Hurtbox hurtbox) {
+        player.hurtboxes.add(hurtbox);
     }
     
 }

@@ -23,6 +23,15 @@ public class ExtensionMethods {
                 .set(center.x - width * 0.5f, center.y - height * 0.5f, width, height);
     }
     
+    public static Rectangle setPositionAndSize(final Rectangle rectangle, final Vector2 center,
+            final float width, final float height) {
+        rectangle.x = (float) (center.x - width * 0.5);
+        rectangle.y = (float) (center.y - height * 0.5);
+        rectangle.width = width;
+        rectangle.height = height;
+        return rectangle;
+    }
+    
     public static float maxX(final Rectangle rectangle) {
         return rectangle.x + rectangle.width;
     }

@@ -1,6 +1,5 @@
 package com.github.kkysen.supersmashbros.actions;
 
-
 /**
  * 
  * 

@@ -15,6 +15,7 @@ import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.KeyInput;
 import com.github.kkysen.supersmashbros.actions.Action;
+import com.github.kkysen.supersmashbros.actions.Attack;
 
 import lombok.experimental.ExtensionMethod;
 
@@ -28,7 +29,7 @@ import lombok.experimental.ExtensionMethod;
  * <br>
  * The {@link Player} also keeps track of the {@link #velocity} and
  * {@link #acceleration} to figure out where the {@link Player} should be
- * rendered, but the {@link State#position} vector itself is stored inside the
+ * rendered, but the {@link #position} vector itself is stored inside the
  * {@link #state}, because that's where the {@link Player} is actually rendered.
  * <br>
  * Then the {@link Player} checks for hits by enemy {@link #hitboxes}. It loops
@@ -37,9 +38,9 @@ import lombok.experimental.ExtensionMethod;
  * the enemy's {@link #hitboxes}. For each {@link Hitbox}, it finds the
  * "{@link Hitbox#damage}" done by the collision of the {@link Hurtbox} and
  * {@link Hitbox} proportional to the overlapping area. Somehow it will also
- * calculate an {@link Action#angle} for the attack. In
+ * calculate an {@link Attack#angle} for the attack. In
  * {@link #knockback(float, float)}, the {@link Player}'s
- * {@link State#position}, {@link #velocity}, and {@link #acceleration} are all
+ * {@link #position}, {@link #velocity}, and {@link #acceleration} are all
  * updated according to the damage done by the collision (we still have to
  * continuously update these and decrease the {@link #acceleration} later).
  * <br>
@@ -47,7 +48,7 @@ import lombok.experimental.ExtensionMethod;
  * requested by pressing the corresponding keys. It loops through the
  * {@link KeyBinding}s in the {@link #actions} map, and for any
  * {@link KeyBinding} that is pressed, it executes that {@link Action}, updating
- * the {@link #state} (or replacing it) and the {@link State#position}, etc. in
+ * the {@link #state} (or replacing it) and the {@link #position}, etc. in
  * the process. Then it also adds/removes any {@link #hitboxes} or
  * {@link #hurtboxes} produced by this {@link Action}'s new {@link State}.
  * 
@@ -63,13 +64,17 @@ public abstract class Player implements Renderable, Loggable {
     private static final float FORCE_MULTIPLIER = 1; // FIXME
     private static final float POINTS_MULTIPLIER = 1; // FIXME
     
+    private static int numPlayers = 0;
+    
+    public World world;
+    
     public final KeyInput input;
     private final EnumMap<KeyBinding, Action> actions = new EnumMap<>(KeyBinding.class);
     
     private final String name;
     private final int id;
     
-    protected State state;
+    public State state;
     
     /**
      * Hitboxes retrieved from attacks, empty when not attacking
@@ -78,7 +83,8 @@ public abstract class Player implements Renderable, Loggable {
     protected final Array<Hurtbox> hurtboxes = new Array<>();
     
     protected final Vector2 acceleration = new Vector2();
-    protected final Vector2 velocity = new Vector2();
+    public final Vector2 velocity = new Vector2();
+    public final Vector2 position = new Vector2();
     
     // I think these two, points and percentage, are the same
     
@@ -87,11 +93,13 @@ public abstract class Player implements Renderable, Loggable {
     private float percentage = 0;
     //private float weight;
     
-    protected Player(final String name, final int id, final KeyInput input,
+    protected Player(final String name, final KeyInput input, final State state,
             final Action[] actions) {
         this.name = name;
-        this.id = id;
+        id = ++numPlayers;
         this.input = input;
+        this.state = state;
+        state.setPlayer(this);
         // FIXME, not sure how this should work
         for (final Action action : actions) {
             this.actions.put(action.keyBinding, action);
@@ -105,15 +113,14 @@ public abstract class Player implements Renderable, Loggable {
     
     /**
      * Determines if this {@link Player} is still alive, which it will be as
-     * long as it has remained within the bounds of the {@link World}.
+     * long as it has remained within the {@link World#bounds} of the
+     * {@link World}.
      * 
-     * @param bounds the rectangular bounds of the {@link World} in which this
-     *            {@link Player} must stay.
-     * @return true if this {@link Player} is within the bounds and thus is
-     *         still alive
+     * @return true if this {@link Player} is within the {@link World#bounds}
+     *         and thus is still alive
      */
-    public final boolean isAlive(final Rectangle bounds) {
-        return bounds.contains(state.position);
+    public final boolean isAlive() {
+        return world.bounds.contains(position);
     }
     
     /**
@@ -150,20 +157,9 @@ public abstract class Player implements Renderable, Loggable {
         points += damage * POINTS_MULTIPLIER;
     }
     
-    public void attacked(final Action action, final float damage) {
+    public void attacked(final Attack attack, final float damage) {
         percentage += damage;
-        impulse(damage, action.angle, action.knockback);
-    }
-    
-    public final void checkHitPlatform(final Platform platform) {
-        final Rectangle bounds = platform.bounds;
-        final Vector2 position = state.position;
-        if (bounds.contains(position)) {
-            log(this + " hit platform and stopped");
-            position.y = bounds.maxY();
-            velocity.set(0, 0);
-            acceleration.set(0, 0);
-        }
+        impulse(damage, attack.angle, attack.knockback);
     }
     
     // old implementation
@@ -181,7 +177,7 @@ public abstract class Player implements Renderable, Loggable {
         //the actual formula for this is long, we can tweak this as needed
         //I just made this up
         acceleration.setAngleAndLength(angle, knockback + percentage * damage * 0.5f);
-        acceleration.accelerate(velocity, state.position);
+        acceleration.accelerate(velocity, position);
     }
     
     private void takeHits(final Array<Player> enemies) {
@@ -197,17 +193,17 @@ public abstract class Player implements Renderable, Loggable {
                     knockback(damage, angle);
                 }
                 
-                for (final Action action : enemy.actions.values()) {
-                    //Assuming one move for now
-                    //Would normally have to choose which hitbox is most relevant
-                    
-                    if (action.hitboxes.size > 0) {
-                        final float damage = hurtbox.damageTakenBy(action,
-                                action.hitboxes.first());
-                        attacked(action, damage);
-                    }
-                    
-                }
+                //                for (final Action action : enemy.actions.values()) {
+                //                    //Assuming one move for now
+                //                    //Would normally have to choose which hitbox is most relevant
+                //
+                //                    if (action.hitboxes.size > 0) {
+                //                        final float damage = hurtbox.damageTakenBy(action,
+                //                                action.hitboxes.first());
+                //                        attacked(action, damage);
+                //                    }
+                //
+                //                }
             }
         }
     }
@@ -218,9 +214,7 @@ public abstract class Player implements Renderable, Loggable {
             if (attackEntry.getKey().isPressed(input)) {
                 log(this + " pressed " + attackEntry.getKey());
                 log(this + " " + attackEntry.getValue() + "ing");
-                state = attackEntry.getValue().execute(state, acceleration, velocity);
-                state.addHitboxes(hitboxes);
-                state.addHurtboxes(hurtboxes);
+                state = attackEntry.getValue().execute(this);
             }
         }
     }
@@ -235,9 +229,21 @@ public abstract class Player implements Renderable, Loggable {
         }
     }
     
+    private void checkOnPlatform() {
+        final Rectangle bounds = world.platform.bounds;
+        if (bounds.contains(position)) {
+            log(this + " hit platform and stopped");
+            position.y = bounds.maxY();
+            velocity.y = 0;
+            acceleration.y = 0;
+        } else {
+            acceleration.y = world.gravity;
+        }
+    }
+    
     private void move() {
         log(this + " moving");
-        acceleration.accelerate(velocity, state.position);
+        acceleration.accelerate(velocity, position);
     }
     
     public final void update(final Array<Player> enemies) {
@@ -246,6 +252,7 @@ public abstract class Player implements Renderable, Loggable {
         log(this + " updating hurtboxes");
         updateBoxes(hurtboxes);
         takeHits(enemies);
+        checkOnPlatform();
         executeActions();
         move();
     }
