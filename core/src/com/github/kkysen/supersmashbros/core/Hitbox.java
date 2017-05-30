@@ -17,15 +17,18 @@ public class Hitbox extends Box {
     public final Player player;
     
     public final float damage;
+    public final float angle;	//angles are hard coded
     
     private final Vector2 position = Pools.obtain(Vector2.class);
     public final Vector2 velocity = Pools.obtain(Vector2.class);
     public final Vector2 acceleration = Pools.obtain(Vector2.class);
     
-    public Hitbox(final Player player, final float lifetime, final float damage) {
+    public Hitbox(final Player player, final float lifetime, final float damage,
+    		final float angle) {
         super(lifetime);
         this.player = player;
         this.damage = damage;
+        this.angle = angle;
     }
     
     @Override
