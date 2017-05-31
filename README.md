@@ -14,23 +14,24 @@ Rather than in traditional fighting games, where players attempt to whittle down
 
 We are trying to mimic the mechanics of the actual game.  Every attack will have a different launch angle and enemy knockback will be determined based on their their damage and the type of attack used.
 
-### Development stages
+### Development Stages
 - [x] 5/24: Plan out project
 - [x] 5/28: Implement basic physics
 - [x] 5/29: Finish convoluted class relationships
-- [x] 5/29: Implement controller input, user and AI
+- [x] 5/29: Implement controller input, user and simple AI
 - [x] 5/29: Implement hitboxes and hurtboxes
 - [x] 5/29: Implement characters
 - [x] 5/29: Implement actions, moves, and attacks
 - [ ] 6/02: Begin work on graphics and animation
 - [ ] 6/11: Debug
 
-### Stretch goals
+### Stretch Goals
 * More characters
 * More moves
 * Better AI
+* Refined user experience
 
-### Work distribution
+### Work Distribution
 ##### Stanley
 * Animation
 * Game mechanics
