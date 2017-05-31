@@ -53,6 +53,11 @@ public class ExtensionMethods {
         position.mulAdd(velocity, deltaTime);
     }
     
+    /**
+     * @param vector vector to transform
+     * @param angle resultant angle in radians
+     * @param length resultant length or magnitude
+     */
     public static void setAngleAndLength(final Vector2 vector, final float angle,
             final float length) {
         vector.x = length * (float) Math.cos(angle);

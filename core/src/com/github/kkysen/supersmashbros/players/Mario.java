@@ -34,13 +34,12 @@ public class Mario extends Player {
     }
     
     public Mario(final Controller controller) {
-        super("Mario", controller, state, new Action[] {
+        super("Mario", controller, state, 2, new Action[] {
             new MoveLeft(state, 1f, 10f),
             new MoveRight(state, 1f, 10f),
             new Jump(state, 1f, 0.5f, 50f),
             new SmashAttack(state, 0, 2f, 3f, 5f, 5f),
-        },
-        		2);
+        });
     }
     
 }

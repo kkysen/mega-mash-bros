@@ -70,6 +70,42 @@ public class World implements Renderable, Disposable, Loggable {
         return "World";
     }
     
+    private boolean someoneWon() {
+        int numAlive = 0;
+        for (final Player p : players) {
+            if (p.lives > 0) {
+                numAlive++;
+            }
+        }
+        return numAlive == 1;
+    }
+    
+    private void updateAndRenderPlayers(final Batch batch) {
+        for (int i = 0; i < players.size; i++) {
+            final Player player = players.removeIndex(i);
+            log("updating " + player);
+            if (player.isAI()) {
+                ((AI) player.controller).makeDecisions(player, players);
+            }
+            player.update(players);
+            
+            // FIXME check this game logic
+            if (!player.isCompletelyDead()) {
+                players.add(player);
+                players.swap(i, players.size - 1);
+                if (!player.isAlive()) {
+                    player.reSpawn(batch);
+                }
+            } else {
+                log(player + " has been killed");
+                // already removed from array
+                player.kill();
+            }
+            log(player + " rendered");
+            player.render(batch);
+        }
+    }
+    
     @Override
     public void render(final Batch batch) {
         log("rendering background and platform");
@@ -81,38 +117,14 @@ public class World implements Renderable, Disposable, Loggable {
             finishGame();
             return;
         }
-        for (int i = 0; i < players.size; i++) {
-            final Player player = players.removeIndex(i);
-            log("updating " + player);
-            if (player.isAI()) {
-                ((AI) player.controller).makeDecisions(player, players);
-            }
-            player.update(players);
-            if (isThereAWinner()) {
-            	players.sort((x, y) -> y.lives-x.lives);	//want greatest lives first
-                log(players.get(0) + " has won");
-                finishGame();
-                return;
-            }
-            if (player.isAlive()) {
-                players.add(player);
-                players.swap(i, players.size - 1);
-            } else {
-                log(player + " has been killed");
-                // already removed from array
-                player.kill();
-            }
-            log(player + " rendered");
-            player.render(batch);
+        if (someoneWon()) {
+            players.sort((x, y) -> y.lives - x.lives);  //want greatest lives first
+            log(players.get(0) + " has won");
+            // TODO other stuff should be done here eventually
+            finishGame();
+            return;
         }
-    }
-    
-    private boolean isThereAWinner() {
-    	int liveCount = 0;
-    	for (Player p : players) {
-    		if (p.lives > 0) liveCount++;
-    	}
-    	return liveCount == 1;
+        updateAndRenderPlayers(batch);
     }
     
     private void finishGame() {

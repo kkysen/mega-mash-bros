@@ -10,8 +10,8 @@ import com.badlogic.gdx.utils.Pools;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
-import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.Controller;
+import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.ai.AI;
@@ -93,15 +93,16 @@ public abstract class Player implements Renderable, Loggable {
     private float percentage = 0;
     //private float weight;
     
-    protected Player(final String name, final Controller input, final State state,
-            final Action[] actions, final int lives) {
+    protected Player(final String name, final Controller controller, final State initialState,
+            final int lives, final Action[] actions) {
         this.name = name;
         id = ++numPlayers;
-        this.controller = input;
-        this.state = state;
+        this.controller = controller;
+        state = initialState;
         this.lives = lives;
-        state.setPlayer(this);
-        // FIXME, not sure how this should work
+        initialState.setPlayer(this);
+        // EnumMap was throwing some weird errors because of some Eclipse compiler error,
+        // so I just made my own "EnumMap"
         for (final Action action : actions) {
             this.actions[action.keyBinding.ordinal()] = action;
         }
@@ -110,6 +111,10 @@ public abstract class Player implements Renderable, Loggable {
     @Override
     public String toString() {
         return "Player " + id + " " + name;
+    }
+    
+    public final void reSpawn(final Batch batch) {
+        // TODO
     }
     
     /**
@@ -121,7 +126,15 @@ public abstract class Player implements Renderable, Loggable {
      *         and thus is still alive
      */
     public final boolean isAlive() {
-        return world.bounds.contains(position) && lives > 0;
+        // I think this should just be based on one life,
+        // because I assume something happends when you die,
+        // like you respawn somewhere else
+        // I added the method below to check if someone was totally dead
+        return world.bounds.contains(position) /*&& lives > 0*/;
+    }
+    
+    public final boolean isCompletelyDead() {
+        return lives <= 0;
     }
     
     /**
@@ -153,19 +166,26 @@ public abstract class Player implements Renderable, Loggable {
      * 
      * @param damage the amount of damage this Player inflicted in its attack
      */
+    // not sure if we need this anymore, I was confused about points/percentage
+    @Deprecated
     public void attack(final float damage) {
         log("attacked, inflicting " + damage + " damage");
         points += damage * POINTS_MULTIPLIER;
     }
     
+    @Deprecated
     public void attacked(final Attack attack, final float damage) {
         percentage += damage;
         impulse(damage, attack.angle, attack.knockback);
     }
     
-    // old implementation
-    // What's the difference b/w damage and knockback?
-    // Isn't knockback based on the damage done?
+    /**
+     * What's the difference b/w damage and knockback?
+     * Isn't knockback based on the damage done?
+     * 
+     * @param damage damage done to this {@link Player}
+     * @param angle angle in radians at which this {@link Player} was attacked
+     */
     private void knockback(final float damage, final float angle) {
         log(this + " knockedback by " + damage * FORCE_MULTIPLIER /* * massReciprocal*/ + " at "
                 + angle + "°");
@@ -174,9 +194,10 @@ public abstract class Player implements Renderable, Loggable {
         move();
     }
     
+    @Deprecated
     private void impulse(final float damage, final float angle, final float knockback) {
-        //the actual formula for this is long, we can tweak this as needed
-        //I just made this up
+        // the actual formula for this is long, we can tweak this as needed
+        // I (Stanley) just made this up
         acceleration.setAngleAndLength(angle, knockback + percentage * damage * 0.5f);
         acceleration.accelerate(velocity, position);
     }
@@ -187,10 +208,16 @@ public abstract class Player implements Renderable, Loggable {
                 log(this + " checking for hits by " + enemy);
                 for (final Hitbox hitbox : enemy.hitboxes) {
                     final float damage = hurtbox.collide(hitbox);
-                    final float angle = 0; // FIXME
+                    final float angle = hitbox.angle; // FIXME
+                    // or should it be...
+                    final float angle2 = hitbox.velocity.angleRad(); // FIXME
                     log(this + " attacked by " + hitbox + ", inflicting " + damage + " damage at "
                             + angle + "°");
                     knockback(damage, angle);
+                    // FIXME percentage should increase here somehow
+                    // I was confused about percentage before,
+                    // I think I mostly get it now
+                    percentage += damage /* * something*/;
                 }
                 
                 //                for (final Action action : enemy.actions.values()) {

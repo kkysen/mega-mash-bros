@@ -41,8 +41,17 @@ public class Action implements Loggable {
         elapsedTime += Gdx.graphics.getDeltaTime();
     }
     
+    private boolean isImpossiblePreState(final State state) {
+        for (final State impossiblePreState : impossiblePreStates) {
+            if (state == impossiblePreState) { // I meant to use ==
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public final State execute(final Player player) {
-        if (elapsedTime < cooldown || impossiblePreStates.contains(player.state)) {
+        if (elapsedTime < cooldown || isImpossiblePreState(player.state)) {
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
         }
