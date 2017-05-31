@@ -1,7 +1,5 @@
 package com.github.kkysen.libgdx.util.keys;
 
-import com.badlogic.gdx.utils.ByteArray;
-
 /**
  * 
  * 
@@ -11,44 +9,37 @@ public class Controller {
     
     private static final int NUM_KEYS = 256;
     
-    private final boolean[] pressedKeysSet = new boolean[NUM_KEYS];
-    private final ByteArray pressedKeys = new ByteArray(4);
+    private final boolean[] pressedKeys = new boolean[NUM_KEYS];
     
     protected Controller() {}
     
     public void pressKey(final int keyCode) {
-        pressedKeysSet[keyCode] = true;
-        pressedKeys.add((byte) keyCode);
+        pressedKeys[keyCode] = true;
     }
     
     public void releaseKey(final int keyCode) {
-        pressedKeysSet[keyCode] = false;
-        pressedKeys.removeValue((byte) keyCode);
+        pressedKeys[keyCode] = false;
     }
     
     public void pressKeys(final KeyBinding keyBinding) {
-        for (final byte key : keyBinding.keys) {
-            pressKey(key + 128);
+        for (final Key key : keyBinding.keys) {
+            pressKey(key.keyCode);
         }
     }
     
     public void releaseKeys(final KeyBinding keyBinding) {
-        for (final byte key : keyBinding.keys) {
-            releaseKey(key + 128);
+        for (final Key key : keyBinding.keys) {
+            releaseKey(key.keyCode);
         }
     }
     
     public boolean isPressed(final Key... keys) {
         for (final Key key : keys) {
-            if (!pressedKeysSet[key.keyCode]) {
+            if (!pressedKeys[key.keyCode]) {
                 return false;
             }
         }
         return true;
-    }
-    
-    public ByteArray getKeysPressed() {
-        return pressedKeys;
     }
     
 }

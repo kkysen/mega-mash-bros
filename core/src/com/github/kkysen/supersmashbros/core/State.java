@@ -46,16 +46,16 @@ public class State implements Renderable {
         drawBoxes(ShapeType.Line, Color.GREEN, player.hitboxes);
         drawBoxes(ShapeType.Line, Color.RED, player.hurtboxes);
         
-        
     }
     
-    public void drawBoxes(ShapeType shapeType, Color color, Array<? extends Box> boxes) {
-    	shapeRenderer.begin(shapeType);
-    	shapeRenderer.setColor(color);
-    	for (Box b : boxes) {
-        	//ill fix this, dont you worry
-        	shapeRenderer.rect(b.bounds.x, b.bounds.y,
-        			b.bounds.width, b.bounds.height);
+    public void drawBoxes(final ShapeType shapeType, final Color color,
+            final Array<? extends Box> boxes) {
+        shapeRenderer.begin(shapeType);
+        shapeRenderer.setColor(color);
+        for (final Box b : boxes) {
+            //ill fix this, dont you worry
+            shapeRenderer.rect(b.bounds.x, b.bounds.y,
+                    b.bounds.width, b.bounds.height);
         }
         shapeRenderer.end();
     }

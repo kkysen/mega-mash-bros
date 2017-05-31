@@ -1,7 +1,6 @@
 package com.github.kkysen.libgdx.util.keys;
 
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.ByteArray;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 
@@ -16,35 +15,18 @@ public enum KeyBinding {
     MAIN_ATTACK(Key.SPACE),
     ;
     
-    private final Key key;
-    final byte[] keys;
+    final Key[] keys;
     
     private KeyBinding(final Key... keys) {
         if (keys.length == 0) {
             throw new IllegalArgumentException();
         }
-        if (keys.length == 1) {
-            key = keys[0];
-            this.keys = null;
-        } else {
-            key = null;
-            this.keys = new byte[keys.length];
-            for (int i = 0; i < keys.length; i++) {
-                this.keys[i] = (byte) keys[i].keyCode;
-            }
-        }
+        this.keys = keys;
     }
     
-    public boolean isPressed(final Controller input) {
-        if (key != null) {
-            return input.isPressed(key);
-        }
-        final ByteArray pressedKeys = input.getKeysPressed();
-        if (keys.length > pressedKeys.size) {
-            return false;
-        }
-        for (int i = 0; i < keys.length; i++) {
-            if (keys[i] != pressedKeys.get(i)) {
+    public boolean isPressed(final Controller controller) {
+        for (final Key key : keys) {
+            if (!controller.isPressed(key)) {
                 return false;
             }
         }
@@ -59,7 +41,7 @@ public enum KeyBinding {
     }
     
     public static KeyBinding random() {
-        return VALUES[MathUtils.random(VALUES.length)];
+        return VALUES[ThreadLocalRandom.current().nextInt(COUNT)];
     }
     
 }

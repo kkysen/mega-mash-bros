@@ -15,7 +15,8 @@ public class SmashAttack extends Attack {
     
     @Override
     protected void attack(final State state, final Vector2 position) {
-        state.addHitbox(state.newHitbox(duration, damage, position, 10f, 10f, 5f, 0f, 45));
+        final float size = 10f;
+        state.addHitbox(state.newHitbox(duration, damage, position, size, size, 5f, 0f, 45));
     }
     
 }

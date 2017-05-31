@@ -61,7 +61,7 @@ public class World implements Renderable, Disposable, Loggable {
         for (final Player player : players) {
             player.world = this;
             player.position.x = MathUtils.random(platformLeft, platformRight);
-            player.position.y = platformTop + MathUtils.random(10);
+            player.position.y = platformTop + MathUtils.random(10f);
         }
     }
     

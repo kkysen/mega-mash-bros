@@ -249,8 +249,7 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     private void updateBoxes(final Array<? extends Box> boxes) {
-        final int size = boxes.size;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < boxes.size; i++) {
             if (!boxes.get(i).update()) {
                 log(boxes.get(i) + " deleted");
                 Pools.free(boxes.removeIndex(i--));
