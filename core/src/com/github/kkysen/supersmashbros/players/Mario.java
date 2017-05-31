@@ -39,7 +39,8 @@ public class Mario extends Player {
             new MoveRight(state, 1f, 10f),
             new Jump(state, 1f, 0.5f, 50f),
             new SmashAttack(state, 0, 2f, 3f, 5f, 5f),
-        });
+        },
+        		2);
     }
     
 }

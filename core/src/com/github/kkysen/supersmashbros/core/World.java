@@ -88,8 +88,9 @@ public class World implements Renderable, Disposable, Loggable {
                 ((AI) player.controller).makeDecisions(player, players);
             }
             player.update(players);
-            if (player.hasWon()) {
-                log(player + " has won");
+            if (isThereAWinner()) {
+            	players.sort((x, y) -> y.lives-x.lives);	//want greatest lives first
+                log(players.get(0) + " has won");
                 finishGame();
                 return;
             }
@@ -104,6 +105,14 @@ public class World implements Renderable, Disposable, Loggable {
             log(player + " rendered");
             player.render(batch);
         }
+    }
+    
+    private boolean isThereAWinner() {
+    	int liveCount = 0;
+    	for (Player p : players) {
+    		if (p.lives > 0) liveCount++;
+    	}
+    	return liveCount == 1;
     }
     
     private void finishGame() {

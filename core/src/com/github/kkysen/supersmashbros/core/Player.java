@@ -72,6 +72,7 @@ public abstract class Player implements Renderable, Loggable {
     
     private final String name;
     private final int id;
+    public final int lives;
     
     public State state;
     
@@ -93,11 +94,12 @@ public abstract class Player implements Renderable, Loggable {
     //private float weight;
     
     protected Player(final String name, final Controller input, final State state,
-            final Action[] actions) {
+            final Action[] actions, final int lives) {
         this.name = name;
         id = ++numPlayers;
         this.controller = input;
         this.state = state;
+        this.lives = lives;
         state.setPlayer(this);
         // FIXME, not sure how this should work
         for (final Action action : actions) {
@@ -119,7 +121,7 @@ public abstract class Player implements Renderable, Loggable {
      *         and thus is still alive
      */
     public final boolean isAlive() {
-        return world.bounds.contains(position);
+        return world.bounds.contains(position) && lives > 0;
     }
     
     /**
@@ -130,9 +132,9 @@ public abstract class Player implements Renderable, Loggable {
      * 
      * @return true if this {@link Player} has won the game
      */
-    public final boolean hasWon() {
+    /*public final boolean hasWon() {
         return points >= WINNING_POINTS;
-    }
+    }*/
     
     public final boolean isAI() {
         return controller instanceof AI;
