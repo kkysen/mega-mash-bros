@@ -202,7 +202,6 @@ public abstract class Player implements Renderable, Loggable {
             log(this + " hit platform and stopped");
             position.y = bounds.maxY();
             velocity.y = 0;
-            velocity.x = 0;
             acceleration.y = 0;
         } else {
             acceleration.y = world.gravity;
