@@ -24,14 +24,23 @@ import com.github.kkysen.supersmashbros.core.State;
  */
 public class Mario extends Player {
     
-    private static final State state = new State(
+    private static final State stateIdle = new State(
     		new Animation<>(
-    				0.1f,
+    				0.2f,
     				Renderable.getFrames(
     						new Texture(asset("sprites_transparent.png")),
     						6,
-    						16,24, 27, 38),
+    						16, 24, 27, 38),
     				PlayMode.LOOP_PINGPONG));
+    
+    private static final State stateMoveRight = new State(
+    		new Animation<>(
+    				0.2f,
+    				Renderable.getFrames(
+    						new Texture(asset("sprites_transparent.png")),
+    						8,
+    						10, 147, 32, 38),
+    				PlayMode.LOOP));
     
     public static Mario userControlled() {
         return new Mario(User.get());
@@ -42,11 +51,11 @@ public class Mario extends Player {
     }
     
     public Mario(final Controller controller) {
-        super("Mario", controller, state, 2, new Action[] {
-            new MoveLeft(state, 1f, 10f),
-            new MoveRight(state, 1f, 10f),
-            new Jump(state, 1f, 0.5f, 50f),
-            new SmashAttack(state, 0, 2f, 3f, 5f, 5f)
+        super("Mario", controller, stateMoveRight, 2, new Action[] {
+            new MoveLeft(stateIdle, 1f, 10f),
+            new MoveRight(stateMoveRight, 1f, 10f),
+            new Jump(stateIdle, 1f, 0.5f, 50f),
+            new SmashAttack(stateIdle, 0, 2f, 3f, 5f, 5f)
         });
     }
     
