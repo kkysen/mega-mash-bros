@@ -34,7 +34,7 @@ public class World implements Renderable, Disposable, Loggable {
     private final int width;
     private final int height;
     
-    private final TextureRegion background;
+    public TextureRegion background;
     public final Rectangle bounds;
     public final Platform platform;
     

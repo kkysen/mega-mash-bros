@@ -126,7 +126,7 @@ public abstract class Player implements Renderable, Loggable {
         // like you respawn somewhere else
         // I added the method below to check if someone was totally dead
         if (world.bounds.contains(position)) {
-            error(position + " in " + world.bounds);
+            //error(position + " in " + world.bounds);
         }
         return world.bounds.contains(position) /*&& lives > 0*/;
     }
@@ -211,7 +211,7 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     private void move() {
-        error(this + " moving at " + velocity + ", position = " + position);
+        //error(this + " moving at " + velocity + ", position = " + position);
         acceleration.accelerate(velocity, position);
     }
     
