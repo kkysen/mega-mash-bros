@@ -40,6 +40,7 @@ public class SuperSmashBros extends ApplicationAdapter {
     private World createWorld() {
         System.out.println(ASSETS.toAbsolutePath());
         final Texture background = new Texture(asset("background.jpg"));
+        System.out.println(background.getHeight() + ", " + background.getWidth());
         final Sprite platform = new Sprite(new Texture(asset("platform.png")));
         return new World(WIDTH, HEIGHT, background, platform, Mario.userControlled());
     }
@@ -50,7 +51,8 @@ public class SuperSmashBros extends ApplicationAdapter {
         camera.setToOrtho(false, WIDTH, HEIGHT);
         batch = new SpriteBatch();
         world = createWorld();
-        Gdx.app.setLogLevel(Application.LOG_ERROR);
+        Gdx.app.setLogLevel(Application.LOG_NONE);
+        System.out.println(world.bounds);
     }
     
     @Override
@@ -65,14 +67,6 @@ public class SuperSmashBros extends ApplicationAdapter {
         if (world.gameOver) {
             pause();
         }
-        //        pause();
-        //        try {
-        //            System.in.read();
-        //        } catch (final IOException e) {
-        //            // TODO Auto-generated catch block
-        //            e.printStackTrace();
-        //        }
-        //        resume();
     }
     
     @Override
