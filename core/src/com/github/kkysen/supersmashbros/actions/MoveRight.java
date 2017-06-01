@@ -16,8 +16,12 @@ public class MoveRight extends Move {
     }
     
     @Override
-    protected void move(final Vector2 velocity) {
-        velocity.x += speed;
+    protected void move(final Vector2 velocity, final boolean isOnPlatform) {
+        error("actually called moving right");
+        if (isOnPlatform) {
+            error("actually moved right");
+            velocity.x = speed;
+        }
     }
     
 }

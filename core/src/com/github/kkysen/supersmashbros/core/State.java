@@ -2,7 +2,6 @@ package com.github.kkysen.supersmashbros.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
+import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.supersmashbros.actions.Attack;
 
@@ -21,7 +21,9 @@ import lombok.experimental.ExtensionMethod;
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)
-public class State implements Renderable {
+public class State implements Renderable, Loggable {
+    
+    private final String name;
     
     private Player player;
     public Vector2 position;
@@ -29,13 +31,20 @@ public class State implements Renderable {
     private float elapsedTime = 0;
     private final Animation<TextureRegion> animation;
     
-    public State(final Animation<TextureRegion> animation) {
+    public State(final String name, final Animation<TextureRegion> animation) {
+        this.name = name;
         this.animation = animation;
+    }
+    
+    @Override
+    public String toString() {
+        return name;
     }
     
     public void setPlayer(final Player player) {
         this.player = player;
-        position = player.position;
+        error(this + " set player to " + player);
+        position = player == null ? null : player.position;
     }
     
     @Override
@@ -48,8 +57,6 @@ public class State implements Renderable {
         drawBoxes(ShapeType.Line, Color.GREEN, player.hitboxes);
         drawBoxes(ShapeType.Line, Color.RED, player.hurtboxes);
     }
-    
-    
     
     public void drawBoxes(final ShapeType shapeType, final Color color,
             final Array<? extends Box> boxes) {

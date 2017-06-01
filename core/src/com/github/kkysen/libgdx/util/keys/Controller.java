@@ -42,4 +42,23 @@ public class Controller {
         return true;
     }
     
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (int keyCode = 0; keyCode < pressedKeys.length; keyCode++) {
+            if (pressedKeys[keyCode]) {
+                sb.append(Key.get(keyCode));
+                sb.append(',');
+                sb.append(' ');
+            }
+        }
+        if (sb.length() == 1) {
+            return "[]";
+        }
+        sb.setCharAt(sb.length() - 2, ']');
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
+    
 }

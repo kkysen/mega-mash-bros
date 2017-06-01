@@ -16,7 +16,7 @@ public class Jump extends Move {
     }
     
     @Override
-    protected void move(final Vector2 velocity) {
+    protected void move(final Vector2 velocity, boolean isOnPlatform) {
         error("someone jumped");
         velocity.y += speed;
     }

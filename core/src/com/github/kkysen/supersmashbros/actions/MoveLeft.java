@@ -16,8 +16,10 @@ public class MoveLeft extends Move {
     }
     
     @Override
-    protected void move(final Vector2 velocity) {
-        velocity.x -= speed;
+    protected void move(final Vector2 velocity, final boolean isOnPlatform) {
+        if (isOnPlatform) {
+            velocity.x = -speed;
+        }
     }
     
 }

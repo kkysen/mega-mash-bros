@@ -3,7 +3,6 @@ package com.github.kkysen.supersmashbros.core;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
@@ -56,10 +55,6 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public abstract class Player implements Renderable, Loggable {
     
-    // TODO move hitboxes into attack. calculations that use dmg form hitbox use it from attack
-    
-    private static final float WINNING_POINTS = 100; // FIXME
-    
     private static final float KNOCKBACK_MULTIPLIER = 1; // FIXME
     private static final float PERCENTAGE_MULTIPLIER = 1; // FIXME
     
@@ -72,7 +67,7 @@ public abstract class Player implements Renderable, Loggable {
     
     private final String name;
     private final int id;
-    public final int lives;
+    public int lives;
     
     public State state;
     
@@ -130,6 +125,9 @@ public abstract class Player implements Renderable, Loggable {
         // because I assume something happends when you die,
         // like you respawn somewhere else
         // I added the method below to check if someone was totally dead
+        if (world.bounds.contains(position)) {
+            error(position + " in " + world.bounds);
+        }
         return world.bounds.contains(position) /*&& lives > 0*/;
     }
     
@@ -176,6 +174,7 @@ public abstract class Player implements Renderable, Loggable {
     
     private void executeActions() {
         log(this + " checking for called actions");
+        //System.out.println(controller);
         for (int i = 0; i < actions.length; i++) {
             final Action action = actions[i];
             action.update();
@@ -196,11 +195,14 @@ public abstract class Player implements Renderable, Loggable {
         }
     }
     
+    public final boolean isOnPlatform() {
+        return world.platform.bounds.contains(position);
+    }
+    
     private void checkIfOnPlatform() {
-        final Rectangle bounds = world.platform.bounds;
-        if (bounds.contains(position)) {
+        if (isOnPlatform()) {
             log(this + " hit platform and stopped");
-            position.y = bounds.maxY();
+            position.y = world.platform.bounds.maxY();
             velocity.y = 0;
             acceleration.y = 0;
         } else {
@@ -209,7 +211,7 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     private void move() {
-        log(this + " moving at " + velocity);
+        error(this + " moving at " + velocity + ", position = " + position);
         acceleration.accelerate(velocity, position);
     }
     
@@ -226,6 +228,11 @@ public abstract class Player implements Renderable, Loggable {
     
     public final void kill() {
         error(this + " was killed");
+        hitboxes.clear();
+        hurtboxes.clear();
+        for (final Action action : actions) {
+            
+        }
         // TODO
     }
     

@@ -38,7 +38,7 @@ public class World implements Renderable, Disposable, Loggable {
     public final Rectangle bounds;
     public final Platform platform;
     
-    public final float gravity = -100; // FIXME
+    public final float gravity = -500; // FIXME
     
     private final Array<Player> players;
     
@@ -72,8 +72,8 @@ public class World implements Renderable, Disposable, Loggable {
     
     private boolean someoneWon() {
         int numAlive = 0;
-        for (final Player p : players) {
-            if (p.lives > 0) {
+        for (final Player player : players) {
+            if (player.lives > 0) {
                 numAlive++;
             }
         }
@@ -94,6 +94,7 @@ public class World implements Renderable, Disposable, Loggable {
                 players.add(player);
                 players.swap(i, players.size - 1);
                 if (!player.isAlive()) {
+                    player.lives--;
                     player.reSpawn(batch);
                 }
             } else {
@@ -111,13 +112,16 @@ public class World implements Renderable, Disposable, Loggable {
         log("rendering background and platform");
         batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         platform.render(batch);
-        log("rendering " + this);
+        if (gameOver) {
+            return;
+        }
+        log("rendering " + this + " with " + players.size + " players");
         if (players.size == 0) {
             log("nobody won");
             finishGame();
             return;
         }
-        if (someoneWon()) {
+        if (false/*someoneWon()*/) {
             players.sort((x, y) -> y.lives - x.lives);  //want greatest lives first
             log(players.get(0) + " has won");
             // TODO other stuff should be done here eventually
@@ -128,12 +132,13 @@ public class World implements Renderable, Disposable, Loggable {
     }
     
     private void finishGame() {
-        log("game over");
+        error("      game over");
         gameOver = true;
     }
     
     @Override
     public void dispose() {
+        Gdx.input.setInputProcessor(null);
         //background.dispose();
     }
     

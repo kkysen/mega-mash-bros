@@ -23,6 +23,6 @@ public abstract class Move extends Action {
     protected final void attack(final State state) {}
     
     @Override
-    protected abstract void move(final Vector2 velocity);
+    protected abstract void move(final Vector2 velocity, boolean isOnPlatform);
     
 }

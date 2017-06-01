@@ -55,16 +55,17 @@ public class Action implements Loggable {
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
         }
-        log("someone called " + this);
+        player.state.setPlayer(null);
+        error("someone called " + this);
         elapsedTime = 0;
         state.setPlayer(player);
         attack(state);
-        move(player.velocity);
+        move(player.velocity, player.isOnPlatform());
         return state;
     }
     
     protected void attack(final State state) {}
     
-    protected void move(final Vector2 velocity) {}
+    protected void move(final Vector2 velocity, final boolean isOnPlatform) {}
     
 }
