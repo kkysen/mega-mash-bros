@@ -24,6 +24,7 @@ import com.github.kkysen.supersmashbros.core.State;
  */
 public class Mario extends Player {
     
+	//2 pixels btwn frames
     private static final State idleState = new State("Mario idle state",
             new Animation<>(
                     0.2f,
@@ -33,6 +34,7 @@ public class Mario extends Player {
                             16, 24, 27, 38),
                     PlayMode.LOOP_PINGPONG));
     
+    //4 pixels btwn frames
     private static final State moveRightState = new State("Mario move right state",
             new Animation<>(
                     0.1f,
