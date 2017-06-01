@@ -27,7 +27,7 @@ public class Action implements Loggable {
     private final State[] impossiblePreStates;
     
     protected final float startup;
-    protected final float duration;
+    public final float duration;
     protected final float cooldown;
     
     protected float elapsedTime;
@@ -58,12 +58,12 @@ public class Action implements Loggable {
         log("someone called " + this);
         elapsedTime = 0;
         state.setPlayer(player);
-        attack(state, player.position);
+        attack(state);
         move(player.velocity);
         return state;
     }
     
-    protected void attack(final State state, final Vector2 position) {}
+    protected void attack(final State state) {}
     
     protected void move(final Vector2 velocity) {}
     

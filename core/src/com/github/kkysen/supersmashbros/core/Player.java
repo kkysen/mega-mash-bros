@@ -60,8 +60,8 @@ public abstract class Player implements Renderable, Loggable {
     
     private static final float WINNING_POINTS = 100; // FIXME
     
-    private static final float FORCE_MULTIPLIER = 1; // FIXME
-    private static final float POINTS_MULTIPLIER = 1; // FIXME
+    private static final float KNOCKBACK_MULTIPLIER = 1; // FIXME
+    private static final float PERCENTAGE_MULTIPLIER = 1; // FIXME
     
     private static int numPlayers = 0;
     
@@ -88,7 +88,7 @@ public abstract class Player implements Renderable, Loggable {
     
     // I think these two, points and percentage, are the same
     
-    private float points = 0;
+    private final float points = 0;
     
     private float percentage = 0;
     //private float weight;
@@ -137,69 +137,26 @@ public abstract class Player implements Renderable, Loggable {
         return lives <= 0;
     }
     
-    /**
-     * Determines if this {@link Player} has won the game based off of how many
-     * {@link #points} (may be changed to equivalent {@link #percentage}) it has
-     * gained, which are
-     * gained by attacking other {@link Player}s.
-     * 
-     * @return true if this {@link Player} has won the game
-     */
-    /*public final boolean hasWon() {
-        return points >= WINNING_POINTS;
-    }*/
-    
     public final boolean isAI() {
         return controller instanceof AI;
     }
     
-    //Points based on damage dealt (???)
-    /*public void attacked(final float damage) {
-        points += damage * POINTS_MULTIPLIER;
-        percentage += damage
-    }*/
-    
     /**
-     * Allows this {@link Player} to update its own stats when one of its
-     * {@link #hitboxes} successfully attacked another {@link Player}'s
-     * {@link Hurtbox}.
-     * 
-     * @param damage the amount of damage this Player inflicted in its attack
-     */
-    // not sure if we need this anymore, I was confused about points/percentage
-    @Deprecated
-    public void attack(final float damage) {
-        log("attacked, inflicting " + damage + " damage");
-        points += damage * POINTS_MULTIPLIER;
-    }
-    
-    @Deprecated
-    public void attacked(final Attack attack, final float damage) {
-        percentage += damage;
-        impulse(damage, attack.angle, attack.knockback);
-    }
-    
-    /**
-     * What's the difference b/w damage and knockback?
-     * Isn't knockback based on the damage done?
+     * Knock backs a player at a certain angle and knockback value, increasing
+     * {@link #percentage} in the process.
      * 
      * @param damage damage done to this {@link Player}
      * @param angle angle in radians at which this {@link Player} was attacked
+     * @param knockback the hard-coded {@link Hitbox#knockback} value
      */
-    private void knockback(final float damage, final float angle) {
-        log(this + " knockedback by " + damage * FORCE_MULTIPLIER /* * massReciprocal*/ + " at "
-                + angle + "°");
-        // do Players have mass/inertia?;
-        acceleration.setAngleAndLength(angle, damage * FORCE_MULTIPLIER /* * massReciprocal*/);
+    private void knockback(final float damage, final float angle, final float knockback) {
+        log(this + " knockedback by "
+                + knockback * damage * /* * massReciprocal*/ KNOCKBACK_MULTIPLIER + " at " + angle
+                + "°, increasing percentage to " + percentage + "%");
+        percentage += damage * PERCENTAGE_MULTIPLIER;
+        acceleration.setAngleAndLength(angle,
+                knockback * damage * /* * massReciprocal*/ KNOCKBACK_MULTIPLIER);
         move();
-    }
-    
-    @Deprecated
-    private void impulse(final float damage, final float angle, final float knockback) {
-        // the actual formula for this is long, we can tweak this as needed
-        // I (Stanley) just made this up
-        acceleration.setAngleAndLength(angle, knockback + percentage * damage * 0.5f);
-        acceleration.accelerate(velocity, position);
     }
     
     private void takeHits(final Array<Player> enemies) {
@@ -208,29 +165,11 @@ public abstract class Player implements Renderable, Loggable {
                 log(this + " checking for hits by " + enemy);
                 for (final Hitbox hitbox : enemy.hitboxes) {
                     final float damage = hurtbox.collide(hitbox);
-                    final float angle = hitbox.angle; // FIXME
-                    // or should it be...
-                    final float angle2 = hitbox.velocity.angleRad(); // FIXME
+                    final Attack attack = hitbox.attack;
                     log(this + " attacked by " + hitbox + ", inflicting " + damage + " damage at "
-                            + angle + "°");
-                    knockback(damage, angle);
-                    // FIXME percentage should increase here somehow
-                    // I was confused about percentage before,
-                    // I think I mostly get it now
-                    percentage += damage /* * something*/;
+                            + attack.angle + "°");
+                    knockback(damage, attack.angle, attack.knockback);
                 }
-                
-                //                for (final Action action : enemy.actions.values()) {
-                //                    //Assuming one move for now
-                //                    //Would normally have to choose which hitbox is most relevant
-                //
-                //                    if (action.hitboxes.size > 0) {
-                //                        final float damage = hurtbox.damageTakenBy(action,
-                //                                action.hitboxes.first());
-                //                        attacked(action, damage);
-                //                    }
-                //
-                //                }
             }
         }
     }

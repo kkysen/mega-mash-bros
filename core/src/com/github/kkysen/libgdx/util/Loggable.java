@@ -9,12 +9,20 @@ import com.badlogic.gdx.Gdx;
  */
 public interface Loggable {
     
+    public default String name() {
+        return getClass().getSimpleName();
+    }
+    
     public default void log(final String message) {
-        Gdx.app.log(getClass().getSimpleName(), message);
+        Gdx.app.log(name(), message);
+    }
+    
+    public default void debug(final String message) {
+        Gdx.app.debug(name(), message);
     }
     
     public default void error(final String message) {
-        Gdx.app.error(getClass().getSimpleName(), message);
+        Gdx.app.error(name(), message);
     }
     
 }

@@ -1,7 +1,7 @@
 package com.github.kkysen.supersmashbros.actions;
 
-import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
+import com.github.kkysen.supersmashbros.core.Hitbox;
 import com.github.kkysen.supersmashbros.core.State;
 
 public class SmashAttack extends Attack {
@@ -14,9 +14,11 @@ public class SmashAttack extends Attack {
     }
     
     @Override
-    protected void attack(final State state, final Vector2 position) {
-        final float size = 10f;
-        state.addHitbox(state.newHitbox(duration, damage, position, size, size, 5f, 0f, 45));
+    protected void attack(final State state) {
+        final Hitbox hitbox = state.newHitbox(this);
+        hitbox.bounds.setSize(10f, 10f);
+        hitbox.velocity.set(5f, 0f);
+        state.addHitbox(hitbox);
     }
     
 }

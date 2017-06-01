@@ -20,7 +20,7 @@ public abstract class Move extends Action {
     }
     
     @Override
-    protected final void attack(final State state, final Vector2 position) {}
+    protected final void attack(final State state) {}
     
     @Override
     protected abstract void move(final Vector2 velocity);

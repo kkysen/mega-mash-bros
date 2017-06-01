@@ -9,21 +9,19 @@ import com.github.kkysen.supersmashbros.actions.Attack;
  */
 public class Hurtbox extends Box {
     
-    private static final float DAMAGE_SCALE = 1.0f; // FIXME
+    private static final float DAMAGE_MULTIPLIER = 1.0f; // FIXME
     
     public Hurtbox(final float lifetime) {
         super(lifetime);
     }
     
     public float damageTakenBy(final Hitbox hitbox) {
-        return intersectionArea(hitbox) * hitbox.damage * DAMAGE_SCALE;
+        return intersectionArea(hitbox) * hitbox.attack.damage * DAMAGE_MULTIPLIER;
     }
     
     public float collide(final Hitbox hitbox) {
         log(this + " collided with " + hitbox);
-        final float damage = damageTakenBy(hitbox);
-        hitbox.collide(this, damage);
-        return damage;
+        return damageTakenBy(hitbox);
     }
     
     /**
@@ -31,7 +29,7 @@ public class Hurtbox extends Box {
      * Base dmg (from action) * contact area with hurtbox
      */
     public float damageTakenBy(final Attack attack, final Hitbox hitbox) {
-        return intersectionArea(hitbox) * attack.damage/* * DAMAGE_SCALE*/;
+        return intersectionArea(hitbox) * attack.damage/* * DAMAGE_MULTIPLIER*/;
     }
     
     public float collide(final Attack attack, final Hitbox hitbox) {

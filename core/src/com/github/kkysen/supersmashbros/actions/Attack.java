@@ -26,7 +26,7 @@ public abstract class Attack extends Action {
     }
     
     @Override
-    protected abstract void attack(final State state, Vector2 position);
+    protected abstract void attack(final State state);
     
     @Override
     protected final void move(final Vector2 velocity) {}

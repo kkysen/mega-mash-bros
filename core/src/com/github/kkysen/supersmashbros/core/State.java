@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Renderable;
+import com.github.kkysen.supersmashbros.actions.Attack;
 
 import lombok.experimental.ExtensionMethod;
 
@@ -60,12 +61,9 @@ public class State implements Renderable {
         shapeRenderer.end();
     }
     
-    public Hitbox newHitbox(final float lifetime, final float damage, final Vector2 center,
-            final float width, final float height, final float vx, final float vy,
-            final float angle) {
-        final Hitbox hitbox = new Hitbox(player, lifetime, damage, angle);
-        hitbox.bounds.setPositionAndSize(center, width, height);
-        hitbox.velocity.set(vx, vy);
+    public Hitbox newHitbox(final Attack attack) {
+        final Hitbox hitbox = new Hitbox(player, attack);
+        hitbox.bounds.setPosition(position);
         return hitbox;
     }
     
