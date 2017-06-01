@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -26,9 +27,9 @@ public class State implements Renderable {
     public Vector2 position;
     
     private float elapsedTime = 0;
-    private final Animation<Texture> animation;
+    private final Animation<TextureRegion> animation;
     
-    public State(final Animation<Texture> animation) {
+    public State(final Animation<TextureRegion> animation) {
         this.animation = animation;
     }
     
@@ -40,14 +41,15 @@ public class State implements Renderable {
     @Override
     public void render(final Batch batch) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        final Texture frame = animation.getKeyFrame(elapsedTime);
+        final TextureRegion frame = animation.getKeyFrame(elapsedTime);
         batch.draw(frame, position.x, position.y);
         // TODO
         //rendering hitboxes here?
         drawBoxes(ShapeType.Line, Color.GREEN, player.hitboxes);
         drawBoxes(ShapeType.Line, Color.RED, player.hurtboxes);
-        
     }
+    
+    
     
     public void drawBoxes(final ShapeType shapeType, final Color color,
             final Array<? extends Box> boxes) {

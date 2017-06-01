@@ -4,6 +4,8 @@ import static com.github.kkysen.supersmashbros.app.SuperSmashBros.asset;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.libgdx.util.keys.User;
 import com.github.kkysen.supersmashbros.actions.Action;
@@ -22,8 +24,14 @@ import com.github.kkysen.supersmashbros.core.State;
  */
 public class Mario extends Player {
     
-    private static final State state = new State(new Animation<>(0.1f,
-            new Texture(asset("mario.png"))));
+    private static final State state = new State(
+    		new Animation<>(
+    				0.1f,
+    				Renderable.getFrames(
+    						new Texture(asset("sprites_transparent.png")),
+    						6,
+    						16,24, 27, 38),
+    				PlayMode.LOOP_PINGPONG));
     
     public static Mario userControlled() {
         return new Mario(User.get());
@@ -38,7 +46,7 @@ public class Mario extends Player {
             new MoveLeft(state, 1f, 10f),
             new MoveRight(state, 1f, 10f),
             new Jump(state, 1f, 0.5f, 50f),
-            new SmashAttack(state, 0, 2f, 3f, 5f, 5f),
+            new SmashAttack(state, 0, 2f, 3f, 5f, 5f)
         });
     }
     
