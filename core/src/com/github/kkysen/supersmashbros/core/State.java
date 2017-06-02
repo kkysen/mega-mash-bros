@@ -1,6 +1,5 @@
 package com.github.kkysen.supersmashbros.core;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -9,6 +8,7 @@ import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.supersmashbros.actions.Attack;
+import com.github.kkysen.supersmashbros.app.Game;
 
 import lombok.experimental.ExtensionMethod;
 
@@ -44,7 +44,7 @@ public class State implements Renderable, Loggable, Cloneable {
     
     @Override
     public String toString() {
-        return name;
+        return name + " @ " + position;
     }
     
     public void setPlayer(final Player player) {
@@ -56,7 +56,7 @@ public class State implements Renderable, Loggable, Cloneable {
     
     @Override
     public void render(final Batch batch) {
-        elapsedTime += Gdx.graphics.getDeltaTime();
+        elapsedTime += Game.deltaTime;
         final TextureRegion frame = animation.getKeyFrame(elapsedTime);
         batch.draw(frame, position.x, position.y);
         // TODO

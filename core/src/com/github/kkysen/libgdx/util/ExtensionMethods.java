@@ -1,9 +1,9 @@
 package com.github.kkysen.libgdx.util;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pools;
+import com.github.kkysen.supersmashbros.app.Game;
 
 import lombok.experimental.ExtensionMethod;
 
@@ -53,7 +53,7 @@ public class ExtensionMethods {
     
     public static void accelerate(final Vector2 acceleration, final Vector2 velocity,
             final Vector2 position) {
-        final float deltaTime = Gdx.graphics.getDeltaTime();
+        final float deltaTime = Game.deltaTime;
         velocity.mulAdd(acceleration, deltaTime);
         position.mulAdd(velocity, deltaTime);
     }

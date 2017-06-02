@@ -1,7 +1,9 @@
 package com.github.kkysen.supersmashbros.app;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -17,11 +19,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.github.kkysen.supersmashbros.core.World;
 import com.github.kkysen.supersmashbros.players.Mario;
 
-public class SuperSmashBros extends ApplicationAdapter {
+public class Game extends ApplicationAdapter {
     
     public static final String TITLE = "Super Smash Bros";
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 800;
+    public static final int WIDTH = 1600;
+    public static final int HEIGHT = 900;
     
     private static final Path ASSETS = Paths.get("").toAbsolutePath().getParent()
             .resolve("core/assets");
@@ -33,6 +35,11 @@ public class SuperSmashBros extends ApplicationAdapter {
     public static FileHandle asset(final String path) {
         return open(ASSETS.resolve(path));
     }
+    
+    public static Game instance;
+    
+    public static float deltaTime;
+    public static float speed = 1;
     
     private OrthographicCamera camera;
     private SpriteBatch batch;
@@ -50,17 +57,37 @@ public class SuperSmashBros extends ApplicationAdapter {
     
     @Override
     public void create() {
+        Gdx.app.setLogLevel(Application.LOG_NONE);
+        instance = this;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);
         batch = new SpriteBatch();
         lineRenderer = new ShapeRenderer();
         world = createWorld();
-        Gdx.app.setLogLevel(Application.LOG_NONE);
-        System.out.println(world.bounds);
+    }
+    
+    private static void readSpeed() {
+        final Scanner in;
+        try {
+            in = new Scanner(ASSETS.resolve("speed.txt"));
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (in.hasNextLine() && in.hasNextFloat()) {
+            final float newSpeed = in.nextFloat();
+            if (newSpeed != speed) {
+                System.out.println("\tread speed = " + newSpeed);
+            }
+            speed = newSpeed;
+        }
+        in.close();
     }
     
     @Override
     public void render() {
+        readSpeed();
+        deltaTime = Gdx.graphics.getDeltaTime() * speed;
+        
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();

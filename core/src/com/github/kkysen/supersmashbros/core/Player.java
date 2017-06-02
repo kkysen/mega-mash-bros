@@ -1,7 +1,6 @@
 package com.github.kkysen.supersmashbros.core;
 
 import java.util.Map;
-import java.util.Objects;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -99,9 +98,11 @@ public abstract class Player implements Renderable, Loggable {
         id = ++numPlayers;
         this.controller = controller;
         state = initialState.clone();
-        Objects.requireNonNull(state.position);
+        state.setPlayer(this);
+        System.out.println(state);
+        assert state != null;
+        assert state.position != null;
         this.lives = lives;
-        initialState.setPlayer(this);
         // EnumMap was throwing some weird errors because of some Eclipse compiler error,
         // so I just made my own "EnumMap"
         for (final Action action : actions) {

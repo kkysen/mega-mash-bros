@@ -1,72 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="731c3fe6-4d5a-4d63-b146-584528ff993b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/Renderable.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/app/SuperSmashBros.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Box.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Hitbox.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Hurtbox.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Player.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/World.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/players/Mario.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_ashley_ashley_1_7_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_box2dlights_box2dlights_1_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_ai_1_8_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_backend_headless_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_backend_lwjgl_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_box2d_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_box2d_platform_natives_desktop_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_bullet_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_bullet_platform_natives_desktop_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_controllers_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_controllers_desktop_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_controllers_platform_natives_desktop_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_freetype_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_freetype_platform_natives_desktop_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_platform_natives_desktop_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_gdx_gdx_tools_1_9_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_badlogicgames_jlayer_jlayer_1_0_1_gdx.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_jinput_jinput_2_0_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_jinput_jinput_platform_natives_linux_2_0_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_jinput_jinput_platform_natives_osx_2_0_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_jinput_jinput_platform_natives_windows_2_0_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_jutils_jutils_1_0_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jcraft_jorbis_0_0_17.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_lwjgl_lwjgl_lwjgl_2_9_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_lwjgl_lwjgl_lwjgl_platform_natives_linux_2_9_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_lwjgl_lwjgl_lwjgl_platform_natives_osx_2_9_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_lwjgl_lwjgl_lwjgl_platform_natives_windows_2_9_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_lwjgl_lwjgl_lwjgl_util_2_9_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_projectlombok_lombok_1_16_16.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules/Super Smash Bros.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules/core/core.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules/core/core_main.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules/core/core_test.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules/desktop/desktop.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules/desktop/desktop_main.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules/desktop/desktop_test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UML Class Diagram.ucls" afterPath="$PROJECT_DIR$/UML Class Diagram.ucls" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/Renderable.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/Renderable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/Textures.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/Textures.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/KeyBinding.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/KeyBinding.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/actions/Attack.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/actions/Attack.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/actions/Move.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/actions/Move.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/actions/MoveLeft.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/actions/MoveLeft.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/actions/MoveRight.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/actions/MoveRight.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/actions/SmashAttack.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/actions/SmashAttack.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/app/SuperSmashBros.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/app/SuperSmashBros.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/Box.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/Box.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/Hitbox.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/Hitbox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/Hurtbox.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/Hurtbox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/Player.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/World.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/World.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/players/Mario.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/players/Mario.java" />
-    </list>
+    <list default="true" id="731c3fe6-4d5a-4d63-b146-584528ff993b" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/bin/" />
     <ignored path="$PROJECT_DIR$/core/bin/" />
     <ignored path="$PROJECT_DIR$/desktop/bin/" />
@@ -104,9 +39,12 @@
       <file leaf-file-name="State.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-511">
-              <caret line="22" column="30" lean-forward="true" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
-              <folding />
+            <state relative-caret-position="644">
+              <caret line="57" column="43" lean-forward="true" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+              <folding>
+                <element signature="e#1284#1285#0" expanded="true" />
+                <element signature="e#1311#1312#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -857,6 +795,13 @@
       <projects_view />
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java" />
+      </list>
+    </option>
+  </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
@@ -1233,16 +1178,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496421801470</updated>
-      <workItem from="1496421807825" duration="1315000" />
+      <workItem from="1496421807825" duration="1916000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1315000" />
+    <option name="totallyTimeSpent" value="1916000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3232" height="1732" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1306,9 +1251,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-511">
-          <caret line="22" column="30" lean-forward="true" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
-          <folding />
+        <state relative-caret-position="644">
+          <caret line="57" column="43" lean-forward="true" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+          <folding>
+            <element signature="e#1284#1285#0" expanded="true" />
+            <element signature="e#1311#1312#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

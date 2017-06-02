@@ -1,10 +1,10 @@
 package com.github.kkysen.supersmashbros.actions;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
+import com.github.kkysen.supersmashbros.app.Game;
 import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.State;
 
@@ -46,7 +46,7 @@ public class Action implements Loggable {
     }
     
     public void update() {
-        elapsedTime += Gdx.graphics.getDeltaTime();
+        elapsedTime += Game.deltaTime;
     }
     
     private boolean isImpossiblePreState(final State state) {

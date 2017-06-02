@@ -1,11 +1,10 @@
 package com.github.kkysen.supersmashbros.players;
 
-import static com.github.kkysen.supersmashbros.app.SuperSmashBros.asset;
+import static com.github.kkysen.supersmashbros.app.Game.asset;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
-import com.badlogic.gdx.math.GridPoint2;
 import com.github.kkysen.libgdx.util.Textures;
 import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.libgdx.util.keys.User;
@@ -53,9 +52,11 @@ public class Mario extends Player {
                     Textures.getFrames(
                             new Texture(asset("sprites_transparent.png")),
                             17, 84,
-                            new GridPoint2(28, 42),
-                            new GridPoint2(31, 42),
-                            new GridPoint2(33, 44))));
+                            new int[][] {
+                                {28, 42},
+                                {31, 42},
+                                {33, 44}
+                            })));
     
     public static Mario userControlled() {
         return new Mario(User.get());

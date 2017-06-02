@@ -1,6 +1,5 @@
 package com.github.kkysen.supersmashbros.core;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -12,6 +11,7 @@ import com.badlogic.gdx.utils.Pool.Poolable;
 import com.badlogic.gdx.utils.Pools;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
+import com.github.kkysen.supersmashbros.app.Game;
 
 /**
  * 
@@ -60,7 +60,7 @@ public abstract class Box implements Renderable, Poolable, Loggable {
     public abstract boolean subUpdate();
     
     public final boolean update() {
-        elapsedTime += Gdx.graphics.getDeltaTime();
+        elapsedTime += Game.deltaTime;
         if (elapsedTime > lifetime) {
             return false;
         }
