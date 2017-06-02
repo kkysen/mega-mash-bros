@@ -1,5 +1,6 @@
 package com.github.kkysen.supersmashbros.core;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pools;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
@@ -30,13 +31,29 @@ public class Hitbox extends Box {
     }
     
     @Override
+    protected Color getColor() {
+        return Color.RED;
+    }
+    
+    @Override
     public String toString() {
         return player + "'s Hitbox, damage = " + attack.damage;
+    }
+    
+    public String motion() {
+        return "a = " + acceleration + ", v = " + velocity + ", p = " + position;
+    }
+    
+    public void setPosition(final Vector2 position) {
+        this.position.set(position);
+        bounds.x = position.x;
+        bounds.y = position.y;
     }
     
     @Override
     public boolean subUpdate() {
         log("updated vectors");
+        //System.out.println(join(acceleration, velocity, position));
         acceleration.accelerate(velocity, position);
         bounds.x = position.x;
         bounds.y = position.y;

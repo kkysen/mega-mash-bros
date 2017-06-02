@@ -16,8 +16,9 @@ public class SmashAttack extends Attack {
     @Override
     protected void attack(final State state) {
         final Hitbox hitbox = state.newHitbox(this);
-        hitbox.bounds.setSize(10f, 10f);
-        hitbox.velocity.set(5f, 0f);
+        hitbox.bounds.setSize(50f, 50f);
+        hitbox.velocity.set(50f, 0f);
+        System.out.println("\tSmashAttack created " + hitbox + ", " + hitbox.motion());
         state.addHitbox(hitbox);
     }
     

@@ -29,6 +29,6 @@ public abstract class Attack extends Action {
     protected abstract void attack(final State state);
     
     @Override
-    protected final void move(final Vector2 velocity, boolean isOnPlatform) {}
+    protected final void move(final Vector2 velocity, final boolean isOnPlatform) {}
     
 }

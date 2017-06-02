@@ -1,10 +1,12 @@
 package com.github.kkysen.supersmashbros.core;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
@@ -50,14 +52,15 @@ public class World implements Renderable, Disposable, Loggable {
         this.height = height;
         this.background = new TextureRegion(background, 0, 0, width, height);
         bounds = new Rectangle(0, 0, width, height);
-        platform.setSize(width * 0.25f, height * 0.1f);
+        platform.setSize(width * 0.75f, height * 0.1f);
         platform.setCenter(width * 0.5f, height * 0.25f);
         this.platform = new Platform(platform);
         this.players = new Array<>(players);
         final Rectangle platformBounds = this.platform.bounds;
         final float platformTop = platformBounds.maxY();
-        final float platformLeft = platformBounds.x;
-        final float platformRight = platformBounds.maxX();
+        final float margin = platformBounds.width * 0.25f;
+        final float platformLeft = platformBounds.x + margin;
+        final float platformRight = platformBounds.maxX() - margin;
         for (final Player player : players) {
             player.world = this;
             player.position.x = MathUtils.random(platformLeft, platformRight);
@@ -129,6 +132,13 @@ public class World implements Renderable, Disposable, Loggable {
             return;
         }
         updateAndRenderPlayers(batch);
+    }
+    
+    @Override
+    public void render(final ShapeRenderer lineRenderer, final Camera camera) {
+        for (final Player player : players) {
+            player.render(lineRenderer, camera);
+        }
     }
     
     private void finishGame() {

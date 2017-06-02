@@ -1,19 +1,24 @@
 package com.github.kkysen.supersmashbros.core;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.badlogic.gdx.utils.Pools;
 import com.github.kkysen.libgdx.util.Loggable;
+import com.github.kkysen.libgdx.util.Renderable;
 
 /**
  * 
  * 
  * @author Khyber Sen
  */
-public abstract class Box implements Poolable, Loggable {
+public abstract class Box implements Renderable, Poolable, Loggable {
     
     private static final Pool<Rectangle> pool = Pools.get(Rectangle.class);
     
@@ -61,5 +66,16 @@ public abstract class Box implements Poolable, Loggable {
         }
         return subUpdate();
     }
+    
+    @Override
+    public final void render(final Batch batch) {}
+    
+    @Override
+    public void render(final ShapeRenderer lineRenderer, final Camera camera) {
+        lineRenderer.setColor(getColor());
+        lineRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+    }
+    
+    protected abstract Color getColor();
     
 }

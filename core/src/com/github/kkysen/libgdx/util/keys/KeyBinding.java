@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public enum KeyBinding {
     
+    STOP(Key.S),
     LEFT(Key.A),
     RIGHT(Key.D),
     JUMP(Key.W),

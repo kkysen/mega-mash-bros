@@ -1,5 +1,6 @@
 package com.github.kkysen.supersmashbros.core;
 
+import com.badlogic.gdx.graphics.Color;
 import com.github.kkysen.supersmashbros.actions.Attack;
 
 /**
@@ -13,6 +14,11 @@ public class Hurtbox extends Box {
     
     public Hurtbox(final float lifetime) {
         super(lifetime);
+    }
+    
+    @Override
+    protected Color getColor() {
+        return Color.BLUE;
     }
     
     public float damageTakenBy(final Hitbox hitbox) {

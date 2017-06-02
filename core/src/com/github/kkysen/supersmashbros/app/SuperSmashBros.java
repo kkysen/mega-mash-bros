@@ -12,16 +12,16 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.github.kkysen.libgdx.util.Loggable;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.github.kkysen.supersmashbros.core.World;
 import com.github.kkysen.supersmashbros.players.Mario;
 
-public class SuperSmashBros extends ApplicationAdapter implements Loggable {
+public class SuperSmashBros extends ApplicationAdapter {
     
     public static final String TITLE = "Super Smash Bros";
     public static final int WIDTH = 800;
-    public static final int HEIGHT = 450;
+    public static final int HEIGHT = 800;
     
     private static final Path ASSETS = Paths.get("").toAbsolutePath().getParent()
             .resolve("core/assets");
@@ -36,15 +36,16 @@ public class SuperSmashBros extends ApplicationAdapter implements Loggable {
     
     private OrthographicCamera camera;
     private SpriteBatch batch;
+    private ShapeRenderer lineRenderer;
     
     private World world;
     
     private World createWorld() {
-        System.out.println(ASSETS.toAbsolutePath());
         final Texture background = new Texture(asset("background.jpg"));
         System.out.println(background.getHeight() + ", " + background.getWidth());
         final Sprite platform = new Sprite(new Texture(asset("platform.png")));
-        return new World(WIDTH, HEIGHT, background, platform, Mario.userControlled());
+        return new World(WIDTH, HEIGHT, background, platform, Mario.userControlled(),
+                Mario.frozen());
     }
     
     @Override
@@ -52,28 +53,10 @@ public class SuperSmashBros extends ApplicationAdapter implements Loggable {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);
         batch = new SpriteBatch();
+        lineRenderer = new ShapeRenderer();
         world = createWorld();
         Gdx.app.setLogLevel(Application.LOG_NONE);
         System.out.println(world.bounds);
-    }
-    
-    @Override
-    public void resize(int width, int height) {
-    	System.out.println("resizing");
-    	System.out.println("textureregion size: " + 
-    			world.background.getRegionWidth() + ", " +
-    			world.background.getRegionHeight());
-    	
-    	System.out.println("screen size: " + 
-    			Gdx.graphics.getWidth() + ", " +
-    			Gdx.graphics.getHeight());
-    	//world.background = new TextureRegion(world.background, 0, 0, width, height);
-    	world.background.setRegionHeight(height);
-    	world.background.setRegionHeight(width);
-    	
-    	batch.begin();
-        world.render(batch);
-        batch.end();
     }
     
     @Override
@@ -81,11 +64,17 @@ public class SuperSmashBros extends ApplicationAdapter implements Loggable {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
-        //batch.setProjectionMatrix(camera.combined);
         
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
         world.render(batch);
         batch.end();
+        
+        Gdx.gl20.glLineWidth(5);
+        lineRenderer.setProjectionMatrix(camera.combined);
+        lineRenderer.begin(ShapeType.Line);
+        world.render(lineRenderer, camera);
+        lineRenderer.end();
         
         if (world.gameOver) {
             pause();

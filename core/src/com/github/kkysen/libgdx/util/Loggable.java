@@ -25,4 +25,16 @@ public interface Loggable {
         Gdx.app.error(name(), message);
     }
     
+    public default String join(final Object... objects) {
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0;; i++) {
+            sb.append(objects[i]);
+            if (i + 1 == objects.length) {
+                return sb.toString();
+            }
+            sb.append(',');
+            sb.append(' ');
+        }
+    }
+    
 }

@@ -8,8 +8,6 @@ import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.State;
 
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.ExtensionMethod;
 
 /**
@@ -18,7 +16,6 @@ import lombok.experimental.ExtensionMethod;
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)
-@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class Action implements Loggable {
     
     private final State state;
@@ -31,6 +28,17 @@ public class Action implements Loggable {
     protected final float cooldown;
     
     protected float elapsedTime;
+    
+    protected Action(final State state, final KeyBinding keyBinding,
+            final State[] impossiblePreStates, final float startup, final float duration,
+            final float cooldown) {
+        this.state = state.clone();
+        this.keyBinding = keyBinding;
+        this.impossiblePreStates = impossiblePreStates;
+        this.startup = startup;
+        this.duration = duration;
+        this.cooldown = cooldown;
+    }
     
     @Override
     public String toString() {

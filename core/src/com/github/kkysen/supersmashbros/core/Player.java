@@ -1,8 +1,11 @@
 package com.github.kkysen.supersmashbros.core;
 
 import java.util.Map;
+import java.util.Objects;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
@@ -71,6 +74,8 @@ public abstract class Player implements Renderable, Loggable {
     
     public State state;
     
+    public boolean wasOnPlatform = true;
+    
     /**
      * Hitboxes retrieved from attacks, empty when not attacking
      */
@@ -93,7 +98,8 @@ public abstract class Player implements Renderable, Loggable {
         this.name = name;
         id = ++numPlayers;
         this.controller = controller;
-        state = initialState;
+        state = initialState.clone();
+        Objects.requireNonNull(state.position);
         this.lives = lives;
         initialState.setPlayer(this);
         // EnumMap was throwing some weird errors because of some Eclipse compiler error,
@@ -125,9 +131,6 @@ public abstract class Player implements Renderable, Loggable {
         // because I assume something happends when you die,
         // like you respawn somewhere else
         // I added the method below to check if someone was totally dead
-        if (world.bounds.contains(position)) {
-            //error(position + " in " + world.bounds);
-        }
         return world.bounds.contains(position) /*&& lives > 0*/;
     }
     
@@ -200,14 +203,19 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     private void checkIfOnPlatform() {
-        if (isOnPlatform()) {
+        final boolean isOnPlatform = isOnPlatform();
+        if (isOnPlatform) {
             log(this + " hit platform and stopped");
             position.y = world.platform.bounds.maxY();
             velocity.y = 0;
             acceleration.y = 0;
+            if (!wasOnPlatform) {
+                state = actions[KeyBinding.STOP.ordinal()].execute(this);
+            }
         } else {
             acceleration.y = world.gravity;
         }
+        wasOnPlatform = isOnPlatform;
     }
     
     private void move() {
@@ -239,6 +247,16 @@ public abstract class Player implements Renderable, Loggable {
     @Override
     public final void render(final Batch batch) {
         state.render(batch);
+    }
+    
+    @Override
+    public final void render(final ShapeRenderer lineRenderer, final Camera camera) {
+        for (final Hitbox hitbox : hitboxes) {
+            hitbox.render(lineRenderer, camera);
+        }
+        for (final Hurtbox hurtbox : hurtboxes) {
+            hurtbox.render(lineRenderer, camera);
+        }
     }
     
 }
