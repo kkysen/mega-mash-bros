@@ -49,7 +49,7 @@ public class World implements Renderable, Disposable, Loggable {
         this.width = width;
         this.height = height;
         this.background = new TextureRegion(background, 0, 0, width, height);
-        bounds = new Rectangle(0, 0, background.getWidth(), background.getHeight());
+        bounds = new Rectangle(0, 0, width, height);
         platform.setSize(width * 0.25f, height * 0.1f);
         platform.setCenter(width * 0.5f, height * 0.25f);
         this.platform = new Platform(platform);
