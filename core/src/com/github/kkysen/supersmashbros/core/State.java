@@ -45,6 +45,7 @@ public class State implements Renderable, Loggable {
         this.player = player;
         error(this + " set player to " + player);
         position = player == null ? null : player.position;
+        elapsedTime = 0;
     }
     
     @Override
