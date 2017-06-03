@@ -125,7 +125,7 @@ public abstract class Player implements Renderable, Loggable {
     
     @Override
     public String toString() {
-        return "Player " + id + " " + name;
+        return "Player " + id + " " + controller.name() + " " + name();
     }
     
     public final void reSpawn(final Batch batch) {

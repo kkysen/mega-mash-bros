@@ -62,7 +62,8 @@ public class World implements Renderable, Disposable, Loggable {
         final float platformRight = platformBounds.maxX() - margin;
         for (final Player player : players) {
             player.world = this;
-            player.position.x = MathUtils.random(platformLeft, platformRight);
+            player.position.x = MathUtils.random(platformLeft,
+                    player.isAI() ? platformRight : platformRight * 0.25f);
             player.position.y = platformTop + MathUtils.random(10f);
         }
     }

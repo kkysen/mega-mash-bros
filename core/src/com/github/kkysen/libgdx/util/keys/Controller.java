@@ -1,11 +1,13 @@
 package com.github.kkysen.libgdx.util.keys;
 
+import com.github.kkysen.libgdx.util.Loggable;
+
 /**
  * 
  * 
  * @author Khyber Sen
  */
-public class Controller {
+public class Controller implements Loggable {
     
     private static final int NUM_KEYS = 256;
     

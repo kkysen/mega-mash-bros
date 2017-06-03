@@ -26,7 +26,7 @@ public class Hurtbox extends Box {
     
     @Override
     protected Color getColor() {
-        return Color.BLUE;
+        return player.isAI() ? Color.BLUE : Color.GOLD;
     }
     
     @Override
