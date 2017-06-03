@@ -124,7 +124,7 @@ public class World implements Renderable, Disposable, Loggable {
             finishGame();
             return;
         }
-        if (false/*someoneWon()*/) {
+        if (someoneWon()) {
             players.sort((x, y) -> y.lives - x.lives);  //want greatest lives first
             log(players.get(0) + " has won");
             // TODO other stuff should be done here eventually
