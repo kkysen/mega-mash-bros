@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.World;
 import com.github.kkysen.supersmashbros.players.Mario;
 
@@ -51,8 +52,13 @@ public class Game extends ApplicationAdapter {
         final Texture background = new Texture(asset("background.jpg"));
         System.out.println(background.getHeight() + ", " + background.getWidth());
         final Sprite platform = new Sprite(new Texture(asset("platform.png")));
-        return new World(WIDTH, HEIGHT, background, platform, Mario.userControlled(),
-                Mario.frozen());
+        final int numAIs = 10;
+        final Player[] players = new Player[numAIs + 1];
+        players[0] = Mario.userControlled();
+        for (int i = 1; i < players.length; i++) {
+            players[i] = Mario.frozen();
+        }
+        return new World(WIDTH, HEIGHT, background, platform, players);
     }
     
     @Override
@@ -100,7 +106,7 @@ public class Game extends ApplicationAdapter {
         Gdx.gl20.glLineWidth(5);
         lineRenderer.setProjectionMatrix(camera.combined);
         lineRenderer.begin(ShapeType.Line);
-        world.render(lineRenderer, camera);
+        world.render(lineRenderer);
         lineRenderer.end();
         
         if (world.gameOver) {

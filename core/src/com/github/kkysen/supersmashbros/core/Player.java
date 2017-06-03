@@ -2,9 +2,9 @@ package com.github.kkysen.supersmashbros.core;
 
 import java.util.Map;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
@@ -108,6 +108,19 @@ public abstract class Player implements Renderable, Loggable {
         for (final Action action : actions) {
             this.actions[action.keyBinding.ordinal()] = action;
         }
+        hurtboxes.add(new Hurtbox(this));
+    }
+    
+    // these should be replaced by something better, but will do for now
+    
+    @Deprecated
+    public float normalWidth() {
+        return 50f; // FIXME
+    }
+    
+    @Deprecated
+    public float normalHeight() {
+        return 50f; // FIXME
     }
     
     @Override
@@ -152,12 +165,13 @@ public abstract class Player implements Renderable, Loggable {
      * @param knockback the hard-coded {@link Hitbox#knockback} value
      */
     private void knockback(final float damage, final float angle, final float knockback) {
-        log(this + " knockedback by "
-                + knockback * damage * /* * massReciprocal*/ KNOCKBACK_MULTIPLIER + " at " + angle
-                + "°, increasing percentage to " + percentage + "%");
+        final float accelerationMagnitude = knockback * damage
+                * /* * massReciprocal*/ KNOCKBACK_MULTIPLIER;
+        System.out.println(this + " knocked back by " + accelerationMagnitude + " at "
+                + MathUtils.radiansToDegrees * angle + "°, increasing percentage to " + percentage
+                + "%");
         percentage += damage * PERCENTAGE_MULTIPLIER;
-        acceleration.setAngleAndLength(angle,
-                knockback * damage * /* * massReciprocal*/ KNOCKBACK_MULTIPLIER);
+        acceleration.setAngleAndLength(angle, accelerationMagnitude);
         move();
     }
     
@@ -167,9 +181,14 @@ public abstract class Player implements Renderable, Loggable {
                 log(this + " checking for hits by " + enemy);
                 for (final Hitbox hitbox : enemy.hitboxes) {
                     final float damage = hurtbox.collide(hitbox);
+                    if (damage == 0) {
+                        continue;
+                    }
                     final Attack attack = hitbox.attack;
-                    log(this + " attacked by " + hitbox + ", inflicting " + damage + " damage at "
-                            + attack.angle + "°");
+                    System.out.println(this + " attacked by " + hitbox + ", inflicting " + damage
+                            + " damage and "
+                            + attack.knockback + " knockback at "
+                            + MathUtils.radiansToDegrees * attack.angle + "°");
                     knockback(damage, attack.angle, attack.knockback);
                 }
             }
@@ -251,12 +270,12 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     @Override
-    public final void render(final ShapeRenderer lineRenderer, final Camera camera) {
+    public final void render(final ShapeRenderer lineRenderer) {
         for (final Hitbox hitbox : hitboxes) {
-            hitbox.render(lineRenderer, camera);
+            hitbox.render(lineRenderer);
         }
         for (final Hurtbox hurtbox : hurtboxes) {
-            hurtbox.render(lineRenderer, camera);
+            hurtbox.render(lineRenderer);
         }
     }
     

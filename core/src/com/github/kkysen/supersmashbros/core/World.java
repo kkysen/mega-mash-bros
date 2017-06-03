@@ -1,7 +1,6 @@
 package com.github.kkysen.supersmashbros.core;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -135,9 +134,9 @@ public class World implements Renderable, Disposable, Loggable {
     }
     
     @Override
-    public void render(final ShapeRenderer lineRenderer, final Camera camera) {
+    public void render(final ShapeRenderer lineRenderer) {
         for (final Player player : players) {
-            player.render(lineRenderer, camera);
+            player.render(lineRenderer);
         }
     }
     

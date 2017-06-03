@@ -12,13 +12,26 @@ public class Hurtbox extends Box {
     
     private static final float DAMAGE_MULTIPLIER = 1.0f; // FIXME
     
-    public Hurtbox(final float lifetime) {
-        super(lifetime);
+    private final Player player;
+    
+    public Hurtbox(final Player player, final float width, final float height,
+            final float lifetime) {
+        super(player.position, width, height, lifetime);
+        this.player = player;
+    }
+    
+    public Hurtbox(final Player player) {
+        this(player, player.normalWidth(), player.normalHeight(), Float.MAX_VALUE);
     }
     
     @Override
     protected Color getColor() {
         return Color.BLUE;
+    }
+    
+    @Override
+    public String toString() {
+        return player + "'s Hurtbox";
     }
     
     public float damageTakenBy(final Hitbox hitbox) {
@@ -46,7 +59,9 @@ public class Hurtbox extends Box {
     
     @Override
     public boolean subUpdate() {
-        return true; // TODO
+        bounds.x = player.position.x;
+        bounds.y = player.position.y;
+        return true;
     }
     
 }

@@ -62,11 +62,8 @@ public class State implements Renderable, Loggable, Cloneable {
         // TODO
     }
     
-    public Hitbox newHitbox(final Attack attack) {
-        final Hitbox hitbox = new Hitbox(player, attack);
-        System.out.println(position);
-        hitbox.setPosition(position);
-        return hitbox;
+    public Hitbox newHitbox(final Attack attack, final float width, final float height) {
+        return new Hitbox(player, attack, width, height);
     }
     
     public void addHitbox(final Hitbox hitbox) {

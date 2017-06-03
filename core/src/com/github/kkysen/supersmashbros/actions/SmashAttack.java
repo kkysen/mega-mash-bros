@@ -10,14 +10,13 @@ public class SmashAttack extends Attack {
             final float cooldown,
             final float damage, final float knockback) {
         super(state, KeyBinding.MAIN_ATTACK, new State[] {}, startup, duration, cooldown, damage,
-                180, knockback);
+                75, knockback);
     }
     
     @Override
     protected void attack(final State state) {
-        final Hitbox hitbox = state.newHitbox(this);
-        hitbox.bounds.setSize(50f, 50f);
-        hitbox.velocity.set(50f, 0f);
+        final Hitbox hitbox = state.newHitbox(this, 50f, 50f);
+        hitbox.velocity.set(300f, 0f);
         System.out.println("\tSmashAttack created " + hitbox + ", " + hitbox.motion());
         state.addHitbox(hitbox);
     }

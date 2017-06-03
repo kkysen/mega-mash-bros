@@ -1,11 +1,11 @@
 package com.github.kkysen.supersmashbros.core;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.badlogic.gdx.utils.Pools;
@@ -27,7 +27,12 @@ public abstract class Box implements Renderable, Poolable, Loggable {
     private float elapsedTime = 0;
     private final float lifetime;
     
-    public Box(final float lifetime) {
+    public Box(final Vector2 position, final float width, final float height,
+            final float lifetime) {
+        bounds.x = position.x;
+        bounds.y = position.y;
+        bounds.width = width;
+        bounds.height = height;
         this.lifetime = lifetime;
     }
     
@@ -71,7 +76,7 @@ public abstract class Box implements Renderable, Poolable, Loggable {
     public final void render(final Batch batch) {}
     
     @Override
-    public void render(final ShapeRenderer lineRenderer, final Camera camera) {
+    public void render(final ShapeRenderer lineRenderer) {
         lineRenderer.setColor(getColor());
         lineRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
     }

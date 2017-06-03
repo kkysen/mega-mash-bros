@@ -20,14 +20,15 @@ public class Hitbox extends Box {
     
     public final Attack attack;
     
-    private final Vector2 position = Pools.obtain(Vector2.class);
+    private final Vector2 position;
     public final Vector2 velocity = Pools.obtain(Vector2.class);
     public final Vector2 acceleration = Pools.obtain(Vector2.class);
     
-    public Hitbox(final Player player, final Attack attack) {
-        super(attack.duration);
+    public Hitbox(final Player player, final Attack attack, final float width, final float height) {
+        super(player.position, width, height, attack.duration);
         this.player = player;
         this.attack = attack;
+        position = player.position.cpy();
     }
     
     @Override
@@ -37,17 +38,11 @@ public class Hitbox extends Box {
     
     @Override
     public String toString() {
-        return player + "'s Hitbox, damage = " + attack.damage;
+        return player + "'s Hitbox[damage = " + attack.damage + "]";
     }
     
     public String motion() {
         return "a = " + acceleration + ", v = " + velocity + ", p = " + position;
-    }
-    
-    public void setPosition(final Vector2 position) {
-        this.position.set(position);
-        bounds.x = position.x;
-        bounds.y = position.y;
     }
     
     @Override
