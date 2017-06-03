@@ -33,7 +33,7 @@ public class Hitbox extends Box {
     
     @Override
     protected Color getColor() {
-        return Color.RED;
+        return player.isAI() ? Color.RED : Color.CYAN;
     }
     
     @Override

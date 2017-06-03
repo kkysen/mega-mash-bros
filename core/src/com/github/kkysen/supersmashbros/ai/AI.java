@@ -1,8 +1,8 @@
 package com.github.kkysen.supersmashbros.ai;
 
 import com.badlogic.gdx.utils.Array;
-import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.Controller;
+import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.core.Player;
 
 /**
@@ -19,6 +19,7 @@ public abstract class AI extends Controller {
     
     @Override
     public final void pressKeys(final KeyBinding keyBinding) {
+        //System.out.println(name() + " pressed " + keyBinding);
         super.pressKeys(keyBinding);
         for (final KeyBinding pressedKey : pressedKeys) {
             super.releaseKeys(pressedKey);

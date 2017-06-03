@@ -19,9 +19,6 @@ public enum KeyBinding {
     final Key[] keys;
     
     private KeyBinding(final Key... keys) {
-        if (keys.length == 0) {
-            throw new IllegalArgumentException();
-        }
         this.keys = keys;
     }
     

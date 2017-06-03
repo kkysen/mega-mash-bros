@@ -65,7 +65,7 @@ public abstract class Player implements Renderable, Loggable {
     public World world;
     
     public final Controller controller;
-    private final Action[] actions = new Action[KeyBinding.values().length];
+    private final Action[] actions;
     
     private final String name;
     private final int id;
@@ -85,12 +85,7 @@ public abstract class Player implements Renderable, Loggable {
     public final Vector2 velocity = new Vector2();
     public final Vector2 position = new Vector2();
     
-    // I think these two, points and percentage, are the same
-    
-    private final float points = 0;
-    
     private float percentage = 0;
-    //private float weight;
     
     protected Player(final String name, final Controller controller, final State initialState,
             final int lives, final Action[] actions) {
@@ -105,9 +100,7 @@ public abstract class Player implements Renderable, Loggable {
         this.lives = lives;
         // EnumMap was throwing some weird errors because of some Eclipse compiler error,
         // so I just made my own "EnumMap"
-        for (final Action action : actions) {
-            this.actions[action.keyBinding.ordinal()] = action;
-        }
+        this.actions = actions;
         hurtboxes.add(new Hurtbox(this));
     }
     
@@ -201,7 +194,7 @@ public abstract class Player implements Renderable, Loggable {
         for (int i = 0; i < actions.length; i++) {
             final Action action = actions[i];
             action.update();
-            if (KeyBinding.get(i).isPressed(controller)) {
+            if (action.keyBinding.isPressed(controller)) {
                 error(this + " pressed " + KeyBinding.get(i));
                 error(this + " tried calling " + action);
                 state = action.execute(this);

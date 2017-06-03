@@ -1,6 +1,7 @@
 package com.github.kkysen.libgdx.util.keys;
 
 import com.github.kkysen.libgdx.util.Loggable;
+import com.github.kkysen.supersmashbros.ai.AI;
 
 /**
  * 
@@ -24,12 +25,18 @@ public class Controller implements Loggable {
     }
     
     public void pressKeys(final KeyBinding keyBinding) {
+        if (this instanceof AI) {
+            System.out.println(name() + " pressed " + keyBinding);
+        }
         for (final Key key : keyBinding.keys) {
             pressKey(key.keyCode);
         }
     }
     
     public void releaseKeys(final KeyBinding keyBinding) {
+        if (this instanceof AI) {
+            //System.out.println(name() + " released " + keyBinding);
+        }
         for (final Key key : keyBinding.keys) {
             releaseKey(key.keyCode);
         }

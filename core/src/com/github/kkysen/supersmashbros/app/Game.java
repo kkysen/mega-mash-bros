@@ -52,12 +52,13 @@ public class Game extends ApplicationAdapter {
         final Texture background = new Texture(asset("background.jpg"));
         System.out.println(background.getHeight() + ", " + background.getWidth());
         final Sprite platform = new Sprite(new Texture(asset("platform.png")));
-        final int numAIs = 200;
+        final int numAIs = 10;
         final Player[] players = new Player[numAIs + 1];
         players[0] = Mario.userControlled();
         for (int i = 1; i < players.length; i++) {
             //players[i] = Mario.frozen();
-            players[i] = (i & 1) == 0 ? Mario.randomlyControlled() : Mario.frozen();
+            players[i] = Mario.randomlyControlled();
+            //players[i] = (i & 1) == 1 ? Mario.randomlyControlled() : Mario.frozen();
         }
         return new World(WIDTH, HEIGHT, background, platform, players);
     }
