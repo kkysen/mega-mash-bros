@@ -68,7 +68,7 @@ public abstract class Player implements Renderable, Loggable {
     private final Action[] actions;
     
     private final String name;
-    private final int id;
+    public final int id;
     public int lives;
     
     public State state;
@@ -90,7 +90,7 @@ public abstract class Player implements Renderable, Loggable {
     protected Player(final String name, final Controller controller, final State initialState,
             final int lives, final Action[] actions) {
         this.name = name;
-        id = ++numPlayers;
+        id = numPlayers++;
         this.controller = controller;
         state = initialState.clone();
         state.setPlayer(this);

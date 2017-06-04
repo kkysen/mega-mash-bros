@@ -1,5 +1,8 @@
 package com.github.kkysen.libgdx.util;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pools;
@@ -12,6 +15,11 @@ import lombok.experimental.ExtensionMethod;
  */
 @ExtensionMethod(ExtensionMethods.class)
 public class ExtensionMethods {
+    
+    public static <T> T[] sorted(final T[] a, final Comparator<? super T> comparator) {
+        Arrays.sort(a, comparator);
+        return a;
+    }
     
     public static Rectangle scale(final Rectangle rectangle, final float scalar) {
         final Vector2 center = rectangle.getCenter(Pools.obtain(Vector2.class));
@@ -83,10 +91,9 @@ public class ExtensionMethods {
     
     public static Vector2 distanceTraveled(final Vector2 distance, final Vector2 acceleration,
             final Vector2 velocity,
-            final int timeCycles) {
-        final float dt = Game.deltaTime * timeCycles;
-        distance.x = distanceTraveled(acceleration.x, velocity.x, dt);
-        distance.y = distanceTraveled(acceleration.y, velocity.y, dt);
+            final float deltaTime) {
+        distance.x = distanceTraveled(acceleration.x, velocity.x, deltaTime);
+        distance.y = distanceTraveled(acceleration.y, velocity.y, deltaTime);
         return distance;
     }
     
