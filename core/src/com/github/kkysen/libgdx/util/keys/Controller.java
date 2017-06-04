@@ -4,8 +4,6 @@ import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.supersmashbros.ai.AI;
 
 /**
- * 
- * 
  * @author Khyber Sen
  */
 public class Controller implements Loggable {
@@ -34,9 +32,9 @@ public class Controller implements Loggable {
     }
     
     public void releaseKeys(final KeyBinding keyBinding) {
-        if (this instanceof AI) {
-            //System.out.println(name() + " released " + keyBinding);
-        }
+        //        if (this instanceof AI) {
+        //            System.out.println(name() + " released " + keyBinding);
+        //        }
         for (final Key key : keyBinding.keys) {
             releaseKey(key.keyCode);
         }

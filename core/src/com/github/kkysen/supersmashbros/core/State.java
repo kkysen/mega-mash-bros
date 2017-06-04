@@ -9,12 +9,9 @@ import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.app.Game;
-
 import lombok.experimental.ExtensionMethod;
 
 /**
- * 
- * 
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)

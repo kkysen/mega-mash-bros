@@ -8,8 +8,6 @@ import com.github.kkysen.supersmashbros.app.Game;
 import lombok.experimental.ExtensionMethod;
 
 /**
- * 
- * 
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * clone of {@link Controller} as an Enum
- * 
+ *
  * @author Khyber Sen
  */
 @RequiredArgsConstructor
@@ -165,12 +165,12 @@ public enum Key {
     F9(252),
     F10(253),
     F11(254),
-    F12(255),
-    ;
+    F12(255);
     
     final int keyCode;
     
     private static final Key[] KEYS = new Key[256];
+    
     static {
         for (final Key key : values()) {
             KEYS[key.keyCode] = key;
