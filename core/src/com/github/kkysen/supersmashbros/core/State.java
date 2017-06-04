@@ -52,7 +52,14 @@ public class State implements Renderable, Loggable, Cloneable {
         error(this + " set player to " + player);
         position = player == null ? null : player.position;
         elapsedTime = 0;
-        System.out.println("time set to 0");
+        //System.out.println("time set to 0");
+    }
+    
+    public void setPlayerOther(final Player player) {
+    	System.out.println("calling other");
+        this.player = player;
+        error(this + " set player to " + player);
+        position = player == null ? null : player.position;
     }
     
     @Override

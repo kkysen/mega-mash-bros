@@ -78,9 +78,25 @@ public class Action implements Loggable {
     	/*attackContinue(state);
     	moveContinue(player.velocity, player.isOnPlatform());*/
     	//state.setPlayer(player);
-    	attack(state);
+    	
+    	
+    	/*attack(state);
         move(player.velocity, player.isOnPlatform());
     	
+        return state;*/
+        
+        
+        
+        
+    	if (elapsedTime < cooldown || isImpossiblePreState(player.state)) {
+            error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
+            return player.state;
+        }
+        player.state.setPlayer(null);
+        error("someone called " + this);
+        state.setPlayerOther(player);
+        attack(state);
+        move(player.velocity, player.isOnPlatform());
         return state;
     }
 
@@ -90,9 +106,25 @@ public class Action implements Loggable {
     	/*attackFinish(state);
     	moveFinish(player.velocity, player.isOnPlatform());*/
     	//state.setPlayer(player);
-    	attack(state);
+    	
+    	
+    	/*attack(state);
         move(player.velocity, player.isOnPlatform());
     	
+        return state;*/
+    	
+    	
+    	
+    	
+    	if (elapsedTime < cooldown || isImpossiblePreState(player.state)) {
+            error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
+            return player.state;
+        }
+        player.state.setPlayer(null);
+        error("someone called " + this);
+        state.setPlayerOther(player);
+        attack(state);
+        move(player.velocity, player.isOnPlatform());
         return state;
     }
 

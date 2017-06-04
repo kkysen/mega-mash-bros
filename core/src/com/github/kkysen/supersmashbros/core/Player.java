@@ -192,10 +192,11 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     private void executeActions() {
+    	System.out.println(controller);
         log(this + " checking for called actions");
         //System.out.println(controller);
         if (controller.noKeysPressed()) {
-        	System.out.println("no action called");
+        	//System.out.println("no action called");
         	state = defaultAction.continueAction(this);
         	return;
         }
@@ -219,6 +220,7 @@ public abstract class Player implements Renderable, Loggable {
                 state = action.execute(this);
             }
             else if (action.keyBinding.isStillPressed(controller)) {
+            	System.out.println("still pressed");
             	error(this + " still pressing " + KeyBinding.get(i));
                 error(this + " still calling " + action);
                 state = action.continueAction(this);
