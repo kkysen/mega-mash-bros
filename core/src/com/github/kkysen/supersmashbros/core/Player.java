@@ -78,8 +78,8 @@ public abstract class Player implements Renderable, Loggable {
     /**
      * Hitboxes retrieved from attacks, empty when not attacking
      */
-    protected final Array<Hitbox> hitboxes = new Array<>();
-    protected final Array<Hurtbox> hurtboxes = new Array<>();
+    public final Array<Hitbox> hitboxes = new Array<>();
+    public final Array<Hurtbox> hurtboxes = new Array<>();
     
     protected final Vector2 acceleration = new Vector2();
     public final Vector2 velocity = new Vector2();

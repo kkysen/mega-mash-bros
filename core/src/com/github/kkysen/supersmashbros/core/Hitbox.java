@@ -20,7 +20,7 @@ public class Hitbox extends Box {
     
     public final Attack attack;
     
-    private final Vector2 position;
+    public final Vector2 position;
     public final Vector2 velocity = Pools.obtain(Vector2.class);
     public final Vector2 acceleration = Pools.obtain(Vector2.class);
     

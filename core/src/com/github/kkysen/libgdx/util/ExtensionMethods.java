@@ -76,4 +76,18 @@ public class ExtensionMethods {
         return false;
     }
     
+    private static float distanceTraveled(final float acceleration, final float velocity,
+            final float time) {
+        return time * (velocity + 0.5f * acceleration * time);
+    }
+    
+    public static Vector2 distanceTraveled(final Vector2 distance, final Vector2 acceleration,
+            final Vector2 velocity,
+            final int timeCycles) {
+        final float dt = Game.deltaTime * timeCycles;
+        distance.x = distanceTraveled(acceleration.x, velocity.x, dt);
+        distance.y = distanceTraveled(acceleration.y, velocity.y, dt);
+        return distance;
+    }
+    
 }

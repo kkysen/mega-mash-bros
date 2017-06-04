@@ -10,7 +10,7 @@ import com.github.kkysen.supersmashbros.actions.Attack;
  */
 public class Hurtbox extends Box {
     
-    private static final float DAMAGE_MULTIPLIER = 1.0f; // FIXME
+    private static final float DAMAGE_MULTIPLIER = 0.1f; // FIXME
     
     private final Player player;
     
