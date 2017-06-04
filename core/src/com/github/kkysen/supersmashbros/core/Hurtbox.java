@@ -15,13 +15,13 @@ public class Hurtbox extends Box {
     private final Player player;
     
     public Hurtbox(final Player player, final float width, final float height,
-            final float lifetime) {
-        super(player.position, width, height, lifetime);
+            final float lifetime, final float warmupTime) {
+        super(player.position, width, height, lifetime, warmupTime);
         this.player = player;
     }
     
     public Hurtbox(final Player player) {
-        this(player, player.normalWidth(), player.normalHeight(), Float.MAX_VALUE);
+        this(player, player.normalWidth(), player.normalHeight(), Float.MAX_VALUE, 0);
     }
     
     @Override
@@ -39,6 +39,9 @@ public class Hurtbox extends Box {
     }
     
     public float collide(final Hitbox hitbox) {
+        if (isWarmingUp() || hitbox.isWarmingUp()) {
+            return 0;
+        }
         log(this + " collided with " + hitbox);
         return damageTakenBy(hitbox);
     }

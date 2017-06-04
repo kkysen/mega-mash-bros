@@ -24,21 +24,26 @@ public abstract class Box implements Renderable, Poolable, Loggable {
     
     public final Rectangle bounds = pool.obtain();
     
-    private float elapsedTime = 0;
+    private float elapsedTime;
     private final float lifetime;
     
     public Box(final Vector2 position, final float width, final float height,
-            final float lifetime) {
+            final float lifetime, final float warmupTime) {
         bounds.x = position.x;
         bounds.y = position.y;
         bounds.width = width;
         bounds.height = height;
         this.lifetime = lifetime;
+        elapsedTime = -warmupTime;
     }
     
     @Override
     public void reset() {
         pool.free(bounds);
+    }
+    
+    public boolean isWarmingUp() {
+        return elapsedTime < 0;
     }
     
     public final boolean overlaps(final Box box) {
@@ -77,6 +82,9 @@ public abstract class Box implements Renderable, Poolable, Loggable {
     
     @Override
     public void render(final ShapeRenderer lineRenderer) {
+        if (isWarmingUp()) { // still starting up
+            return;
+        }
         lineRenderer.setColor(getColor());
         lineRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
     }

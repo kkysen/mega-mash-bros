@@ -23,19 +23,19 @@ public class Action implements Loggable {
     
     private final State[] impossiblePreStates;
     
-    protected final float startup;
+    public final float startup;
     public final float duration;
     protected final float cooldown;
     
     protected float elapsedTime;
     
     protected Action(final State state, final KeyBinding keyBinding,
-            final State[] impossiblePreStates, final float startup, final float duration,
+            final State[] impossiblePreStates, final float warmupTime, final float duration,
             final float cooldown) {
         this.state = state.clone();
         this.keyBinding = keyBinding;
         this.impossiblePreStates = impossiblePreStates;
-        this.startup = startup;
+        this.startup = warmupTime;
         this.duration = duration;
         this.cooldown = cooldown;
     }
