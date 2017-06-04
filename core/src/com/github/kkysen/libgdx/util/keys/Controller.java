@@ -63,6 +63,7 @@ public class Controller implements Loggable {
                 return false;
             }
             else {
+            	System.out.println("moving press");
             	initPressedKeys[key.keyCode] = false;
             	pressedKeys[key.keyCode] = true;
             }

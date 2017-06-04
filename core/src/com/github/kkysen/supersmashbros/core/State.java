@@ -48,6 +48,7 @@ public class State implements Renderable, Loggable, Cloneable {
     }
     
     public void setPlayer(final Player player) {
+    	System.out.println("calling set");
         this.player = player;
         error(this + " set player to " + player);
         position = player == null ? null : player.position;
