@@ -25,6 +25,27 @@ public enum KeyBinding {
     public boolean isPressed(final Controller controller) {
         for (final Key key : keys) {
             if (!controller.isPressed(key)) {
+            	//System.out.println("go");
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean isStillPressed(final Controller controller) {
+        for (final Key key : keys) {
+            if (!controller.isStillPressed(key)) {
+            	//System.out.println("go");
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean hasBeenReleased(final Controller controller) {
+        for (final Key key : keys) {
+            if (!controller.isStillPressed(key)) {
+            	//System.out.println("go");
                 return false;
             }
         }

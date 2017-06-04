@@ -10,7 +10,6 @@ import com.github.kkysen.supersmashbros.core.State;
  * @author Khyber Sen
  */
 public class Jump extends Move {
-    
     private int numMidairJumps = 1;
     
     public Jump(final State state, final float duration, final float cooldown, final float speed) {

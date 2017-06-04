@@ -72,8 +72,40 @@ public class Action implements Loggable {
         return state;
     }
     
-    protected void attack(final State state) {}
+    public final State continueAction(final Player player) {
+    	error("someone continuing to " + this);
+    	
+    	/*attackContinue(state);
+    	moveContinue(player.velocity, player.isOnPlatform());*/
+    	//state.setPlayer(player);
+    	attack(state);
+        move(player.velocity, player.isOnPlatform());
+    	
+        return state;
+    }
+
+	public final State finish (final Player player) {
+    	error(this + " finishing");
+    	
+    	/*attackFinish(state);
+    	moveFinish(player.velocity, player.isOnPlatform());*/
+    	//state.setPlayer(player);
+    	attack(state);
+        move(player.velocity, player.isOnPlatform());
+    	
+        return state;
+    }
+
+	protected void attack(final State state) {}
     
     protected void move(final Vector2 velocity, final boolean isOnPlatform) {}
     
+    
+    private void attackContinue(State state2) {}
+
+	private void moveContinue(Vector2 velocity, boolean onPlatform) {}
+	
+	private void attackFinish(State state2) {}
+	
+	private void moveFinish(Vector2 velocity, boolean onPlatform) {}
 }

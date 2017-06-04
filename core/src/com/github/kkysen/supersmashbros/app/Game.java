@@ -52,7 +52,7 @@ public class Game extends ApplicationAdapter {
         final Texture background = new Texture(asset("background.jpg"));
         System.out.println(background.getHeight() + ", " + background.getWidth());
         final Sprite platform = new Sprite(new Texture(asset("platform.png")));
-        final int numAIs = 100;
+        final int numAIs = 1;
         final Player[] players = new Player[numAIs + 1];
         players[0] = Mario.userControlled();
         for (int i = 1; i < players.length; i++) {

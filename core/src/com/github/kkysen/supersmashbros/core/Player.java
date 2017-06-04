@@ -2,6 +2,7 @@ package com.github.kkysen.supersmashbros.core;
 
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
@@ -72,6 +73,7 @@ public abstract class Player implements Renderable, Loggable {
     public int lives;
     
     public State state;
+    public Action defaultAction;
     
     public boolean wasOnPlatform = true;
     
@@ -88,11 +90,12 @@ public abstract class Player implements Renderable, Loggable {
     private float percentage = 0;
     
     protected Player(final String name, final Controller controller, final State initialState,
-            final int lives, final Action[] actions) {
+            final Action defaultAction, final int lives, final Action[] actions) {
         this.name = name;
         id = ++numPlayers;
         this.controller = controller;
         state = initialState.clone();
+        this.defaultAction = defaultAction;
         state.setPlayer(this);
         System.out.println(state);
         assert state != null;
@@ -191,6 +194,22 @@ public abstract class Player implements Renderable, Loggable {
     private void executeActions() {
         log(this + " checking for called actions");
         //System.out.println(controller);
+        if (controller.noKeysPressed()) {
+        	System.out.println("no action called");
+        	state = defaultAction.continueAction(this);
+        	return;
+        }
+        
+        /*for (int i = 0; i < actions.length; i++) {
+        	final Action action = actions[i];
+            action.update();
+            if (action.keyBinding.isPressed(controller)) {
+                error(this + " pressed " + KeyBinding.get(i));
+                error(this + " tried calling " + action);
+                state = action.execute(this);
+            }
+        }*/
+        
         for (int i = 0; i < actions.length; i++) {
             final Action action = actions[i];
             action.update();
@@ -198,6 +217,14 @@ public abstract class Player implements Renderable, Loggable {
                 error(this + " pressed " + KeyBinding.get(i));
                 error(this + " tried calling " + action);
                 state = action.execute(this);
+            }
+            else if (action.keyBinding.isStillPressed(controller)) {
+            	error(this + " still pressing " + KeyBinding.get(i));
+                error(this + " still calling " + action);
+                state = action.continueAction(this);
+            }
+            else if (action.keyBinding.hasBeenReleased(controller)) {
+            	state = action.finish(this);
             }
         }
     }
@@ -259,6 +286,7 @@ public abstract class Player implements Renderable, Loggable {
     
     @Override
     public final void render(final Batch batch) {
+    	state.setPlayer(this);
         state.render(batch);
     }
     

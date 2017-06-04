@@ -26,7 +26,7 @@ public class State implements Renderable, Loggable, Cloneable {
     public Vector2 position;
     
     private float elapsedTime = 0;
-    private final Animation<TextureRegion> animation;
+    public final Animation<TextureRegion> animation;
     
     public State(final String name, final Animation<TextureRegion> animation) {
         this.name = name;
@@ -52,6 +52,7 @@ public class State implements Renderable, Loggable, Cloneable {
         error(this + " set player to " + player);
         position = player == null ? null : player.position;
         elapsedTime = 0;
+        System.out.println("time set to 0");
     }
     
     @Override
