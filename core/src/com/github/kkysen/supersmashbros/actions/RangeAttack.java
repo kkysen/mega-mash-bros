@@ -16,10 +16,13 @@ public class RangeAttack extends Attack {
     
     @Override
     protected void attack(final State state) {
-        final Hitbox hitbox = state.newHitbox(this, 50f, 50f);
-        hitbox.velocity.set(MathUtils.randomBoolean() ? 300f : -300f, 0f);
-        //System.out.println("\t" + name() + " created " + hitbox + ", " + hitbox.motion());
-        state.addHitbox(hitbox);
+    	if (timesUsed == 0) {
+    		final Hitbox hitbox = state.newHitbox(this, 50f, 50f);
+            hitbox.velocity.set(MathUtils.randomBoolean() ? 300f : -300f, 0f);
+            //System.out.println("\t" + name() + " created " + hitbox + ", " + hitbox.motion());
+            state.addHitbox(hitbox);
+            timesUsed++;
+    	}
     }
     
 }

@@ -28,7 +28,7 @@ public class Action extends Executable implements Loggable {
     
     protected float elapsedTime;
     public boolean firstCalled;
-    public int timesUsed;
+    protected int timesUsed;
     
     protected Action(final State state, final KeyBinding keyBinding,
             final State[] impossiblePreStates, final float warmupTime, final float duration,
@@ -99,14 +99,14 @@ public class Action extends Executable implements Loggable {
         	player.facingRight = false;
         }
         
-        if (timesUsed == 0) {
+        //if (timesUsed == 0) {
         	attack(state);
             move(player.acceleration, player.velocity, player.isOnPlatform());
-        }
+        /*}
         
         if (this instanceof Attack && timesUsed == 0) {
             timesUsed++;
-        }
+        }*/
         
         
         return state;
@@ -121,5 +121,6 @@ public class Action extends Executable implements Loggable {
     
     protected void move(final Vector2 acceleration, final Vector2 velocity,
             final boolean isOnPlatform) {}
+    
     
 }

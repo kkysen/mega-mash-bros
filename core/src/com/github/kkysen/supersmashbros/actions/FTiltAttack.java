@@ -17,11 +17,14 @@ public class FTiltAttack extends Attack {
 
 	@Override
 	protected void attack(State state) {
-		Vector2 temp = state.player.position.cpy();
-		temp.add(20, 20);
-		final Hitbox hitbox = state.newHitbox(this, 50f, 50f, temp);
-		//hitbox.velocity.set(MathUtils.randomBoolean() ? 300f : -300f, 0f);
-        System.out.println("\tF_Tilt " + hitbox);
-        state.addHitbox(hitbox);
+		if (timesUsed == 0) {
+			Vector2 temp = state.player.position.cpy();
+			temp.add(20, 20);
+			final Hitbox hitbox = state.newHitbox(this, 50f, 50f, temp);
+			//hitbox.velocity.set(MathUtils.randomBoolean() ? 300f : -300f, 0f);
+	        System.out.println("\tF_Tilt " + hitbox);
+	        state.addHitbox(hitbox);
+	        timesUsed++;
+		}
 	}
 }

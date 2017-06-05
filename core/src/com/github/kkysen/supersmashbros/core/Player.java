@@ -16,6 +16,7 @@ import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
+import com.github.kkysen.supersmashbros.actions.Flying;
 import com.github.kkysen.supersmashbros.ai.AI;
 
 import lombok.experimental.ExtensionMethod;
@@ -200,6 +201,7 @@ public abstract class Player implements Renderable, Loggable {
         log(this + " checking for called executables");
         //System.out.println(state);
         boolean moveActive = false;
+        if (state.name().equals(Flying.class.getSimpleName())) return;
         
         for (int i = 0; i < executables.length; i++) {
             final Executable executable = executables[i];
