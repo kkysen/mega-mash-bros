@@ -47,15 +47,8 @@ public class SmartAI extends AI {
         for (final Player enemy : enemies) {
             for (final Hitbox hitbox : enemy.hitboxes) {
                 // assuming const acceleration
-                System.out.println("checking " + hitbox);
-                //                final float distance2 = self.position.dst(hitbox.position);
+                //System.out.println("checking " + hitbox);
                 dd.distanceTraveled(hitbox.acceleration, hitbox.velocity, dt);
-                //                if (dd.len2() < distance2) {
-                //                    System.out.println("too far away");
-                //                    continue; // definitely too far away
-                //                }
-                System.out
-                        .println("dist2: " + xyf.set(hitbox.position).add(dd).dst2(self.position));
                 if (xyf.set(hitbox.position).add(dd).dst2(self.position) < radius2) {
                     final float angle = vf.set(hitbox.velocity).mulAdd(hitbox.acceleration, dt)
                             .angle();
@@ -63,7 +56,7 @@ public class SmartAI extends AI {
                     // choose move based on sector
                     final int sector = (((int) angle << 1) + 45) / 90;
                     pressKeys(sectorToKeys[sector]);
-                    System.out.println("pressed " + sectorToKeys[sector]);
+                    //System.out.println("pressed " + sectorToKeys[sector]);
                     return true;
                 }
             }
@@ -81,7 +74,7 @@ public class SmartAI extends AI {
                 (a, b) -> (int) (distances[a.id] - distances[b.id]);
         final Player[] enemiesArray = enemies.toArray().sorted(cmpByDistance);
         for (final Player enemy : enemiesArray) {
-            // FIXME implement logic
+            // FIXME implement better logic
             if (distances[enemy.id] > cycles * 2) {
                 continue;
             }

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="731c3fe6-4d5a-4d63-b146-584528ff993b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="731c3fe6-4d5a-4d63-b146-584528ff993b" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/bin/" />
     <ignored path="$PROJECT_DIR$/core/bin/" />
     <ignored path="$PROJECT_DIR$/desktop/bin/" />
@@ -65,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/ExtensionMethods.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="520">
-              <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+              <caret line="47" column="5" lean-forward="false" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1633#1634#0" expanded="true" />
@@ -1494,12 +1492,20 @@
       <workItem from="1496540438960" duration="788000" />
       <workItem from="1496541258193" duration="902000" />
       <workItem from="1496542704730" duration="81000" />
-      <workItem from="1496622979506" duration="85000" />
+      <workItem from="1496622979506" duration="220000" />
     </task>
+    <task id="LOCAL-00001" summary="merging physics to master, finished SmartAI physics">
+      <created>1496623175799</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1496623175799</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10005000" />
+    <option name="totallyTimeSpent" value="10140000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3232" height="1732" extended-state="6" />
@@ -1566,6 +1572,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="true" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="15" />
+    <MESSAGE value="merging physics to master, finished SmartAI physics" />
+    <option name="LAST_COMMIT_MESSAGE" value="merging physics to master, finished SmartAI physics" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1807,7 +1815,7 @@
     <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/ExtensionMethods.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="520">
-          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+          <caret line="47" column="5" lean-forward="false" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1633#1634#0" expanded="true" />
