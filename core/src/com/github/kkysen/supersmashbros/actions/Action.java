@@ -28,6 +28,7 @@ public class Action extends Executable implements Loggable {
     
     protected float elapsedTime;
     public boolean firstCalled;
+    public int timesUsed;
     
     protected Action(final State state, final KeyBinding keyBinding,
             final State[] impossiblePreStates, final float warmupTime, final float duration,
@@ -39,6 +40,7 @@ public class Action extends Executable implements Loggable {
         this.duration = duration;
         this.cooldown = cooldown;
         firstCalled = true;
+        timesUsed = 0;
     }
     
     public void update() {
@@ -59,7 +61,17 @@ public class Action extends Executable implements Loggable {
     
     @Override
     public final State execute(final Player player) {
+    	//System.out.print
+    	/*if (elapsedTime < startup || isImpossiblePreState(player.state)) {
+        	System.out.println(elapsedTime);
+        	System.out.println("start");
+            error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
+            return player.state;
+        }*/
+    	
         if (elapsedTime < cooldown || isImpossiblePreState(player.state)) {
+        	System.out.println(elapsedTime);
+        	System.out.println("cool");
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
         }
@@ -87,13 +99,22 @@ public class Action extends Executable implements Loggable {
         	player.facingRight = false;
         }
         
-        attack(state);
-        move(player.acceleration, player.velocity, player.isOnPlatform());
+        if (timesUsed == 0) {
+        	attack(state);
+            move(player.acceleration, player.velocity, player.isOnPlatform());
+        }
+        
+        if (this instanceof Attack && timesUsed == 0) {
+            timesUsed++;
+        }
+        
+        
         return state;
     }
     
     public void reset() {
     	firstCalled = true;
+    	timesUsed = 0;
     }
     
     protected void attack(final State state) {}
