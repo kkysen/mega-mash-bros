@@ -13,6 +13,7 @@ import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.User;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.FTiltAttack;
+import com.github.kkysen.supersmashbros.actions.Flying;
 import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.actions.Message;
 import com.github.kkysen.supersmashbros.actions.MoveLeft;
@@ -108,6 +109,25 @@ public class Mario extends Player {
                                 {31, 38}
                             })));
     
+    //FIXME
+    private static final State flyingState = new State("Mario front attack state",
+            new Animation<>(
+                    .1f,
+                    Textures.getFrames(
+                            new Texture(asset("sprites_transparent.png")),
+                            11, 998,
+                            new int[][] {
+                                {32, 38},
+                                {51, 38},
+                                {45, 38},
+                                {42, 38},
+                                {40, 38},
+                                {38, 44},
+                                {39, 38},
+                                {39, 38},
+                                {31, 38}
+                            })));
+    
     public static Mario userControlled() {
         return new Mario(User.get());
     }
@@ -133,7 +153,8 @@ public class Mario extends Player {
             new RangeAttack(idleState, 0, 10f, 1f, 5f, 5f),
             new Message(KeyBinding.P, player -> player.position),
             new FTiltAttack(fTiltState, .1f, .1f, 1f, 5f, 5f),
-        });
+        },
+        		new Flying(flyingState, KeyBinding.NONE, new State[0], 0f, 0f, 0f));
     }
     
 }

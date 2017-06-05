@@ -78,6 +78,7 @@ public abstract class Player implements Renderable, Loggable {
     public State state;
     public Action defaultGroundAction;
     /*public Action defaultAirAction;*/
+    public Action flying;
     
     public boolean wasOnPlatform = true;
     
@@ -95,13 +96,14 @@ public abstract class Player implements Renderable, Loggable {
     
     protected Player(final String name, final Controller controller, final State initialState,
             final Action defaultGround, /*final Action defaultAir,*/
-            final int lives, final Executable[] executables) {
+            final int lives, final Executable[] executables, final Action flyingAction) {
         this.name = name;
         id = numPlayers++;
         this.controller = controller;
         state = initialState.clone();
         state.setPlayer(this, true);
         defaultGroundAction = defaultGround;
+        flying = flyingAction;
         /*defaultAirAction = defaultAir;*/
         System.out.println(state);
         assert state != null;
@@ -175,6 +177,7 @@ public abstract class Player implements Renderable, Loggable {
         percentage += damage * PERCENTAGE_MULTIPLIER;
         acceleration.setAngleAndLength(angle, accelerationMagnitude);
         move();
+        state = flying.execute(this);
     }
     
     private void takeHits(final Array<Player> enemies) {
@@ -201,7 +204,13 @@ public abstract class Player implements Renderable, Loggable {
         log(this + " checking for called executables");
         //System.out.println(state);
         boolean moveActive = false;
-        if (state.name().equals(Flying.class.getSimpleName())) return;
+        /*if (state.name().equals(Flying.class.getSimpleName())) return;
+        if (state.action.name().equals(Flying.class.getSimpleName())) {
+        	System.out.println("flying");
+        }*/
+        if (state.action instanceof Flying) {
+        	System.out.println("flying");
+        }
         
         for (int i = 0; i < executables.length; i++) {
             final Executable executable = executables[i];

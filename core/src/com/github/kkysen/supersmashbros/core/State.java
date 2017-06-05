@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
+import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.app.Game;
 import lombok.experimental.ExtensionMethod;
@@ -24,10 +25,12 @@ public class State implements Renderable, Loggable, Cloneable {
     
     private float elapsedTime;
     private final Animation<TextureRegion> animation;
+    public Action action;
     
     public State(final String name, final Animation<TextureRegion> animation) {
         this.name = name;
         this.animation = animation;
+        
     }
     
     @Override

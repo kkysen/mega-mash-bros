@@ -41,6 +41,7 @@ public class Action extends Executable implements Loggable {
         this.cooldown = cooldown;
         firstCalled = true;
         timesUsed = 0;
+        state.action = this;
     }
     
     public void update() {
