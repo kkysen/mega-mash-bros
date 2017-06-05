@@ -61,7 +61,7 @@ public class Mario extends Player {
     	temp.forEach((x) -> x.flip(true, false));
     }   
     
-    private static final State moveLeftState = new State("Mario move right state",
+    private static final State moveLeftState = new State("Mario move left state",
             new Animation<>(
                     0.1f,
                     temp,
@@ -110,7 +110,7 @@ public class Mario extends Player {
                             })));
     
     //FIXME
-    private static final State flyingState = new State("Mario front attack state",
+    private static final State flyingState = new State("Mario flying state",
             new Animation<>(
                     .1f,
                     Textures.getFrames(

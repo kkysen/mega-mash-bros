@@ -21,5 +21,13 @@ public class Flying extends Action {
 	@Override
     protected void move(final Vector2 acceleration, final Vector2 velocity,
             final boolean isOnPlatform) {
+		System.out.println("velo: " + velocity.len());
+		if (velocity.len() < 3) {
+			System.out.println("back to idle");
+			//state.player.defaultGroundAction.execute(state.player);
+			state.player.state.setPlayer(null, true);
+			state.setPlayer(state.player, true);
+		}
+		
 	}
 }

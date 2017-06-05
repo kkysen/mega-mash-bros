@@ -77,6 +77,7 @@ public abstract class Player implements Renderable, Loggable {
     
     public State state;
     public Action defaultGroundAction;
+    //public State flyingState;
     /*public Action defaultAirAction;*/
     public Action flying;
     
@@ -202,22 +203,30 @@ public abstract class Player implements Renderable, Loggable {
     
     private void executeExecutables() {
         log(this + " checking for called executables");
-        //System.out.println(state);
+        System.out.println(state);
+        //System.out.println(state.action);
         boolean moveActive = false;
         /*if (state.name().equals(Flying.class.getSimpleName())) return;
         if (state.action.name().equals(Flying.class.getSimpleName())) {
         	System.out.println("flying");
         }*/
-        if (state.action instanceof Flying) {
+        /*if (state.action instanceof Flying) {
         	System.out.println("flying");
-        }
+        	state = flying.execute(this);
+        	return;
+        }*/
         
         for (int i = 0; i < executables.length; i++) {
             final Executable executable = executables[i];
             if (executable instanceof Action) {
                 ((Action) executable).update();
             }
-            if (executable.keyBinding.isPressed(controller)) {
+            
+            /*if (state.action instanceof Flying){
+            	System.out.println("state is flying");
+            	moveActive = true;
+            }*/
+            /*else*/ if (executable.keyBinding.isPressed(controller)) {
                 //System.out.println(this + " pressed " + KeyBinding.get(i));
                 //System.out.println(this + " tried calling " + action);
                 state = executable.execute(this);
@@ -229,7 +238,16 @@ public abstract class Player implements Renderable, Loggable {
                 }
             }
         }
-        if (!moveActive /*&& wasOnPlatform*/) state = defaultGroundAction.execute(this);
+        System.out.println(state.action);
+        if (state.action instanceof Flying){
+        	System.out.println("state is flying");
+        	moveActive = true;
+        }
+        //if (state.name().equals(flying.name()))
+        
+        if (/*state.action instanceof Flying &&*/ !moveActive /*&& wasOnPlatform*/) {
+        	//state = defaultGroundAction.execute(this);
+        }
         //else if (!moveActive && wasOnPlatform) state = defaultAirAction.execute(this);
     }
     

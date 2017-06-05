@@ -18,7 +18,7 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public class Action extends Executable implements Loggable {
     
-    private final State state;
+    protected final State state;
     
     private final State[] impossiblePreStates;
     
@@ -41,7 +41,7 @@ public class Action extends Executable implements Loggable {
         this.cooldown = cooldown;
         firstCalled = true;
         timesUsed = 0;
-        state.action = this;
+        this.state.action = this;
     }
     
     public void update() {
@@ -62,6 +62,11 @@ public class Action extends Executable implements Loggable {
     
     @Override
     public final State execute(final Player player) {
+    	if (this instanceof Flying) {
+    		System.out.println("yay flying");
+    		assert state.action != null;
+    		//return state;
+    	}
     	//System.out.print
     	/*if (elapsedTime < startup || isImpossiblePreState(player.state)) {
         	System.out.println(elapsedTime);
