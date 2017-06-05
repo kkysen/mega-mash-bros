@@ -50,7 +50,6 @@ public class Game extends ApplicationAdapter {
     
     private World createWorld() {
         final Texture background = new Texture(asset("background.jpg"));
-        System.out.println(background.getHeight() + ", " + background.getWidth());
         final Sprite platform = new Sprite(new Texture(asset("platform.png")));
         final int numAIs = 1;
         final Player[] players = new Player[numAIs + 1];
