@@ -72,6 +72,7 @@ public abstract class Player implements Renderable, Loggable {
     private final String name;
     public final int id;
     public int lives;
+    public boolean facingRight;
     
     public State state;
     public Action defaultGroundAction;

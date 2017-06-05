@@ -79,6 +79,14 @@ public class Action extends Executable implements Loggable {
         	state.setPlayer(player, false);
         }
         
+        //If we want to do cool stuff later
+        if (this instanceof MoveRight) {
+        	player.facingRight = true;
+        }
+        else if (this instanceof MoveLeft) {
+        	player.facingRight = false;
+        }
+        
         attack(state);
         move(player.acceleration, player.velocity, player.isOnPlatform());
         return state;

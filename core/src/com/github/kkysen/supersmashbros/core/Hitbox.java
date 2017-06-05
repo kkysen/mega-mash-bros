@@ -28,6 +28,13 @@ public class Hitbox extends Box {
         position = player.position.cpy();
     }
     
+    public Hitbox(final Player player, final Attack attack,
+    		final float width, final float height, final Vector2 pos) {
+        super(player, width, height, attack.duration, attack.startup);
+        this.attack = attack;
+        position = pos.cpy();
+    }
+    
     @Override
     protected Color getColor() {
         return player.isAI() ? Color.RED : Color.CYAN;

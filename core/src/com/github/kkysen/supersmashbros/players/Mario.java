@@ -12,6 +12,7 @@ import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.User;
 import com.github.kkysen.supersmashbros.actions.Executable;
+import com.github.kkysen.supersmashbros.actions.FTiltAttack;
 import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.actions.Message;
 import com.github.kkysen.supersmashbros.actions.MoveLeft;
@@ -89,6 +90,24 @@ public class Mario extends Player {
                                 {33, 44}
                             })));*/
     
+    private static final State fTiltState = new State("Mario front attack state",
+            new Animation<>(
+                    .1f,
+                    Textures.getFrames(
+                            new Texture(asset("sprites_transparent.png")),
+                            11, 998,
+                            new int[][] {
+                                {32, 38},
+                                {51, 38},
+                                {45, 38},
+                                {42, 38},
+                                {40, 38},
+                                {38, 44},
+                                {39, 38},
+                                {39, 38},
+                                {31, 38}
+                            })));
+    
     public static Mario userControlled() {
         return new Mario(User.get());
     }
@@ -107,12 +126,13 @@ public class Mario extends Player {
     
     public Mario(final Controller controller) {
         super("Mario", controller, idleState, new Stop(idleState, jumpState), 1, new Executable[] {
-            new Stop(idleState, jumpState),
+            new Stop(fTiltState, jumpState),
             new MoveLeft(moveLeftState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 300f),
             new RangeAttack(idleState, 0, 10f, 1f, 5f, 5f),
             new Message(KeyBinding.P, player -> player.position),
+            new FTiltAttack(fTiltState, .1f, .1f, 1f, 5f, 5f),
         });
     }
     

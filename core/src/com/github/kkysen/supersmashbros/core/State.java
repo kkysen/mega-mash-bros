@@ -19,7 +19,7 @@ public class State implements Renderable, Loggable, Cloneable {
     
     private final String name;
     
-    private Player player;
+    public Player player;
     public Vector2 position;
     
     private float elapsedTime;
@@ -62,6 +62,11 @@ public class State implements Renderable, Loggable, Cloneable {
     
     public Hitbox newHitbox(final Attack attack, final float width, final float height) {
         return new Hitbox(player, attack, width, height);
+    }
+    
+    public Hitbox newHitbox(final Attack attack, final float width, final float height,
+    		final Vector2 pos) {
+        return new Hitbox(player, attack, width, height, pos);
     }
     
     public void addHitbox(final Hitbox hitbox) {
