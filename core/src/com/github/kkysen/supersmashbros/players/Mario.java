@@ -78,7 +78,7 @@ public class Mario extends Player {
     }
     
     public Mario(final Controller controller) {
-        super("Mario", controller, idleState, 1, new Executable[] {
+        super("Mario", controller, idleState, new Stop(idleState), 1, new Executable[] {
             new Stop(idleState),
             new MoveLeft(moveLeftState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),

@@ -74,6 +74,7 @@ public abstract class Player implements Renderable, Loggable {
     public int lives;
     
     public State state;
+    public Action defaultAction;
     
     public boolean wasOnPlatform = true;
     
@@ -90,12 +91,13 @@ public abstract class Player implements Renderable, Loggable {
     private float percentage = 0;
     
     protected Player(final String name, final Controller controller, final State initialState,
-            final int lives, final Executable[] executables) {
+            final Action defaultAction, final int lives, final Executable[] executables) {
         this.name = name;
         id = numPlayers++;
         this.controller = controller;
         state = initialState.clone();
-        state.setPlayer(this);
+        state.setPlayer(this, true);
+        this.defaultAction = defaultAction;
         System.out.println(state);
         assert state != null;
         assert state.position != null;
@@ -193,6 +195,8 @@ public abstract class Player implements Renderable, Loggable {
     private void executeExecutables() {
         log(this + " checking for called executables");
         //System.out.println(controller);
+        boolean moveActive = false;
+        
         for (int i = 0; i < executables.length; i++) {
             final Executable executable = executables[i];
             if (executable instanceof Action) {
@@ -202,8 +206,15 @@ public abstract class Player implements Renderable, Loggable {
                 //System.out.println(this + " pressed " + KeyBinding.get(i));
                 //System.out.println(this + " tried calling " + action);
                 state = executable.execute(this);
+                moveActive = true;
+            }
+            else {
+            	if (executable instanceof Action) {
+                    ((Action) executable).reset();
+                }
             }
         }
+        if (!moveActive) state = defaultAction.execute(this);
     }
     
     private void updateBoxes(final Array<? extends Box> boxes) {

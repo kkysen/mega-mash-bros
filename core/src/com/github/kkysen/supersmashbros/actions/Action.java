@@ -27,6 +27,7 @@ public class Action extends Executable implements Loggable {
     protected final float cooldown;
     
     protected float elapsedTime;
+    public boolean firstCalled;
     
     protected Action(final State state, final KeyBinding keyBinding,
             final State[] impossiblePreStates, final float warmupTime, final float duration,
@@ -37,6 +38,7 @@ public class Action extends Executable implements Loggable {
         startup = warmupTime;
         this.duration = duration;
         this.cooldown = cooldown;
+        firstCalled = true;
     }
     
     public void update() {
@@ -58,13 +60,29 @@ public class Action extends Executable implements Loggable {
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
         }
-        player.state.setPlayer(null);
+        
+        
         error("someone called " + this);
-        elapsedTime = 0;
-        state.setPlayer(player);
+        
+        if (firstCalled) {
+        	player.state.setPlayer(null, true);
+        	System.out.println("first");
+        	elapsedTime = 0;
+        	state.setPlayer(player, true);
+            firstCalled = false;
+        }
+        else {
+        	//System.out.println("held");
+        	state.setPlayer(player, false);
+        }
+        
         attack(state);
         move(player.acceleration, player.velocity, player.isOnPlatform());
         return state;
+    }
+    
+    public void reset() {
+    	firstCalled = true;
     }
     
     protected void attack(final State state) {}

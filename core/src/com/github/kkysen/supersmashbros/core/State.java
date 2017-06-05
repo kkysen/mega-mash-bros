@@ -22,7 +22,7 @@ public class State implements Renderable, Loggable, Cloneable {
     private Player player;
     public Vector2 position;
     
-    private float elapsedTime = 0;
+    private float elapsedTime;
     private final Animation<TextureRegion> animation;
     
     public State(final String name, final Animation<TextureRegion> animation) {
@@ -44,15 +44,16 @@ public class State implements Renderable, Loggable, Cloneable {
         return name + " @ " + position;
     }
     
-    public void setPlayer(final Player player) {
+    public void setPlayer(final Player player, final boolean resetTime) {
         this.player = player;
         error(this + " set player to " + player);
         position = player == null ? null : player.position;
-        elapsedTime = 0;
+        if (resetTime) elapsedTime = 0;
     }
     
     @Override
     public void render(final Batch batch) {
+    	System.out.println(elapsedTime + ": " + name);
         elapsedTime += Game.deltaTime;
         final TextureRegion frame = animation.getKeyFrame(elapsedTime);
         batch.draw(frame, position.x, position.y);
