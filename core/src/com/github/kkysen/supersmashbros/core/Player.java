@@ -15,6 +15,7 @@ import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
+import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.ai.AI;
 
 import lombok.experimental.ExtensionMethod;
@@ -22,7 +23,7 @@ import lombok.experimental.ExtensionMethod;
 /**
  * The {@link Player} class contains a {@link #name} and {@link #id} (unused
  * right now), a {@link Map}&lt;{@link KeyBinding}, {@link Action}&gt; for all
- * the possible {@link #actions} it may do in response to pressed keys, a
+ * the possible {@link #executables} it may do in response to pressed keys, a
  * {@link State} that holds the rendered, animated {@link #state} of the
  * {@link Player}, and all the {@link #hitboxes} and {@link #hurtboxes} produced
  * by the {@link Player}.
@@ -44,9 +45,10 @@ import lombok.experimental.ExtensionMethod;
  * updated according to the damage done by the collision (we still have to
  * continuously update these and decrease the {@link #acceleration} later).
  * <br>
- * Then the {@link Player} checks for any {@link #actions} the user might have
+ * Then the {@link Player} checks for any {@link #executables} the user might
+ * have
  * requested by pressing the corresponding keys. It loops through the
- * {@link KeyBinding}s in the {@link #actions} map, and for any
+ * {@link KeyBinding}s in the {@link #executables} map, and for any
  * {@link KeyBinding} that is pressed, it executes that {@link Action}, updating
  * the {@link #state} (or replacing it) and the {@link #position}, etc. in
  * the process. Then it also adds/removes any {@link #hitboxes} or
@@ -65,7 +67,7 @@ public abstract class Player implements Renderable, Loggable {
     public World world;
     
     public final Controller controller;
-    private final Action[] actions;
+    private final Executable[] executables;
     
     private final String name;
     public final int id;
@@ -81,14 +83,14 @@ public abstract class Player implements Renderable, Loggable {
     public final Array<Hitbox> hitboxes = new Array<>();
     public final Array<Hurtbox> hurtboxes = new Array<>();
     
-    protected final Vector2 acceleration = new Vector2();
+    public final Vector2 acceleration = new Vector2();
     public final Vector2 velocity = new Vector2();
     public final Vector2 position = new Vector2();
     
     private float percentage = 0;
     
     protected Player(final String name, final Controller controller, final State initialState,
-            final int lives, final Action[] actions) {
+            final int lives, final Executable[] executables) {
         this.name = name;
         id = numPlayers++;
         this.controller = controller;
@@ -100,7 +102,7 @@ public abstract class Player implements Renderable, Loggable {
         this.lives = lives;
         // EnumMap was throwing some weird errors because of some Eclipse compiler error,
         // so I just made my own "EnumMap"
-        this.actions = actions;
+        this.executables = executables;
         hurtboxes.add(new Hurtbox(this));
     }
     
@@ -188,16 +190,18 @@ public abstract class Player implements Renderable, Loggable {
         }
     }
     
-    private void executeActions() {
-        log(this + " checking for called actions");
+    private void executeExecutables() {
+        log(this + " checking for called executables");
         //System.out.println(controller);
-        for (int i = 0; i < actions.length; i++) {
-            final Action action = actions[i];
-            action.update();
-            if (action.keyBinding.isPressed(controller)) {
-                error(this + " pressed " + KeyBinding.get(i));
-                error(this + " tried calling " + action);
-                state = action.execute(this);
+        for (int i = 0; i < executables.length; i++) {
+            final Executable executable = executables[i];
+            if (executable instanceof Action) {
+                ((Action) executable).update();
+            }
+            if (executable.keyBinding.isPressed(controller)) {
+                //System.out.println(this + " pressed " + KeyBinding.get(i));
+                //System.out.println(this + " tried calling " + action);
+                state = executable.execute(this);
             }
         }
     }
@@ -223,7 +227,7 @@ public abstract class Player implements Renderable, Loggable {
             velocity.y = 0;
             acceleration.y = 0;
             if (!wasOnPlatform) {
-                state = actions[KeyBinding.STOP.ordinal()].execute(this);
+                state = executables[KeyBinding.STOP.ordinal()].execute(this);
             }
         } else {
             acceleration.y = world.gravity;
@@ -243,7 +247,7 @@ public abstract class Player implements Renderable, Loggable {
         updateBoxes(hurtboxes);
         takeHits(enemies);
         checkIfOnPlatform();
-        executeActions();
+        executeExecutables();
         move();
     }
     
@@ -251,7 +255,7 @@ public abstract class Player implements Renderable, Loggable {
         error(this + " was killed");
         hitboxes.clear();
         hurtboxes.clear();
-        for (final Action action : actions) {
+        for (final Executable executable : executables) {
             
         }
         // TODO

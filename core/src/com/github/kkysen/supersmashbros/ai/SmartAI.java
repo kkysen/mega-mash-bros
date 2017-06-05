@@ -2,7 +2,6 @@ package com.github.kkysen.supersmashbros.ai;
 
 import java.util.Comparator;
 
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
@@ -10,6 +9,7 @@ import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.app.Game;
 import com.github.kkysen.supersmashbros.core.Hitbox;
+import com.github.kkysen.supersmashbros.core.Platform.Relation;
 import com.github.kkysen.supersmashbros.core.Player;
 
 import lombok.experimental.ExtensionMethod;
@@ -22,11 +22,11 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public class SmartAI extends AI {
     
-    private static final int cycles = 32; // must be power of 2
+    private static final int cycles = 16; // must be power of 2
+    private static final float radius2 = cycles * cycles * 50f;
     
     private static final Vector2 dd = Pools.obtain(Vector2.class); // change in distance
     private static final Vector2 xyf = Pools.obtain(Vector2.class); // final position
-    private static final Circle radius = Pools.obtain(Circle.class);
     private static final Vector2 vf = Pools.obtain(Vector2.class); // final velocity
     
     private static final KeyBinding[] sectorToKeys = {
@@ -42,24 +42,28 @@ public class SmartAI extends AI {
     
     private int i = 0;
     
-    private boolean evade(final Player self, final Array<Player> enemies, final Circle radius,
-            final float dt) {
+    private boolean evade(final Player self, final Array<Player> enemies, final float dt) {
         // TODO maybe I should sort all the hitboxes first to evade the closer ones first
         for (final Player enemy : enemies) {
             for (final Hitbox hitbox : enemy.hitboxes) {
                 // assuming const acceleration
-                final float distance2 = self.position.dst(hitbox.position);
+                System.out.println("checking " + hitbox);
+                //                final float distance2 = self.position.dst(hitbox.position);
                 dd.distanceTraveled(hitbox.acceleration, hitbox.velocity, dt);
-                if (dd.len2() > distance2) {
-                    break; // definitely too far away
-                }
-                if (radius.contains(xyf.set(hitbox.position).add(dd))) {
+                //                if (dd.len2() < distance2) {
+                //                    System.out.println("too far away");
+                //                    continue; // definitely too far away
+                //                }
+                System.out
+                        .println("dist2: " + xyf.set(hitbox.position).add(dd).dst2(self.position));
+                if (xyf.set(hitbox.position).add(dd).dst2(self.position) < radius2) {
                     final float angle = vf.set(hitbox.velocity).mulAdd(hitbox.acceleration, dt)
                             .angle();
                     // divide unit circle into 8 sectors 0 to 7, 0 being [-22.5, 22.5]
                     // choose move based on sector
                     final int sector = (((int) angle << 1) + 45) / 90;
                     pressKeys(sectorToKeys[sector]);
+                    System.out.println("pressed " + sectorToKeys[sector]);
                     return true;
                 }
             }
@@ -67,8 +71,7 @@ public class SmartAI extends AI {
         return false;
     }
     
-    private boolean target(final Player self, final Array<Player> enemies, final Circle radius,
-            final float dt) {
+    private boolean target(final Player self, final Array<Player> enemies) {
         final Vector2 position = self.position;
         final float[] distances = new float[enemies.size + 1];
         for (final Player enemy : enemies) {
@@ -76,23 +79,54 @@ public class SmartAI extends AI {
         }
         final Comparator<Player> cmpByDistance = //
                 (a, b) -> (int) (distances[a.id] - distances[b.id]);
-        for (final Player enemy : enemies.toArray().sorted(cmpByDistance)) {
+        final Player[] enemiesArray = enemies.toArray().sorted(cmpByDistance);
+        for (final Player enemy : enemiesArray) {
             // FIXME implement logic
+            if (distances[enemy.id] > cycles * 2) {
+                continue;
+            }
             pressKeys(KeyBinding.MAIN_ATTACK);
+            break;
+        }
+        final float x = position.x;
+        final Relation platformRelation = self.world.platform.xRelation(x);
+        switch (platformRelation) {
+            case MIDDLE:
+                final float dx = enemiesArray[0].position.x - x;
+                if (dx < 0) {
+                    pressKeys(KeyBinding.LEFT);
+                    break;
+                } else {
+                    pressKeys(KeyBinding.RIGHT);
+                    break;
+                }
+            case LEFT_MARGIN:
+                pressKeys(KeyBinding.RIGHT);
+                break;
+            case RIGHT_MARGIN:
+                pressKeys(KeyBinding.LEFT);
+                break;
+            case OFF_LEFT:
+                pressKeys(KeyBinding.JUMP);
+                pressKeys(KeyBinding.RIGHT);
+                break;
+            case OFF_RIGHT:
+                pressKeys(KeyBinding.JUMP);
+                pressKeys(KeyBinding.LEFT);
+                break;
         }
         return false;
     }
     
     @Override
     public void makeDecisions(final Player self, final Array<Player> enemies) {
-        if ((++i & cycles) != 0) {
-            return; // only run every 32 game loops
+        if ((++i & cycles - 1) != 0) {
+            return; // only run every #cycles game loops
         }
         final float dt = cycles * Game.deltaTime; // delta time
-        radius.set(self.position, cycles);
         // using short circuit
-        final boolean dummy = evade(self, enemies, radius, dt)
-                || target(self, enemies, radius, dt);
+        final boolean dummy = evade(self, enemies, dt)
+                || target(self, enemies);
     }
     
 }

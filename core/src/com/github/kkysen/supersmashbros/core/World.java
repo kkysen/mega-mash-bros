@@ -45,26 +45,22 @@ public class World implements Renderable, Disposable, Loggable {
     
     public boolean gameOver = false;
     
-    public World(final int width, final int height, final Texture background, final Sprite platform,
+    public World(final int width, final int height, final Texture background,
+            final Sprite platformSprite,
             final Player... players) {
         this.width = width;
         this.height = height;
         this.background = new TextureRegion(background, 0, 0, width, height);
         bounds = new Rectangle(0, 0, width, height);
-        platform.setSize(width * 0.75f, height * 0.1f);
-        platform.setCenter(width * 0.5f, height * 0.25f);
-        this.platform = new Platform(platform);
+        platformSprite.setSize(width * 0.75f, height * 0.1f);
+        platformSprite.setCenter(width * 0.5f, height * 0.25f);
+        platform = new Platform(platformSprite);
         this.players = new Array<>(players);
-        final Rectangle platformBounds = this.platform.bounds;
-        final float platformTop = platformBounds.maxY();
-        final float margin = platformBounds.width * 0.25f;
-        final float platformLeft = platformBounds.x + margin;
-        final float platformRight = platformBounds.maxX() - margin;
         for (final Player player : players) {
             player.world = this;
-            player.position.x = MathUtils.random(platformLeft,
-                    player.isAI() ? platformRight : platformRight * 0.25f);
-            player.position.y = platformTop + MathUtils.random(10f);
+            player.position.x = MathUtils.random(platform.leftMargin,
+                    player.isAI() ? platform.rightMargin : platform.rightMargin * 0.25f);
+            player.position.y = platform.top + MathUtils.random(10f);
         }
     }
     

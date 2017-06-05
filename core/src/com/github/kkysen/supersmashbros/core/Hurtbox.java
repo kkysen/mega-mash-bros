@@ -12,12 +12,9 @@ public class Hurtbox extends Box {
     
     private static final float DAMAGE_MULTIPLIER = 0.1f; // FIXME
     
-    private final Player player;
-    
     public Hurtbox(final Player player, final float width, final float height,
             final float lifetime, final float warmupTime) {
-        super(player.position, width, height, lifetime, warmupTime);
-        this.player = player;
+        super(player, width, height, lifetime, warmupTime);
     }
     
     public Hurtbox(final Player player) {

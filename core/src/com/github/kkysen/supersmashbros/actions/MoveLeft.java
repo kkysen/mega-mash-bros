@@ -16,7 +16,7 @@ public class MoveLeft extends Move {
     }
     
     @Override
-    protected void move(final Vector2 velocity, final boolean isOnPlatform) {
+    protected void move(Vector2 acceleration, final Vector2 velocity, final boolean isOnPlatform) {
         velocity.x = Math.max(-speed, velocity.x - speed);
     }
     

@@ -7,15 +7,18 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.github.kkysen.libgdx.util.Textures;
 import com.github.kkysen.libgdx.util.keys.Controller;
+import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.User;
-import com.github.kkysen.supersmashbros.actions.Action;
+import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.Jump;
+import com.github.kkysen.supersmashbros.actions.Message;
 import com.github.kkysen.supersmashbros.actions.MoveLeft;
 import com.github.kkysen.supersmashbros.actions.MoveRight;
 import com.github.kkysen.supersmashbros.actions.SmashAttack;
 import com.github.kkysen.supersmashbros.actions.Stop;
 import com.github.kkysen.supersmashbros.ai.FrozenAI;
 import com.github.kkysen.supersmashbros.ai.RandomAI;
+import com.github.kkysen.supersmashbros.ai.SmartAI;
 import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.State;
 
@@ -70,13 +73,18 @@ public class Mario extends Player {
         return new Mario(new FrozenAI());
     }
     
+    public static Mario smart() {
+        return new Mario(new SmartAI());
+    }
+    
     public Mario(final Controller controller) {
-        super("Mario", controller, idleState, 1, new Action[] {
+        super("Mario", controller, idleState, 1, new Executable[] {
             new Stop(idleState),
-            new MoveLeft(moveLeftState, 0f, 100f),
-            new MoveRight(moveRightState, 0f, 100f),
+            new MoveLeft(moveLeftState, 0f, 200f),
+            new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 300f),
-            new SmashAttack(idleState, 0, 10f, 1f, 5f, 5f)
+            new SmashAttack(idleState, 0, 10f, 1f, 5f, 5f),
+            new Message(KeyBinding.P, player -> player.position),
         });
     }
     

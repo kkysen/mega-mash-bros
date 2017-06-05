@@ -16,10 +16,9 @@ import lombok.experimental.ExtensionMethod;
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)
-public class Action implements Loggable {
+public class Action extends Executable implements Loggable {
     
     private final State state;
-    public final KeyBinding keyBinding;
     
     private final State[] impossiblePreStates;
     
@@ -32,17 +31,12 @@ public class Action implements Loggable {
     protected Action(final State state, final KeyBinding keyBinding,
             final State[] impossiblePreStates, final float warmupTime, final float duration,
             final float cooldown) {
+        super(keyBinding);
         this.state = state.clone();
-        this.keyBinding = keyBinding;
         this.impossiblePreStates = impossiblePreStates;
-        this.startup = warmupTime;
+        startup = warmupTime;
         this.duration = duration;
         this.cooldown = cooldown;
-    }
-    
-    @Override
-    public String toString() {
-        return getClass().getSimpleName();
     }
     
     public void update() {
@@ -58,6 +52,7 @@ public class Action implements Loggable {
         return false;
     }
     
+    @Override
     public final State execute(final Player player) {
         if (elapsedTime < cooldown || isImpossiblePreState(player.state)) {
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
@@ -68,12 +63,13 @@ public class Action implements Loggable {
         elapsedTime = 0;
         state.setPlayer(player);
         attack(state);
-        move(player.velocity, player.isOnPlatform());
+        move(player.acceleration, player.velocity, player.isOnPlatform());
         return state;
     }
     
     protected void attack(final State state) {}
     
-    protected void move(final Vector2 velocity, final boolean isOnPlatform) {}
+    protected void move(final Vector2 acceleration, final Vector2 velocity,
+            final boolean isOnPlatform) {}
     
 }

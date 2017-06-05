@@ -18,7 +18,7 @@ public class Jump extends Move {
     }
     
     @Override
-    protected void move(final Vector2 velocity, final boolean isOnPlatform) {
+    protected void move(Vector2 acceleration, final Vector2 velocity, final boolean isOnPlatform) {
         if (isOnPlatform || numMidairJumps++ <= 1) {
             error("someone jumped");
             System.out.println("someone jumped");

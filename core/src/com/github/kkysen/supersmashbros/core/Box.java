@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.badlogic.gdx.utils.Pools;
@@ -24,13 +23,16 @@ public abstract class Box implements Renderable, Poolable, Loggable {
     
     public final Rectangle bounds = pool.obtain();
     
+    public final Player player;
+    
     private float elapsedTime;
     private final float lifetime;
     
-    public Box(final Vector2 position, final float width, final float height,
-            final float lifetime, final float warmupTime) {
-        bounds.x = position.x;
-        bounds.y = position.y;
+    public Box(final Player player, final float width, final float height, final float lifetime,
+            final float warmupTime) {
+        this.player = player;
+        bounds.x = player.position.x;
+        bounds.y = player.position.y;
         bounds.width = width;
         bounds.height = height;
         this.lifetime = lifetime;
@@ -71,7 +73,7 @@ public abstract class Box implements Renderable, Poolable, Loggable {
     
     public final boolean update() {
         elapsedTime += Game.deltaTime;
-        if (elapsedTime > lifetime) {
+        if (elapsedTime > lifetime || !player.world.bounds.contains(bounds.x, bounds.y)) {
             return false;
         }
         return subUpdate();
