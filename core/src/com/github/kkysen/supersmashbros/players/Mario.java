@@ -5,6 +5,8 @@ import static com.github.kkysen.supersmashbros.app.Game.asset;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.github.kkysen.libgdx.util.Textures;
 import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
@@ -47,7 +49,21 @@ public class Mario extends Player {
                             10, 147, 32, 38),
                     PlayMode.LOOP));
     
-    private static final State moveLeftState = moveRightState; // FIXME
+    private static Array<TextureRegion> temp = Textures.getFrames(
+            new Texture(asset("sprites_transparent.png")),
+            8,
+            10, 147, 32, 38);
+    
+    //I know this is dirty
+    static {
+    	temp.forEach((x) -> x.flip(true, false));
+    }   
+    
+    private static final State moveLeftState = new State("Mario move right state",
+            new Animation<>(
+                    0.1f,
+                    temp,
+                    PlayMode.LOOP));
     
     private static final State jumpState = new State("Mario jump state",
             new Animation<>(
@@ -60,6 +76,18 @@ public class Mario extends Player {
                                 {31, 42},
                                 {33, 44}
                             })));
+    
+    /*private static final State fallState = new State("Mario fall state",
+            new Animation<>(
+                    0.5f,
+                    Textures.getFrames(
+                            new Texture(asset("sprites_transparent.png")),
+                            17, 84,
+                            new int[][] {
+                                {28, 42},
+                                {31, 42},
+                                {33, 44}
+                            })));*/
     
     public static Mario userControlled() {
         return new Mario(User.get());
@@ -78,8 +106,8 @@ public class Mario extends Player {
     }
     
     public Mario(final Controller controller) {
-        super("Mario", controller, idleState, new Stop(idleState), 1, new Executable[] {
-            new Stop(idleState),
+        super("Mario", controller, idleState, new Stop(idleState, jumpState), 1, new Executable[] {
+            new Stop(idleState, jumpState),
             new MoveLeft(moveLeftState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 300f),

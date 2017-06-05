@@ -47,7 +47,10 @@ public class Action extends Executable implements Loggable {
     
     private boolean isImpossiblePreState(final State state) {
         for (final State impossiblePreState : impossiblePreStates) {
-            if (state == impossiblePreState) { // I meant to use ==
+        	//System.out.println("impState: " + impossiblePreState);
+        	//System.out.println("state: " + state);
+        	//System.out.println("prestate" + state.toString().equals(impossiblePreState.toString()));
+            if (state.toString().equals(impossiblePreState.toString())) { // I meant to use ==
                 return true;
             }
         }
@@ -66,7 +69,7 @@ public class Action extends Executable implements Loggable {
         
         if (firstCalled) {
         	player.state.setPlayer(null, true);
-        	System.out.println("first");
+        	//System.out.println("first");
         	elapsedTime = 0;
         	state.setPlayer(player, true);
             firstCalled = false;

@@ -11,8 +11,8 @@ import com.github.kkysen.supersmashbros.core.State;
  */
 public class Stop extends Move {
     
-    public Stop(final State state) {
-        super(state, KeyBinding.STOP, new State[] {}, 0, 0, 0, 0);
+    public Stop(final State state, final State impossible) {
+        super(state, KeyBinding.STOP, new State[] {impossible}, 0, 0, 0, 0);
     }
     
     @Override

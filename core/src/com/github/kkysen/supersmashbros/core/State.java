@@ -53,7 +53,7 @@ public class State implements Renderable, Loggable, Cloneable {
     
     @Override
     public void render(final Batch batch) {
-    	System.out.println(elapsedTime + ": " + name);
+    	//System.out.println(elapsedTime + ": " + name);
         elapsedTime += Game.deltaTime;
         final TextureRegion frame = animation.getKeyFrame(elapsedTime);
         batch.draw(frame, position.x, position.y);

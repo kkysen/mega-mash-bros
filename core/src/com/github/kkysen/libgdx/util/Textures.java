@@ -32,10 +32,10 @@ public class Textures {
         
         for (int i = 0; i < sizes.length; i++) {
             final int[] size = sizes[i];
-            System.out.println("Adding frame " + i);
+            //System.out.println("Adding frame " + i);
             regions.add(new TextureRegion(texture, x + curOffset, y, size[0], size[1]));
-            System.out.println(curOffset + " " + size[0]);
-            System.out.println(regions.get(i));
+            //System.out.println(curOffset + " " + size[0]);
+            //System.out.println(regions.get(i));
             
             curOffset += size[0];
         }
