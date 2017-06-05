@@ -222,11 +222,12 @@ public abstract class Player implements Renderable, Loggable {
                 ((Action) executable).update();
             }
             
-            /*if (state.action instanceof Flying){
-            	System.out.println("state is flying");
+            if (state.action instanceof Flying){
+            	//System.out.println("state is flying");
+            	state = state.action.execute(this);
             	moveActive = true;
-            }*/
-            /*else*/ if (executable.keyBinding.isPressed(controller)) {
+            }
+            else if (executable.keyBinding.isPressed(controller)) {
                 //System.out.println(this + " pressed " + KeyBinding.get(i));
                 //System.out.println(this + " tried calling " + action);
                 state = executable.execute(this);
@@ -238,15 +239,15 @@ public abstract class Player implements Renderable, Loggable {
                 }
             }
         }
-        System.out.println(state.action);
-        if (state.action instanceof Flying){
+        //System.out.println(state.action);
+        /*if (state.action instanceof Flying){
         	System.out.println("state is flying");
         	moveActive = true;
-        }
+        }*/
         //if (state.name().equals(flying.name()))
         
         if (/*state.action instanceof Flying &&*/ !moveActive /*&& wasOnPlatform*/) {
-        	//state = defaultGroundAction.execute(this);
+        	state = defaultGroundAction.execute(this);
         }
         //else if (!moveActive && wasOnPlatform) state = defaultAirAction.execute(this);
     }
