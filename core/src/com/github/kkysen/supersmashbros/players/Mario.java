@@ -14,7 +14,7 @@ import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.actions.Message;
 import com.github.kkysen.supersmashbros.actions.MoveLeft;
 import com.github.kkysen.supersmashbros.actions.MoveRight;
-import com.github.kkysen.supersmashbros.actions.SmashAttack;
+import com.github.kkysen.supersmashbros.actions.RangeAttack;
 import com.github.kkysen.supersmashbros.actions.Stop;
 import com.github.kkysen.supersmashbros.ai.FrozenAI;
 import com.github.kkysen.supersmashbros.ai.RandomAI;
@@ -83,7 +83,7 @@ public class Mario extends Player {
             new MoveLeft(moveLeftState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 300f),
-            new SmashAttack(idleState, 0, 10f, 1f, 5f, 5f),
+            new RangeAttack(idleState, 0, 10f, 1f, 5f, 5f),
             new Message(KeyBinding.P, player -> player.position),
         });
     }

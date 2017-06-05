@@ -5,9 +5,9 @@ import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.core.Hitbox;
 import com.github.kkysen.supersmashbros.core.State;
 
-public class SmashAttack extends Attack {
+public class RangeAttack extends Attack {
     
-    public SmashAttack(final State state, final float startup, final float duration,
+    public RangeAttack(final State state, final float startup, final float duration,
             final float cooldown,
             final float damage, final float knockback) {
         super(state, KeyBinding.MAIN_ATTACK, new State[] {}, startup, duration, cooldown, damage,
