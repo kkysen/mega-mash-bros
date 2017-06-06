@@ -174,12 +174,14 @@ public abstract class Player implements Renderable, Loggable {
      * @param knockback the hard-coded {@link Hitbox#knockback} value
      */
     private void knockback(final float damage, final float angle, final float knockback) {
-        final float accelerationMagnitude = knockback * damage
+        final float accelerationMagnitude = knockback * percentage
                 * /* * massReciprocal*/ KNOCKBACK_MULTIPLIER;
+        
+        percentage += damage * PERCENTAGE_MULTIPLIER;
         System.out.println(this + " knocked back by " + accelerationMagnitude + " at "
                 + MathUtils.radiansToDegrees * angle + "°, increasing percentage to " + percentage
                 + "%");
-        percentage += damage * PERCENTAGE_MULTIPLIER;
+        
         acceleration.setAngleAndLength(angle, accelerationMagnitude);
         move();
         state = flying.execute(this);
@@ -210,7 +212,7 @@ public abstract class Player implements Renderable, Loggable {
         log(this + " checking for called executables");
         //System.out.println(state);
         //System.out.println(state.action);
-        System.out.println("stunTime: " + stunTime);
+        //System.out.println("stunTime: " + stunTime);
         boolean moveActive = false;
         /*if (state.name().equals(Flying.class.getSimpleName())) return;
         if (state.action.name().equals(Flying.class.getSimpleName())) {
@@ -230,7 +232,7 @@ public abstract class Player implements Renderable, Loggable {
             
             if (/*state.action instanceof Flying*/stunTime > 0){
             	//System.out.println("state is flying");
-            	state = state.action.execute(this);
+            	state = flying.execute(this);
             	stunTime -= Gdx.graphics.getDeltaTime();
             	moveActive = true;
             }
@@ -282,7 +284,11 @@ public abstract class Player implements Renderable, Loggable {
             if (!wasOnPlatform) {
                 state = executables[KeyBinding.STOP.ordinal()].execute(this);
             }
-        } else {
+        } 
+        else if (stunTime > 0) {
+        	acceleration.y = world.gravity/4;
+        }
+        else {
             acceleration.y = world.gravity;
         }
         wasOnPlatform = isOnPlatform;

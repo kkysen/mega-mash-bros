@@ -146,13 +146,13 @@ public class Mario extends Player {
     
     public Mario(final Controller controller) {
         super("Mario", controller, idleState, new Stop(idleState, jumpState), 1, new Executable[] {
-            new Stop(fTiltState, jumpState),
+            new Stop(idleState, jumpState),
             new MoveLeft(moveLeftState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 300f),
-            new RangeAttack(idleState, 0, 10f, 1f, 2f, 5f),
+            new RangeAttack(idleState, 0, .5f, 1f, 2f, 20f),
             new Message(KeyBinding.P, player -> player.position),
-            new FTiltAttack(fTiltState, .1f, .1f, 1f, 5f, 5f),
+            new FTiltAttack(fTiltState, .1f, .1f, 1f, 5f, 20f),
         },
         		new Flying(flyingState, KeyBinding.NONE, new State[0], 0f, 0f, 0f));
     }
