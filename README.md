@@ -47,4 +47,4 @@ We are trying to mimic the mechanics of the actual game.  Every attack will have
 * Player programming
 
 ### Bugs
-After the first hit, the knockback drastically decreases. Maybe the formula for calculating knockback is wrong? it may be doing the inverse of what it should (ie less percent = more knockback rather than the other way around).
+* After the first hit, the knockback drastically decreases. Maybe the formula for calculating knockback is wrong? it may be doing the inverse of what it should (ie less percent = more knockback rather than the other way around).
