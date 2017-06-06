@@ -17,6 +17,7 @@ import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.Jump;
+import com.github.kkysen.supersmashbros.actions.Move;
 import com.github.kkysen.supersmashbros.ai.AI;
 
 import lombok.experimental.ExtensionMethod;
@@ -192,7 +193,7 @@ public abstract class Player implements Renderable, Loggable {
     private void executeExecutables() {
         log(this + " checking for called executables");
         //System.out.println(controller);
-        boolean nothingCalled = true;
+        boolean noMovesCalled = true;
         for (int i = 0; i < executables.length; i++) {
             final Executable executable = executables[i];
             if (executable instanceof Action) {
@@ -202,10 +203,12 @@ public abstract class Player implements Renderable, Loggable {
                 //System.out.println(this + " pressed " + KeyBinding.get(i));
                 //System.out.println(this + " tried calling " + action);
                 state = executable.execute(this);
-                nothingCalled = false;
+                if (executable instanceof Move) {
+                    noMovesCalled = false;
+                }
             }
         }
-        if (nothingCalled && !(state.action instanceof Jump)) {
+        if (noMovesCalled && !(state.action instanceof Jump)) {
             stop();
         }
     }
