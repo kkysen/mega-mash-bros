@@ -15,6 +15,7 @@ public enum KeyBinding {
     JUMP(Key.W),
     MAIN_ATTACK(Key.SPACE),
     P(Key.P),
+    FORWARD_TILT(Key.L),
     ;
     
     final Key[] keys;
