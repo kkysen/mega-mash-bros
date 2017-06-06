@@ -22,7 +22,8 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public class SmartAI extends AI {
     
-    private static final int cycles = 4; // must be power of 2
+    private static final float TARGETING_MARGIN = 16f;
+    
     private static final float radius2 = cycles * cycles * 50f;
     
     private static final Vector2 dd = Pools.obtain(Vector2.class); // change in distance
@@ -39,8 +40,6 @@ public class SmartAI extends AI {
         KeyBinding.RIGHT, // 6
         KeyBinding.LEFT,  // 7
     };
-    
-    private int i = 0;
     
     private boolean evade(final Player self, final Array<Player> enemies, final float dt) {
         // TODO maybe I should sort all the hitboxes first to evade the closer ones first
@@ -83,6 +82,9 @@ public class SmartAI extends AI {
         switch (platformRelation) {
             case MIDDLE:
                 final float dx = enemiesArray[0].position.x - x;
+                if (dx < TARGETING_MARGIN && dx > -TARGETING_MARGIN) {
+                    break;
+                }
                 if (dx < 0) {
                     pressKeys(KeyBinding.LEFT);
                     break;
@@ -110,7 +112,7 @@ public class SmartAI extends AI {
     
     @Override
     public void makeDecisions(final Player self, final Array<Player> enemies) {
-        if ((++i & cycles - 1) != 0) {
+        if ((cycle & cycles - 1) != 0) {
             return; // only run every #cycles game loops
         }
         final float dt = cycles * Game.deltaTime; // delta time

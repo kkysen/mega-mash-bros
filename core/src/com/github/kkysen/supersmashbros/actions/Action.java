@@ -33,6 +33,7 @@ public class Action extends Executable implements Loggable {
             final float cooldown) {
         super(keyBinding);
         this.state = state.clone();
+        this.state.action = this;
         this.impossiblePreStates = impossiblePreStates;
         startup = warmupTime;
         this.duration = duration;

@@ -16,6 +16,7 @@ import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
+import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.ai.AI;
 
 import lombok.experimental.ExtensionMethod;
@@ -191,6 +192,7 @@ public abstract class Player implements Renderable, Loggable {
     private void executeExecutables() {
         log(this + " checking for called executables");
         //System.out.println(controller);
+        boolean nothingCalled = true;
         for (int i = 0; i < executables.length; i++) {
             final Executable executable = executables[i];
             if (executable instanceof Action) {
@@ -200,7 +202,11 @@ public abstract class Player implements Renderable, Loggable {
                 //System.out.println(this + " pressed " + KeyBinding.get(i));
                 //System.out.println(this + " tried calling " + action);
                 state = executable.execute(this);
+                nothingCalled = false;
             }
+        }
+        if (nothingCalled && !(state.action instanceof Jump)) {
+            stop();
         }
     }
     
@@ -217,6 +223,10 @@ public abstract class Player implements Renderable, Loggable {
         return world.platform.bounds.contains(position);
     }
     
+    private void stop() {
+        state = executables[KeyBinding.STOP.ordinal()].execute(this);
+    }
+    
     private void checkIfOnPlatform() {
         final boolean isOnPlatform = isOnPlatform();
         if (isOnPlatform) {
@@ -225,7 +235,7 @@ public abstract class Player implements Renderable, Loggable {
             velocity.y = 0;
             acceleration.y = 0;
             if (!wasOnPlatform) {
-                state = executables[KeyBinding.STOP.ordinal()].execute(this);
+                stop();
             }
         } else {
             acceleration.y = world.gravity;
@@ -239,6 +249,7 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     public final void update(final Array<Player> enemies) {
+        controller.update();
         log(this + " updating hitboxes");
         updateBoxes(hitboxes);
         log(this + " updating hurtboxes");

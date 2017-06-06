@@ -7,8 +7,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
+import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.app.Game;
+
 import lombok.experimental.ExtensionMethod;
 
 /**
@@ -20,6 +22,7 @@ public class State implements Renderable, Loggable, Cloneable {
     private final String name;
     
     private Player player;
+    public Action action;
     public Vector2 position;
     
     private float elapsedTime = 0;

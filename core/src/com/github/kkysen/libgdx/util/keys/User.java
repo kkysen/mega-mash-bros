@@ -22,6 +22,9 @@ public class User extends Controller implements InputProcessor {
     private User() {}
     
     @Override
+    public final void update() {}
+    
+    @Override
     public boolean keyDown(final int keyCode) {
         System.out.println(Key.get(keyCode) + " pressed");
         pressKey(keyCode);

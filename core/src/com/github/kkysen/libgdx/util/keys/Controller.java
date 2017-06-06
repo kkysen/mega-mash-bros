@@ -21,6 +21,8 @@ public class Controller implements Loggable {
         pressedKeys[keyCode] = false;
     }
     
+    public void update() {}
+    
     public void pressKeys(final KeyBinding keyBinding) {
         //        if (this instanceof AI) {
         //            System.out.println(name() + " pressed " + keyBinding);
