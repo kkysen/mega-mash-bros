@@ -16,7 +16,6 @@ import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
-import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.actions.Move;
 import com.github.kkysen.supersmashbros.ai.AI;
 
@@ -78,6 +77,8 @@ public abstract class Player implements Renderable, Loggable {
     public State state;
     
     public boolean wasOnPlatform = true;
+    
+    public boolean facingRight = true;
     
     /**
      * Hitboxes retrieved from attacks, empty when not attacking
@@ -190,29 +191,6 @@ public abstract class Player implements Renderable, Loggable {
         }
     }
     
-    private void executeExecutables() {
-        log(this + " checking for called executables");
-        //System.out.println(controller);
-        boolean noMovesCalled = true;
-        for (int i = 0; i < executables.length; i++) {
-            final Executable executable = executables[i];
-            if (executable instanceof Action) {
-                ((Action) executable).update();
-            }
-            if (executable.keyBinding.isPressed(controller)) {
-                //System.out.println(this + " pressed " + KeyBinding.get(i));
-                //System.out.println(this + " tried calling " + action);
-                state = executable.execute(this);
-                if (executable instanceof Move) {
-                    noMovesCalled = false;
-                }
-            }
-        }
-        if (noMovesCalled && !(state.action instanceof Jump)) {
-            stop();
-        }
-    }
-    
     private void updateBoxes(final Array<? extends Box> boxes) {
         for (int i = 0; i < boxes.size; i++) {
             if (!boxes.get(i).update()) {
@@ -249,6 +227,29 @@ public abstract class Player implements Renderable, Loggable {
     private void move() {
         //error(this + " moving at " + velocity + ", position = " + position);
         acceleration.accelerate(velocity, position);
+    }
+    
+    private void executeExecutables() {
+        log(this + " checking for called executables");
+        //System.out.println(controller);
+        boolean noMovesCalled = true;
+        for (int i = 0; i < executables.length; i++) {
+            final Executable executable = executables[i];
+            if (executable instanceof Action) {
+                ((Action) executable).update();
+            }
+            if (executable.keyBinding.isPressed(controller)) {
+                //System.out.println(this + " pressed " + KeyBinding.get(i));
+                //System.out.println(this + " tried calling " + action);
+                state = executable.execute(this);
+                if (executable instanceof Move) {
+                    noMovesCalled = false;
+                }
+            }
+        }
+        if (noMovesCalled && wasOnPlatform) {
+            stop();
+        }
     }
     
     public final void update(final Array<Player> enemies) {

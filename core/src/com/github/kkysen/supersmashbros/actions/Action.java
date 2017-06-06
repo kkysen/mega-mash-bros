@@ -1,6 +1,5 @@
 package com.github.kkysen.supersmashbros.actions;
 
-import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
@@ -63,14 +62,13 @@ public class Action extends Executable implements Loggable {
         error("someone called " + this);
         elapsedTime = 0;
         state.setPlayer(player);
-        attack(state);
-        move(player.acceleration, player.velocity, player.isOnPlatform());
+        attack(state, player.facingRight);
+        move(player);
         return state;
     }
     
-    protected void attack(final State state) {}
+    protected void attack(final State state, final boolean facingRight) {}
     
-    protected void move(final Vector2 acceleration, final Vector2 velocity,
-            final boolean isOnPlatform) {}
+    protected void move(final Player player) {}
     
 }

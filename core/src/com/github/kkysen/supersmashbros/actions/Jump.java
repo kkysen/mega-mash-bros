@@ -1,7 +1,7 @@
 package com.github.kkysen.supersmashbros.actions;
 
-import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
+import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.State;
 
 /**
@@ -18,11 +18,12 @@ public class Jump extends Move {
     }
     
     @Override
-    protected void move(Vector2 acceleration, final Vector2 velocity, final boolean isOnPlatform) {
+    protected void move(final Player player) {
+        final boolean isOnPlatform = player.wasOnPlatform;
         if (isOnPlatform || numMidairJumps++ <= 1) {
             error("someone jumped");
             System.out.println("someone jumped");
-            velocity.y += speed;
+            player.velocity.y += speed;
             if (isOnPlatform) {
                 numMidairJumps = 1;
             }

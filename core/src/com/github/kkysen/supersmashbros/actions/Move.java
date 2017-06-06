@@ -1,7 +1,7 @@
 package com.github.kkysen.supersmashbros.actions;
 
-import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
+import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.State;
 
 /**
@@ -20,10 +20,6 @@ public abstract class Move extends Action {
     }
     
     @Override
-    protected final void attack(final State state) {}
-    
-    @Override
-    protected abstract void move(Vector2 acceleration, final Vector2 velocity,
-            final boolean isOnPlatform);
+    protected abstract void move(Player player);
     
 }

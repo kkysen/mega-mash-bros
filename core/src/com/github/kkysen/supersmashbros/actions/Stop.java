@@ -1,7 +1,7 @@
 package com.github.kkysen.supersmashbros.actions;
 
-import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
+import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.State;
 
 /**
@@ -16,9 +16,9 @@ public class Stop extends Move {
     }
     
     @Override
-    protected void move(Vector2 acceleration, final Vector2 velocity, final boolean isOnPlatform) {
-        velocity.x = 0;
-        acceleration.x = 0;
+    protected void move(final Player player) {
+        player.velocity.x = 0;
+        player.acceleration.x = 0;
     }
     
 }

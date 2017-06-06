@@ -1,7 +1,7 @@
 package com.github.kkysen.supersmashbros.actions;
 
-import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
+import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.State;
 
 /**
@@ -16,8 +16,9 @@ public class MoveRight extends Move {
     }
     
     @Override
-    protected void move(Vector2 acceleration, final Vector2 velocity, final boolean isOnPlatform) {
-        velocity.x = Math.min(speed, velocity.x + speed);
+    protected void move(final Player player) {
+        player.velocity.x = Math.min(speed, player.velocity.x + speed);
+        player.facingRight = true;
     }
     
 }
