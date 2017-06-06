@@ -13,6 +13,7 @@ import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.User;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.FTiltAttack;
+import com.github.kkysen.supersmashbros.actions.Falling;
 import com.github.kkysen.supersmashbros.actions.Flying;
 import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.actions.Message;
@@ -109,7 +110,6 @@ public class Mario extends Player {
                                 {31, 38}
                             })));
     
-    //FIXME
     private static final State flyingState = new State("Mario flying state",
             new Animation<>(
                     .1f,
@@ -126,6 +126,16 @@ public class Mario extends Player {
                                 {39, 38},
                                 {39, 38},
                                 {31, 38}
+                            })));
+    
+    private static final State fallingState = new State("Mario falling state",
+            new Animation<>(
+                    0.5f,
+                    Textures.getFrames(
+                            new Texture(asset("sprites_transparent.png")),
+                            17, 84,
+                            new int[][] {
+                                {33, 44}
                             })));
     
     public static Mario userControlled() {
@@ -154,7 +164,8 @@ public class Mario extends Player {
             new Message(KeyBinding.P, player -> player.position),
             new FTiltAttack(fTiltState, .1f, .1f, 1f, 5f, 20f),
         },
-        		new Flying(flyingState, KeyBinding.NONE, new State[0], 0f, 0f, 0f));
+        		new Flying(flyingState, KeyBinding.NONE, new State[0], 0f, 0f, 0f),
+        		new Falling(fallingState, KeyBinding.NONE, new State[0], 0f, 0f, 0f, 0f));
     }
     
 }

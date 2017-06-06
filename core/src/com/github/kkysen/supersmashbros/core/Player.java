@@ -61,9 +61,9 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public abstract class Player implements Renderable, Loggable {
     
-    private static final float KNOCKBACK_MULTIPLIER = 1; // FIXME
-    private static final float PERCENTAGE_MULTIPLIER = 1; // FIXME
-    private static final float HITSTUN_MULTIPLIER = 1; // FIXME
+    private static final float KNOCKBACK_MULTIPLIER = .01f; // FIXME
+    private static final float PERCENTAGE_MULTIPLIER = .08f; // FIXME
+    private static final float HITSTUN_MULTIPLIER = .01f; // FIXME
     
     private static int numPlayers = 0;
     
@@ -82,6 +82,7 @@ public abstract class Player implements Renderable, Loggable {
     //public State flyingState;
     /*public Action defaultAirAction;*/
     public Action flying;
+    public Action falling;
     public float stunTime;
     
     public boolean wasOnPlatform = true;
@@ -100,7 +101,8 @@ public abstract class Player implements Renderable, Loggable {
     
     protected Player(final String name, final Controller controller, final State initialState,
             final Action defaultGround, /*final Action defaultAir,*/
-            final int lives, final Executable[] executables, final Action flyingAction) {
+            final int lives, final Executable[] executables,
+            final Action flyingAction, final Action fallingAction) {
         this.name = name;
         id = numPlayers++;
         this.controller = controller;
@@ -108,6 +110,7 @@ public abstract class Player implements Renderable, Loggable {
         state.setPlayer(this, true);
         defaultGroundAction = defaultGround;
         flying = flyingAction;
+        falling = fallingAction;
         stunTime = 0;
         /*defaultAirAction = defaultAir;*/
         System.out.println(state);
@@ -212,7 +215,6 @@ public abstract class Player implements Renderable, Loggable {
         log(this + " checking for called executables");
         //System.out.println(state);
         //System.out.println(state.action);
-        //System.out.println("stunTime: " + stunTime);
         boolean moveActive = false;
         /*if (state.name().equals(Flying.class.getSimpleName())) return;
         if (state.action.name().equals(Flying.class.getSimpleName())) {
@@ -231,6 +233,7 @@ public abstract class Player implements Renderable, Loggable {
             }
             
             if (/*state.action instanceof Flying*/stunTime > 0){
+            	System.out.println("stunTime: " + stunTime);
             	//System.out.println("state is flying");
             	state = flying.execute(this);
             	stunTime -= Gdx.graphics.getDeltaTime();
@@ -256,7 +259,8 @@ public abstract class Player implements Renderable, Loggable {
         //if (state.name().equals(flying.name()))
         
         if (/*state.action instanceof Flying &&*/ !moveActive /*&& wasOnPlatform*/) {
-        	state = defaultGroundAction.execute(this);
+        	if (!isOnPlatform()) state = falling.execute(this);
+        	else state = defaultGroundAction.execute(this);
         }
         //else if (!moveActive && wasOnPlatform) state = defaultAirAction.execute(this);
     }
@@ -285,9 +289,9 @@ public abstract class Player implements Renderable, Loggable {
                 state = executables[KeyBinding.STOP.ordinal()].execute(this);
             }
         } 
-        else if (stunTime > 0) {
+        /*else if (stunTime > 0) {
         	acceleration.y = world.gravity/4;
-        }
+        }*/
         else {
             acceleration.y = world.gravity;
         }

@@ -27,12 +27,14 @@ public class Flying extends Action {
 		if (velocity.y < 0) velocity.y = 0;*/
 		
 		
-		if (state.player.stunTime == 0) {
+		/*if (state.player.stunTime == 0) {
+			state.player.acceleration.x = 0;
+			state.player.acceleration.y = 0;
 			System.out.println("back to idle");
 			//state.player.defaultGroundAction.execute(state.player);
 			state.player.state.setPlayer(null, true);
 			state.setPlayer(state.player, true);
-		}
+		}*/
 		
 	}
 }

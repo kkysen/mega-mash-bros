@@ -38,7 +38,7 @@ public class Hurtbox extends Box {
     			((hitbox.bounds.area()*Math.E)/this.bounds.area()));
     			(intersect*intersect)/(float)(Math.E * intersect*2);
     	float fin = hitbox.attack.damage * DAMAGE_MULTIPLIER;*/
-    	float res = (hitbox.attack.damage * (intersect / hitbox.bounds.area() ));
+    	//float res = (hitbox.attack.damage * (intersect / hitbox.bounds.area() ));
     	
     	/*System.out.println(intersectionArea(hitbox) + ", " +
     			((hitbox.bounds.area()-this.bounds.area()) +
@@ -51,14 +51,15 @@ public class Hurtbox extends Box {
     	
     	//System.out.println(hitbox.bounds.area() + ", " + intersect + ", " + areaMult + ", " + fin + ", " + hitbox.attack.damage);
     	//System.out.println(res);
-    	System.out.println("exp: " + (hitbox.attack.damage * (intersect / hitbox.bounds.area() )) );
+    	//System.out.println("exp: " + (hitbox.attack.damage * (intersect / hitbox.bounds.area() )) );
     	
     	/*System.out.println((hitbox.bounds.area()-this.bounds.area()) +
         			(hitbox.bounds.area()/this.bounds.area()));*/
     	
     	if (intersect == 0) return 0;
         
-    	return res;
+    	//return res;
+    	return intersect;
     	/*return 	(intersectionArea(hitbox)/
         			(hitbox.bounds.area()-this.bounds.area()) +
         			(hitbox.bounds.area()/this.bounds.area()))
