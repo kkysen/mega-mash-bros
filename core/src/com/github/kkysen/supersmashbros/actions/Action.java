@@ -63,7 +63,7 @@ public class Action extends Executable implements Loggable {
     @Override
     public final State execute(final Player player) {
     	if (this instanceof Flying) {
-    		System.out.println("yay flying");
+    		//System.out.println("yay flying");
     		assert state.action != null;
     		//return state;
     	}
@@ -76,8 +76,8 @@ public class Action extends Executable implements Loggable {
         }*/
     	
         if (elapsedTime < cooldown || isImpossiblePreState(player.state)) {
-        	System.out.println(elapsedTime);
-        	System.out.println("cool");
+        	//System.out.println(elapsedTime);
+        	//System.out.println("cool");
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
         }

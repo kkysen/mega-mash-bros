@@ -2,6 +2,7 @@ package com.github.kkysen.supersmashbros.core;
 
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
@@ -62,6 +63,7 @@ public abstract class Player implements Renderable, Loggable {
     
     private static final float KNOCKBACK_MULTIPLIER = 1; // FIXME
     private static final float PERCENTAGE_MULTIPLIER = 1; // FIXME
+    private static final float HITSTUN_MULTIPLIER = 1; // FIXME
     
     private static int numPlayers = 0;
     
@@ -80,6 +82,7 @@ public abstract class Player implements Renderable, Loggable {
     //public State flyingState;
     /*public Action defaultAirAction;*/
     public Action flying;
+    public float stunTime;
     
     public boolean wasOnPlatform = true;
     
@@ -105,6 +108,7 @@ public abstract class Player implements Renderable, Loggable {
         state.setPlayer(this, true);
         defaultGroundAction = defaultGround;
         flying = flyingAction;
+        stunTime = 0;
         /*defaultAirAction = defaultAir;*/
         System.out.println(state);
         assert state != null;
@@ -179,6 +183,7 @@ public abstract class Player implements Renderable, Loggable {
         acceleration.setAngleAndLength(angle, accelerationMagnitude);
         move();
         state = flying.execute(this);
+        stunTime = (damage + knockback) * HITSTUN_MULTIPLIER;
     }
     
     private void takeHits(final Array<Player> enemies) {
@@ -203,8 +208,9 @@ public abstract class Player implements Renderable, Loggable {
     
     private void executeExecutables() {
         log(this + " checking for called executables");
-        System.out.println(state);
+        //System.out.println(state);
         //System.out.println(state.action);
+        System.out.println("stunTime: " + stunTime);
         boolean moveActive = false;
         /*if (state.name().equals(Flying.class.getSimpleName())) return;
         if (state.action.name().equals(Flying.class.getSimpleName())) {
@@ -222,9 +228,10 @@ public abstract class Player implements Renderable, Loggable {
                 ((Action) executable).update();
             }
             
-            if (state.action instanceof Flying){
+            if (/*state.action instanceof Flying*/stunTime > 0){
             	//System.out.println("state is flying");
             	state = state.action.execute(this);
+            	stunTime -= Gdx.graphics.getDeltaTime();
             	moveActive = true;
             }
             else if (executable.keyBinding.isPressed(controller)) {

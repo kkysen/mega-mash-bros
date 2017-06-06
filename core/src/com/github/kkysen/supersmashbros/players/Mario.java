@@ -150,7 +150,7 @@ public class Mario extends Player {
             new MoveLeft(moveLeftState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 300f),
-            new RangeAttack(idleState, 0, 10f, 1f, 5f, 5f),
+            new RangeAttack(idleState, 0, 10f, 1f, 2f, 5f),
             new Message(KeyBinding.P, player -> player.position),
             new FTiltAttack(fTiltState, .1f, .1f, 1f, 5f, 5f),
         },
