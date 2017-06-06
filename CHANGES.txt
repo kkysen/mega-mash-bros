@@ -1,0 +1,6 @@
+Moves don't last after button release. Must keep key held down to continue movement
+AI spazes out (cuz only hits key once?)
+Added F-Tilt attack
+Moves now have a counter, so holding down an attack key no longer spams hitboxes
+After getting hit, players placed into a flying state. Also, they recieve hitstun, so they cannot move for the duration of the hitstun
+After flying state wears off, placed into falling state. x-acceleration is negated.
