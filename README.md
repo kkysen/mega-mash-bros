@@ -22,7 +22,8 @@ We are trying to mimic the mechanics of the actual game.  Every attack will have
 - [x] 5/29: Implement hitboxes and hurtboxes
 - [x] 5/29: Implement characters
 - [x] 5/29: Implement actions, moves, and attacks
-- [ ] 6/02: Begin work on graphics and animation
+- [x] 6/02: Begin work on graphics and animation
+- [ ] 6/06: Making physics more alike the original game
 - [ ] 6/11: Debug
 
 ### Stretch Goals
@@ -44,3 +45,6 @@ We are trying to mimic the mechanics of the actual game.  Every attack will have
 * Physics
 * Game setup
 * Player programming
+
+### Bugs
+After the first hit, the knockback drastically decreases. Maybe the formula for calculating knockback is wrong? it may be doing the inverse of what it should (ie less percent = more knockback rather than the other way around).
