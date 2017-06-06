@@ -17,6 +17,7 @@ import lombok.experimental.ExtensionMethod;
 public class Platform implements Renderable {
     
     private static final float DEFAULT_FRICTION = 0.5f; // FIXME
+    private static final float MARGIN_PERCENTAGE = 0.01f;
     
     public Rectangle bounds;
     private final Sprite sprite;
@@ -39,7 +40,7 @@ public class Platform implements Renderable {
         right = bounds.maxX();
         top = bounds.maxY();
         bottom = bounds.y;
-        margin = bounds.width * 0.1f;
+        margin = bounds.width * MARGIN_PERCENTAGE;
         leftMargin = left + margin;
         rightMargin = right - margin;
     }

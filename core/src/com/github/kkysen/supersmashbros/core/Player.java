@@ -59,10 +59,10 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public abstract class Player implements Renderable, Loggable {
     
-    private static final float KNOCKBACK_MULTIPLIER = 1; // FIXME
-    private static final float PERCENTAGE_MULTIPLIER = 1; // FIXME
+    private static final float KNOCKBACK_MULTIPLIER = 0.1f; // FIXME
+    private static final float PERCENTAGE_MULTIPLIER = 0.001f; // FIXME
     
-    private static int numPlayers = 0;
+    public static int numPlayers = 0;
     
     public World world;
     
@@ -97,8 +97,6 @@ public abstract class Player implements Renderable, Loggable {
         state = initialState.clone();
         state.setPlayer(this);
         System.out.println(state);
-        assert state != null;
-        assert state.position != null;
         this.lives = lives;
         // EnumMap was throwing some weird errors because of some Eclipse compiler error,
         // so I just made my own "EnumMap"
@@ -160,7 +158,7 @@ public abstract class Player implements Renderable, Loggable {
      * @param knockback the hard-coded {@link Hitbox#knockback} value
      */
     private void knockback(final float damage, final float angle, final float knockback) {
-        final float accelerationMagnitude = knockback * damage
+        final float accelerationMagnitude = knockback * damage * (percentage + 1)
                 * /* * massReciprocal*/ KNOCKBACK_MULTIPLIER;
         System.out.println(this + " knocked back by " + accelerationMagnitude + " at "
                 + MathUtils.radiansToDegrees * angle + "°, increasing percentage to " + percentage

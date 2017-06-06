@@ -22,7 +22,7 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public class SmartAI extends AI {
     
-    private static final int cycles = 16; // must be power of 2
+    private static final int cycles = 4; // must be power of 2
     private static final float radius2 = cycles * cycles * 50f;
     
     private static final Vector2 dd = Pools.obtain(Vector2.class); // change in distance
@@ -46,16 +46,7 @@ public class SmartAI extends AI {
         // TODO maybe I should sort all the hitboxes first to evade the closer ones first
         for (final Player enemy : enemies) {
             for (final Hitbox hitbox : enemy.hitboxes) {
-                // assuming const acceleration
-                System.out.println("checking " + hitbox);
-                //                final float distance2 = self.position.dst(hitbox.position);
                 dd.distanceTraveled(hitbox.acceleration, hitbox.velocity, dt);
-                //                if (dd.len2() < distance2) {
-                //                    System.out.println("too far away");
-                //                    continue; // definitely too far away
-                //                }
-                System.out
-                        .println("dist2: " + xyf.set(hitbox.position).add(dd).dst2(self.position));
                 if (xyf.set(hitbox.position).add(dd).dst2(self.position) < radius2) {
                     final float angle = vf.set(hitbox.velocity).mulAdd(hitbox.acceleration, dt)
                             .angle();
@@ -63,7 +54,6 @@ public class SmartAI extends AI {
                     // choose move based on sector
                     final int sector = (((int) angle << 1) + 45) / 90;
                     pressKeys(sectorToKeys[sector]);
-                    System.out.println("pressed " + sectorToKeys[sector]);
                     return true;
                 }
             }
@@ -73,7 +63,7 @@ public class SmartAI extends AI {
     
     private boolean target(final Player self, final Array<Player> enemies) {
         final Vector2 position = self.position;
-        final float[] distances = new float[enemies.size + 1];
+        final float[] distances = new float[Player.numPlayers];
         for (final Player enemy : enemies) {
             distances[enemy.id] = position.dst(enemy.position);
         }
