@@ -21,6 +21,10 @@ public class ExtensionMethods {
         return a;
     }
     
+    public static void clear(final Object[] a) {
+        Arrays.fill(a, null);
+    }
+    
     public static Rectangle scale(final Rectangle rectangle, final float scalar) {
         final Vector2 center = rectangle.getCenter(Pools.obtain(Vector2.class));
         final float width = rectangle.width * scalar;

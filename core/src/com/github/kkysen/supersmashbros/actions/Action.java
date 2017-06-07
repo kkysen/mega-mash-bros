@@ -62,12 +62,12 @@ public class Action extends Executable implements Loggable {
         error("someone called " + this);
         elapsedTime = 0;
         state.setPlayer(player);
-        attack(state, player.facingRight);
+        tryAttack(state, player.facingRight);
         move(player);
         return state;
     }
     
-    protected void attack(final State state, final boolean facingRight) {}
+    protected void tryAttack(final State state, final boolean facingRight) {}
     
     protected void move(final Player player) {}
     

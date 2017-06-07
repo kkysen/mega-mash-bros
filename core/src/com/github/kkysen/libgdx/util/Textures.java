@@ -19,6 +19,7 @@ public class Textures {
         for (int i = 0; i < numFrames; i++) {
             regions.add(new TextureRegion(texture, x + width * i, y, width, height));
         }
+        texture.dispose();
         return regions;
     }
     
@@ -39,7 +40,7 @@ public class Textures {
             
             curOffset += size[0];
         }
-        
+        texture.dispose();
         return regions;
     }
     

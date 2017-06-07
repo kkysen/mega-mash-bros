@@ -245,6 +245,8 @@ public abstract class Player implements Renderable, Loggable {
                 if (executable instanceof Move) {
                     noMovesCalled = false;
                 }
+            } else if (executable instanceof Attack) {
+                ((Attack) executable).reset();
             }
         }
         if (noMovesCalled && wasOnPlatform) {
@@ -268,9 +270,7 @@ public abstract class Player implements Renderable, Loggable {
         error(this + " was killed");
         hitboxes.clear();
         hurtboxes.clear();
-        for (final Executable executable : executables) {
-            
-        }
+        executables.clear();
         // TODO
     }
     

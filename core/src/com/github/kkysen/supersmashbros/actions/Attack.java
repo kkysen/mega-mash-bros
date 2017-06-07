@@ -17,6 +17,8 @@ public abstract class Attack extends Action {
     public final float angle;
     public final float knockback;
     
+    private boolean alreadyUsed = false;
+    
     /**
      * @param state the state the player will assume by calling this attack
      * @param keyBinding the key binding used to call this attack
@@ -41,10 +43,22 @@ public abstract class Attack extends Action {
         this.knockback = knockback;
     }
     
-    @Override
-    protected abstract void attack(final State state, boolean facingRight);
+    public void reset() {
+        alreadyUsed = false;
+    }
     
     @Override
-    protected final void move(Player player) {}
+    protected void tryAttack(final State state, final boolean facingRight) {
+        if (alreadyUsed) {
+            return;
+        }
+        alreadyUsed = true;
+        attack(state, facingRight);
+    }
+    
+    protected abstract void attack(State state, boolean facingRight);
+    
+    @Override
+    protected final void move(final Player player) {}
     
 }
