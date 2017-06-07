@@ -18,6 +18,7 @@ import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.Move;
 import com.github.kkysen.supersmashbros.ai.AI;
+import com.github.kkysen.supersmashbros.app.Game;
 
 import lombok.experimental.ExtensionMethod;
 
@@ -60,8 +61,9 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public abstract class Player implements Renderable, Loggable {
     
-    private static final float KNOCKBACK_MULTIPLIER = 0.1f; // FIXME
-    private static final float PERCENTAGE_MULTIPLIER = 0.001f; // FIXME
+    private static final float KNOCKBACK_MULTIPLIER = 0.1f;
+    private static final float PERCENTAGE_MULTIPLIER = 0.001f;
+    private static final float HITSTUN_MULTIPLIER = 0.00001f;
     
     public static int numPlayers = 0;
     
@@ -76,10 +78,6 @@ public abstract class Player implements Renderable, Loggable {
     
     public State state;
     
-    public boolean wasOnPlatform = true;
-    
-    public boolean facingRight = true;
-    
     /**
      * Hitboxes retrieved from attacks, empty when not attacking
      */
@@ -91,6 +89,12 @@ public abstract class Player implements Renderable, Loggable {
     public final Vector2 position = new Vector2();
     
     private float percentage = 0;
+    
+    public boolean wasOnPlatform = true;
+    
+    public boolean facingRight = true;
+    
+    private float stunTime = 0;
     
     protected Player(final String name, final Controller controller, final State initialState,
             final int lives, final Executable[] executables) {
@@ -168,6 +172,8 @@ public abstract class Player implements Renderable, Loggable {
                 + "%");
         percentage += damage * PERCENTAGE_MULTIPLIER;
         acceleration.setAngleAndLength(angle, accelerationMagnitude);
+        stunTime += accelerationMagnitude * HITSTUN_MULTIPLIER;
+        System.out.println(this + " stunned for " + stunTime + " sec");
         move();
     }
     
@@ -230,6 +236,11 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     private void executeExecutables() {
+        if (stunTime > 0) {
+            stunTime -= Game.deltaTime;
+            return;
+        }
+        stunTime = 0;
         log(this + " checking for called executables");
         //System.out.println(controller);
         boolean noMovesCalled = true;
