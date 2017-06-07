@@ -70,7 +70,7 @@ public class Mario extends Player {
                     0.1f,
                     Textures.getFrames(
                             new Texture(sprites),
-                            11, 98,
+                            11, 998,
                             new int[][] {
                                 {32, 38},
                                 {51, 38},

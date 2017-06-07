@@ -16,6 +16,7 @@ import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
+import com.github.kkysen.supersmashbros.actions.ForwardTiltAttack;
 import com.github.kkysen.supersmashbros.actions.Move;
 import com.github.kkysen.supersmashbros.ai.AI;
 import com.github.kkysen.supersmashbros.app.Game;
@@ -260,7 +261,7 @@ public abstract class Player implements Renderable, Loggable {
                 ((Attack) executable).reset();
             }
         }
-        if (noMovesCalled && wasOnPlatform) {
+        if (noMovesCalled && wasOnPlatform && !(state.action instanceof ForwardTiltAttack)) {
             stop();
         }
     }
