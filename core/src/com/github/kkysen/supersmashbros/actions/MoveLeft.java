@@ -11,13 +11,13 @@ import com.github.kkysen.supersmashbros.core.State;
  */
 public class MoveLeft extends Move {
     
-    public MoveLeft(final State state, final float duration, final float speed) {
-        super(state, KeyBinding.LEFT, new State[] {}, 0, duration, 0, speed);
+    public MoveLeft(final State state, final float duration, final float maxSpeed) {
+        super(state, KeyBinding.LEFT, new State[] {}, 0, duration, 0, maxSpeed);
     }
     
     @Override
     protected void move(final Player player) {
-        player.velocity.x = Math.max(-speed, player.velocity.x - speed);
+        player.velocity.x = Math.max(-maxSpeed, player.velocity.x - adjustSpeed(player));
         player.facingRight = false;
     }
     

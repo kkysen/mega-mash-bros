@@ -23,7 +23,7 @@ public class Jump extends Move {
         if (isOnPlatform || numMidairJumps++ <= 1) {
             error("someone jumped");
             System.out.println("someone jumped");
-            player.velocity.y = speed;
+            player.velocity.y = maxSpeed;
             if (isOnPlatform) {
                 numMidairJumps = 1;
             }
