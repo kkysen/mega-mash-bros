@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.github.kkysen.libgdx.util.Textures;
 import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.World;
 import com.github.kkysen.supersmashbros.players.Mario;
@@ -56,9 +57,9 @@ public class Game extends ApplicationAdapter {
         final Player[] players = new Player[numAIs + 1];
         players[0] = Mario.userControlled();
         for (int i = 1; i < players.length; i++) {
-            players[i] = Mario.frozen();
+            //players[i] = Mario.frozen();
             //players[i] = Mario.randomlyControlled();
-            //players[i] = Mario.smart();
+            players[i] = Mario.smart();
             //players[i] = (i & 1) == 1 ? Mario.randomlyControlled() : Mario.frozen();
         }
         return new World(WIDTH, HEIGHT, background, platform, players);
@@ -121,6 +122,7 @@ public class Game extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         world.dispose();
+        Textures.dispose();
     }
     
 }

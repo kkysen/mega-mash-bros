@@ -11,15 +11,23 @@ import com.badlogic.gdx.utils.Array;
  */
 public class Textures {
     
+    private static Array<Texture> textures = new Array<>();
+    
+    public static void dispose() {
+        for (final Texture texture : textures) {
+            texture.dispose();
+        }
+    }
+    
     private Textures() {}
     
     public static Array<TextureRegion> getFrames(final Texture texture, final int numFrames,
             final int x, final int y, final int width, final int height) {
+        textures.add(texture);
         final Array<TextureRegion> regions = new Array<>();
         for (int i = 0; i < numFrames; i++) {
             regions.add(new TextureRegion(texture, x + width * i, y, width, height));
         }
-        texture.dispose();
         return regions;
     }
     
@@ -28,6 +36,7 @@ public class Textures {
      */
     public static Array<TextureRegion> getFrames(final Texture texture, final int x, final int y,
             final int[][] sizes) {
+        textures.add(texture);
         final Array<TextureRegion> regions = new Array<>(sizes.length);
         int curOffset = 0;
         
@@ -40,7 +49,6 @@ public class Textures {
             
             curOffset += size[0];
         }
-        texture.dispose();
         return regions;
     }
     
