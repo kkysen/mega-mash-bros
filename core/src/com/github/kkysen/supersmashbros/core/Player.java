@@ -241,7 +241,9 @@ public abstract class Player implements Renderable, Loggable {
             stunTime -= Game.deltaTime;
             return;
         }
+        // just finished hitstun
         stunTime = 0;
+        acceleration.x = 0;
         log(this + " checking for called executables");
         //System.out.println(controller);
         boolean noMovesCalled = true;
