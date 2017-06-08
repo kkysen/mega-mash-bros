@@ -27,6 +27,8 @@ public class Action extends Executable implements Loggable {
     
     protected float elapsedTime;
     
+    protected boolean alreadyUsed = false;
+    
     protected Action(final State state, final KeyBinding keyBinding,
             final State[] impossiblePreStates, final float warmupTime, final float duration,
             final float cooldown) {
@@ -58,10 +60,21 @@ public class Action extends Executable implements Loggable {
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
         }
-        player.state.setPlayer(null);
+        
         error("someone called " + this);
-        elapsedTime = 0;
-        state.setPlayer(player);
+        
+        if (!alreadyUsed && !(this instanceof Stop)) {
+        	player.state.setPlayer(null);
+        	//System.out.println("lol");
+        	elapsedTime = 0;
+        	state.setPlayer(player);
+        	alreadyUsed = true;
+        }
+        else {
+        	player.state.setPlayer(null, false);
+        	state.setPlayer(player, false);
+        }
+        
         tryAttack(state, player.facingRight);
         move(player);
         return state;
@@ -71,4 +84,7 @@ public class Action extends Executable implements Loggable {
     
     protected void move(final Player player) {}
     
+    public void reset() {
+        alreadyUsed = false;
+    }
 }

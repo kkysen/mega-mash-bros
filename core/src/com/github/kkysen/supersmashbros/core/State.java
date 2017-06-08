@@ -25,7 +25,7 @@ public class State implements Renderable, Loggable, Cloneable {
     public Action action;
     public Vector2 position;
     
-    private float elapsedTime = 0;
+    private float elapsedTime;
     private final Animation<TextureRegion> animation;
     
     public State(final String name, final Animation<TextureRegion> animation) {
@@ -52,11 +52,20 @@ public class State implements Renderable, Loggable, Cloneable {
         error(this + " set player to " + player);
         position = player == null ? null : player.position;
         elapsedTime = 0;
+        //elapsedTime = player == null ? 0 : elapsedTime;
+    }
+    
+    public void setPlayer(final Player player, boolean resetTime) {
+        this.player = player;
+        error(this + " set player to " + player);
+        position = player == null ? null : player.position;
+        if (resetTime) elapsedTime = 0;
     }
     
     @Override
     public void render(final Batch batch) {
         elapsedTime += Game.deltaTime;
+        //System.out.println(elapsedTime);
         final TextureRegion frame = animation.getKeyFrame(elapsedTime);
         batch.draw(frame, position.x, position.y);
         // TODO
@@ -72,6 +81,10 @@ public class State implements Renderable, Loggable, Cloneable {
     
     public void addHurtbox(final Hurtbox hurtbox) {
         player.hurtboxes.add(hurtbox);
+    }
+    
+    public void resetTime() {
+    	elapsedTime = 0;
     }
     
 }

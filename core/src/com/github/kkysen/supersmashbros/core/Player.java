@@ -17,6 +17,7 @@ import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.ForwardTiltAttack;
+import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.actions.Move;
 import com.github.kkysen.supersmashbros.ai.AI;
 import com.github.kkysen.supersmashbros.app.Game;
@@ -62,8 +63,8 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public abstract class Player implements Renderable, Loggable {
     
-    private static final float KNOCKBACK_MULTIPLIER = 0.1f;
-    private static final float PERCENTAGE_MULTIPLIER = 0.001f;
+    private static final float KNOCKBACK_MULTIPLIER = 0.001f;
+    private static final float PERCENTAGE_MULTIPLIER = 0.08f;
     private static final float HITSTUN_MULTIPLIER = 0.00001f;
     
     public static int numPlayers = 0;
@@ -78,6 +79,10 @@ public abstract class Player implements Renderable, Loggable {
     public int lives;
     
     public State state;
+    public float actionTimer = 0;
+    public int numMidairJumps = 1;
+    public boolean jumpHeld = true;
+    public String lastKeyPressed;
     
     /**
      * Hitboxes retrieved from attacks, empty when not attacking
@@ -95,7 +100,7 @@ public abstract class Player implements Renderable, Loggable {
     
     public boolean facingRight = true;
     
-    private float stunTime = 0;
+    public float stunTime = 0;
     
     protected Player(final String name, final Controller controller, final State initialState,
             final int lives, final Executable[] executables) {
@@ -241,8 +246,12 @@ public abstract class Player implements Renderable, Loggable {
             stunTime -= Game.deltaTime;
             return;
         }
+        //System.out.println(state.name());
+        
+        
         // just finished hitstun
         stunTime = 0;
+        actionTimer = 0;
         acceleration.x = 0;
         log(this + " checking for called executables");
         //System.out.println(controller);
@@ -253,18 +262,50 @@ public abstract class Player implements Renderable, Loggable {
                 ((Action) executable).update();
             }
             if (executable.keyBinding.isPressed(controller)) {
-                //System.out.println(this + " pressed " + KeyBinding.get(i));
-                //System.out.println(this + " tried calling " + action);
-                state = executable.execute(this);
-                if (executable instanceof Move) {
+            	if (executable instanceof Move) {
                     noMovesCalled = false;
                 }
-            } else if (executable instanceof Attack) {
+            	//System.out.println(jumpHeld);
+            	
+                //System.out.println(this + " pressed " + KeyBinding.get(i));
+                //System.out.println(this + " tried calling " + action);
+            	if (executable instanceof Jump) {
+            		/*if (!jumpHeld) {
+            			jumpHeld = true;
+                    	System.out.println("jump");
+            		}
+            		else {
+            			continue;
+            		}*/
+            		
+            		if (((Jump) executable).jumpPressed) continue;
+                }
+            	else {
+                	//jumpHeld = false;
+                	//System.out.println("other");
+                }
+            	
+                state = executable.execute(this);
+                
+                
+                
+                //lastKeyPressed = executable.keyBinding.toString();
+            } /*else if (executable instanceof Attack) {
                 ((Attack) executable).reset();
+            }*/
+            else if (executable instanceof Action) {
+            	jumpHeld = false;
+                ((Action)executable).reset();
             }
         }
-        if (noMovesCalled && wasOnPlatform && !(state.action instanceof ForwardTiltAttack)) {
-            stop();
+        if (noMovesCalled) {
+        	//lastKeyPressed = null;
+        	if (wasOnPlatform && !(state.action instanceof Attack)) {
+        		stop();
+        	}
+        }
+        if (wasOnPlatform) {
+        	numMidairJumps = 1;
         }
     }
     

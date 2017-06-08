@@ -43,6 +43,7 @@ public abstract class Attack extends Action {
         this.knockback = knockback;
     }
     
+    @Override
     public void reset() {
         alreadyUsed = false;
     }
