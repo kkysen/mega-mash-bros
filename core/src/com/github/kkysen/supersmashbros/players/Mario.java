@@ -14,6 +14,7 @@ import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.User;
 import com.github.kkysen.supersmashbros.actions.DownTiltAttack;
 import com.github.kkysen.supersmashbros.actions.Executable;
+import com.github.kkysen.supersmashbros.actions.ForwardAirAttack;
 import com.github.kkysen.supersmashbros.actions.ForwardTiltAttack;
 import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.actions.Message;
@@ -132,6 +133,43 @@ public class Mario extends Player {
                                 {34, 36}
                             })));
     
+    static {
+    	temp = Textures.getFrames(
+                new Texture(sprites),
+                14, 1068,
+                new int[][] {
+                    {38, 40},
+                    {37, 40},
+                    {37, 40},
+                    {38, 40},
+                    {35, 40},
+                    {50, 40},
+                    {48, 40},
+                    {38, 40},
+                    {35, 40},
+                    {40, 40},
+                    {42, 40}
+                });
+    	
+        Array<TextureRegion> temp2 = Textures.getFrames(
+                new Texture(sprites),
+                12, 1120,
+                new int[][] {
+                	{41, 40},
+                    {41, 40},
+                    {42, 40},
+                    {42, 40},
+                    {40, 40}
+                });
+        temp.addAll(temp2);
+    }
+    
+    private static final State forwardAirState = new State("Mario forward air state",
+            new Animation<>(
+                    0.1f,
+                    temp));
+    		
+    
     public static Mario userControlled() {
         return new Mario(User.get());
     }
@@ -157,7 +195,8 @@ public class Mario extends Player {
             new RangeAttack(idleRight, 0, 10f, 1f, 5f, 5f),
             new ForwardTiltAttack(forwardTiltState, 0.1f, 0.1f, .5f, 5f, 5f),
             new Message(KeyBinding.P, player -> player.position),
-            new DownTiltAttack(downTiltState, 0.3f, 0.1f, 0.1f, 3f, 1f)
+            new DownTiltAttack(downTiltState, 0.1f, 0.1f, 0.3f, 3f, 1f),
+            new ForwardAirAttack(forwardAirState, 0.3f, 0.1f, .5f, 3f, 1f)
         });
     }
     

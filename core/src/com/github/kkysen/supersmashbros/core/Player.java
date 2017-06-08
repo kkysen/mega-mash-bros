@@ -14,6 +14,7 @@ import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.actions.Action;
+import com.github.kkysen.supersmashbros.actions.AirAttack;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.ForwardTiltAttack;
@@ -254,10 +255,17 @@ public abstract class Player implements Renderable, Loggable {
         }
         else if (state.action instanceof Attack && 
         		moveTime >= (state.action.duration + 
-        				state.action.cooldown + state.action.startup) &&
-        		wasOnPlatform && state.action.alreadyUsed){
+        				state.action.cooldown + state.action.startup) ){
         	state.resetTime();
-        	stop();
+//        	if (!isOnPlatform())  {
+//        		stop();
+//        		state.resetTime();
+//        	}
+        	if (wasOnPlatform) {
+        		stop();
+        		state.resetTime();
+        	}
+        	
         }
         System.out.println(moveTime);
         
@@ -276,6 +284,13 @@ public abstract class Player implements Renderable, Loggable {
                 ((Action) executable).update();
             }
             if (executable.keyBinding.isPressed(controller)) {
+//            	if (executable instanceof AirAttack && isOnPlatform()) {
+//            		continue;
+//            	}
+            	if (executable instanceof AirAttack && !(Math.abs(velocity.y) > 0)) {
+            		continue;
+            	}
+            	
             	if (executable instanceof Move) {
                     noMovesCalled = false;
                     //moveTime = 0;
@@ -287,7 +302,11 @@ public abstract class Player implements Renderable, Loggable {
             		if (((Jump) executable).jumpPressed) continue;
                 }
             	
-                state = executable.execute(this);
+            	//if ((executable instanceof AirAttack && !wasOnPlatform) || 
+            	//		!(executable instanceof AirAttack)) {
+            		state = executable.execute(this);
+            	//}
+                
             }
             else if (executable instanceof Action) {
                 ((Action)executable).reset();
