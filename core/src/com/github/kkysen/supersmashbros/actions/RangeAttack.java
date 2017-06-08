@@ -17,6 +17,7 @@ public class RangeAttack extends Attack {
     protected void attack(final State state, final boolean facingRight) {
         final Hitbox hitbox = state.newHitbox(this, 50f, 50f);
         hitbox.velocity.set(facingRight ? 300f : -300f, 0f);
+        hitbox.angle = (facingRight) ? angle : 180-angle;
         System.out.println("\tSmashAttack created " + hitbox + ", " + hitbox.motion());
         state.addHitbox(hitbox);
     }

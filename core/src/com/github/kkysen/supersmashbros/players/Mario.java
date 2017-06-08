@@ -6,10 +6,13 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.github.kkysen.libgdx.util.Textures;
 import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.User;
+import com.github.kkysen.supersmashbros.actions.DownTiltAttack;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.ForwardTiltAttack;
 import com.github.kkysen.supersmashbros.actions.Jump;
@@ -32,14 +35,31 @@ import com.github.kkysen.supersmashbros.core.State;
 public class Mario extends Player {
     
     private static final FileHandle sprites = asset("sprites_transparent.png");
+    private static Array<TextureRegion> temp;
     
-    private static final State idleState = new State("Mario idle state",
+    
+    
+    private static final State idleRight = new State("Mario idle state",
             new Animation<>(
                     0.2f,
                     Textures.getFrames(
                             new Texture(sprites),
                             6,
                             16, 24, 27, 38),
+                    PlayMode.LOOP_PINGPONG));
+    
+    static {
+    	temp = Textures.getFrames(
+                new Texture(sprites),
+                6,
+                16, 24, 27, 38);
+    	temp.forEach((x) -> x.flip(true, false));
+    }
+    
+    private static final State idleLeft = new State("Mario idle state",
+            new Animation<>(
+                    0.2f,
+                    temp,
                     PlayMode.LOOP_PINGPONG));
     
     private static final State moveRightState = new State("Mario move right state",
@@ -51,7 +71,21 @@ public class Mario extends Player {
                             10, 147, 32, 38),
                     PlayMode.LOOP));
     
-    private static final State moveLeftState = moveRightState; // FIXME
+    //I know this is dirty
+    static {
+    	temp = Textures.getFrames(
+                new Texture(asset("sprites_transparent.png")),
+                8,
+                10, 147, 32, 38);
+    	
+    	temp.forEach((x) -> x.flip(true, false));
+    }   
+    
+    private static final State moveLeftState = new State("Mario move right state",
+            new Animation<>(
+                    0.1f,
+                    temp,
+                    PlayMode.LOOP));
     
     private static final State jumpState = new State("Mario jump state",
             new Animation<>(
@@ -83,6 +117,21 @@ public class Mario extends Player {
                                 {31, 38}
                             })));
     
+    private static final State downTiltState = new State("Mario down tilt state",
+            new Animation<>(
+                    0.1f,
+                    Textures.getFrames(
+                            new Texture(sprites),
+                            12, 788,
+                            new int[][] {
+                                {29, 36},
+                                {56, 36},
+                                {39, 36},
+                                {43, 36},
+                                {33, 36},
+                                {34, 36}
+                            })));
+    
     public static Mario userControlled() {
         return new Mario(User.get());
     }
@@ -100,14 +149,15 @@ public class Mario extends Player {
     }
     
     public Mario(final Controller controller) {
-        super("Mario", controller, idleState, 1, new Executable[] {
-            new Stop(idleState),
+        super("Mario", controller, idleRight, 1, new Executable[] {
+            new Stop(idleRight),
             new MoveLeft(moveLeftState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 500f),
-            new RangeAttack(idleState, 0, 10f, 1f, 5f, 5f),
-            new ForwardTiltAttack(forwardTiltState, 0.1f, 0.1f, 1f, 5f, 5f),
+            new RangeAttack(idleRight, 0, 10f, 1f, 5f, 5f),
+            new ForwardTiltAttack(forwardTiltState, 0.1f, 0.1f, .5f, 5f, 5f),
             new Message(KeyBinding.P, player -> player.position),
+            new DownTiltAttack(downTiltState, 0.3f, 0.1f, 0.1f, 3f, 1f)
         });
     }
     

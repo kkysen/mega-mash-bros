@@ -23,11 +23,11 @@ public class Action extends Executable implements Loggable {
     
     public final float startup;
     public final float duration;
-    protected final float cooldown;
+    public final float cooldown;
     
     protected float elapsedTime;
     
-    protected boolean alreadyUsed = false;
+    public boolean alreadyUsed = false;
     
     protected Action(final State state, final KeyBinding keyBinding,
             final State[] impossiblePreStates, final float warmupTime, final float duration,

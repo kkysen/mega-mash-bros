@@ -21,6 +21,7 @@ public class Hitbox extends Box {
     public final Vector2 position;
     public final Vector2 velocity = Pools.obtain(Vector2.class);
     public final Vector2 acceleration = Pools.obtain(Vector2.class);
+    public float angle;
     
     public Hitbox(final Player player, final Attack attack, final float width, final float height) {
         super(player, width, height, attack.duration, attack.startup);

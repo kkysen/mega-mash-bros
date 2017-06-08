@@ -25,6 +25,7 @@ public class State implements Renderable, Loggable, Cloneable {
     public Action action;
     public Vector2 position;
     
+    public boolean resetJustCalled;
     private float elapsedTime;
     private final Animation<TextureRegion> animation;
     
@@ -67,6 +68,10 @@ public class State implements Renderable, Loggable, Cloneable {
         elapsedTime += Game.deltaTime;
         //System.out.println(elapsedTime);
         final TextureRegion frame = animation.getKeyFrame(elapsedTime);
+        
+        //spazes if you use this
+        //if (player.facingRight) frame.flip(true, false);
+        
         batch.draw(frame, position.x, position.y);
         // TODO
     }

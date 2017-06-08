@@ -60,6 +60,6 @@ public abstract class Attack extends Action {
     protected abstract void attack(State state, boolean facingRight);
     
     @Override
-    protected final void move(final Player player) {}
+    protected void move(final Player player) {}
     
 }

@@ -17,6 +17,7 @@ import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.ForwardTiltAttack;
+import com.github.kkysen.supersmashbros.actions.GroundAttack;
 import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.actions.Move;
 import com.github.kkysen.supersmashbros.ai.AI;
@@ -81,8 +82,6 @@ public abstract class Player implements Renderable, Loggable {
     public State state;
     public float actionTimer = 0;
     public int numMidairJumps = 1;
-    public boolean jumpHeld = true;
-    public String lastKeyPressed;
     
     /**
      * Hitboxes retrieved from attacks, empty when not attacking
@@ -101,6 +100,7 @@ public abstract class Player implements Renderable, Loggable {
     public boolean facingRight = true;
     
     public float stunTime = 0;
+    public float moveTime = 0;
     
     protected Player(final String name, final Controller controller, final State initialState,
             final int lives, final Executable[] executables) {
@@ -197,7 +197,7 @@ public abstract class Player implements Renderable, Loggable {
                             + " damage and "
                             + attack.knockback + " knockback at "
                             + MathUtils.radiansToDegrees * attack.angle + "°");
-                    knockback(damage, attack.angle, attack.knockback);
+                    knockback(damage, hitbox.angle, attack.knockback);
                 }
             }
         }
@@ -246,10 +246,24 @@ public abstract class Player implements Renderable, Loggable {
             stunTime -= Game.deltaTime;
             return;
         }
-        //System.out.println(state.name());
+        if (state.action instanceof Attack && 
+        		moveTime < (state.action.duration + 
+        				state.action.cooldown + state.action.startup)) {
+        	moveTime += Game.deltaTime;
+        	return;
+        }
+        else if (state.action instanceof Attack && 
+        		moveTime >= (state.action.duration + 
+        				state.action.cooldown + state.action.startup) &&
+        		wasOnPlatform && state.action.alreadyUsed){
+        	state.resetTime();
+        	stop();
+        }
+        System.out.println(moveTime);
         
         
         // just finished hitstun
+        moveTime = 0;
         stunTime = 0;
         actionTimer = 0;
         acceleration.x = 0;
@@ -264,43 +278,23 @@ public abstract class Player implements Renderable, Loggable {
             if (executable.keyBinding.isPressed(controller)) {
             	if (executable instanceof Move) {
                     noMovesCalled = false;
+                    //moveTime = 0;
                 }
-            	//System.out.println(jumpHeld);
             	
                 //System.out.println(this + " pressed " + KeyBinding.get(i));
                 //System.out.println(this + " tried calling " + action);
             	if (executable instanceof Jump) {
-            		/*if (!jumpHeld) {
-            			jumpHeld = true;
-                    	System.out.println("jump");
-            		}
-            		else {
-            			continue;
-            		}*/
-            		
             		if (((Jump) executable).jumpPressed) continue;
-                }
-            	else {
-                	//jumpHeld = false;
-                	//System.out.println("other");
                 }
             	
                 state = executable.execute(this);
-                
-                
-                
-                //lastKeyPressed = executable.keyBinding.toString();
-            } /*else if (executable instanceof Attack) {
-                ((Attack) executable).reset();
-            }*/
+            }
             else if (executable instanceof Action) {
-            	jumpHeld = false;
                 ((Action)executable).reset();
             }
         }
         if (noMovesCalled) {
-        	//lastKeyPressed = null;
-        	if (wasOnPlatform && !(state.action instanceof Attack)) {
+        	if (wasOnPlatform && !(state.action instanceof GroundAttack)) {
         		stop();
         	}
         }
