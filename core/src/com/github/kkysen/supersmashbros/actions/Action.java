@@ -65,7 +65,7 @@ public class Action extends Executable implements Loggable {
         
         if (!alreadyUsed && !(this instanceof Stop)) {
         	player.state.setPlayer(null);
-        	//System.out.println("lol");
+        	System.out.println("lol");
         	elapsedTime = 0;
         	state.setPlayer(player);
         	alreadyUsed = true;
@@ -86,5 +86,6 @@ public class Action extends Executable implements Loggable {
     
     public void reset() {
         alreadyUsed = false;
+        elapsedTime = 0;
     }
 }

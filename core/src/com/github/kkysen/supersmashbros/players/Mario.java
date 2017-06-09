@@ -23,6 +23,7 @@ import com.github.kkysen.supersmashbros.actions.MoveRight;
 import com.github.kkysen.supersmashbros.actions.RangeAttack;
 import com.github.kkysen.supersmashbros.actions.Stop;
 import com.github.kkysen.supersmashbros.ai.FrozenAI;
+import com.github.kkysen.supersmashbros.ai.JumpAI;
 import com.github.kkysen.supersmashbros.ai.RandomAI;
 import com.github.kkysen.supersmashbros.ai.SmartAI;
 import com.github.kkysen.supersmashbros.core.Player;
@@ -182,6 +183,10 @@ public class Mario extends Player {
         return new Mario(new FrozenAI());
     }
     
+    public static Mario jump() {
+        return new Mario(new JumpAI());
+    }
+    
     public static Mario smart() {
         return new Mario(new SmartAI());
     }
@@ -196,7 +201,7 @@ public class Mario extends Player {
             new ForwardTiltAttack(forwardTiltState, 0.1f, 0.1f, .5f, 5f, 5f),
             new Message(KeyBinding.P, player -> player.position),
             new DownTiltAttack(downTiltState, 0.1f, 0.1f, 0.3f, 3f, 1f),
-            new ForwardAirAttack(forwardAirState, 0.3f, 0.1f, .5f, 3f, 1f)
+            new ForwardAirAttack(forwardAirState, 0.5f, 0.1f, .8f, 3f, 1f)
         });
     }
     

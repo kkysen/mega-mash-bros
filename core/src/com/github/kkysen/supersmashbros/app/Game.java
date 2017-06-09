@@ -57,7 +57,8 @@ public class Game extends ApplicationAdapter {
         final Player[] players = new Player[numAIs + 1];
         players[0] = Mario.userControlled();
         for (int i = 1; i < players.length; i++) {
-            players[i] = Mario.frozen();
+            //players[i] = Mario.frozen();
+        	players[i] = Mario.jump();
             //players[i] = Mario.randomlyControlled();
             //players[i] = Mario.smart();
             //players[i] = (i & 1) == 1 ? Mario.randomlyControlled() : Mario.frozen();

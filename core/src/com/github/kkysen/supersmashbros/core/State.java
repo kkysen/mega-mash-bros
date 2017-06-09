@@ -28,6 +28,7 @@ public class State implements Renderable, Loggable, Cloneable {
     public boolean resetJustCalled;
     private float elapsedTime;
     private final Animation<TextureRegion> animation;
+    private TextureRegion lastFrame;
     
     public State(final String name, final Animation<TextureRegion> animation) {
         this.name = name;

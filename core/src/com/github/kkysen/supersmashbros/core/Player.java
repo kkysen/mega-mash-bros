@@ -17,6 +17,7 @@ import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.AirAttack;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
+import com.github.kkysen.supersmashbros.actions.ForwardAirAttack;
 import com.github.kkysen.supersmashbros.actions.ForwardTiltAttack;
 import com.github.kkysen.supersmashbros.actions.GroundAttack;
 import com.github.kkysen.supersmashbros.actions.Jump;
@@ -261,13 +262,13 @@ public abstract class Player implements Renderable, Loggable {
 //        		stop();
 //        		state.resetTime();
 //        	}
-        	if (wasOnPlatform) {
+        	//if (wasOnPlatform) {
         		stop();
         		state.resetTime();
-        	}
+        	//}
         	
         }
-        System.out.println(moveTime);
+        //System.out.println(moveTime);
         
         
         // just finished hitstun
@@ -288,6 +289,11 @@ public abstract class Player implements Renderable, Loggable {
 //            		continue;
 //            	}
             	if (executable instanceof AirAttack && !(Math.abs(velocity.y) > 0)) {
+            		System.out.println("skipping air");
+            		continue;
+            	}
+            	if (executable instanceof GroundAttack && Math.abs(velocity.y) > 0) {
+            		System.out.println("skipping ground");
             		continue;
             	}
             	
@@ -309,6 +315,7 @@ public abstract class Player implements Renderable, Loggable {
                 
             }
             else if (executable instanceof Action) {
+            	//if (executable instanceof ForwardAirAttack) System.out.println("hi");
                 ((Action)executable).reset();
             }
         }
