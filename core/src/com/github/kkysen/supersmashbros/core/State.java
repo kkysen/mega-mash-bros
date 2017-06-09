@@ -21,7 +21,7 @@ public class State implements Renderable, Loggable, Cloneable {
     
     private final String name;
     
-    private Player player;
+    public Player player;
     public Action action;
     public Vector2 position;
     

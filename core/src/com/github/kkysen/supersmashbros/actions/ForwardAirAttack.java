@@ -15,12 +15,12 @@ public class ForwardAirAttack extends AirAttack {
 
 	@Override
 	protected void attack(State state, boolean facingRight) {
-		
-		(new Timer()).scheduleTask(new Timer.Task() {
+		final State temp = state;
+		Timer.instance().scheduleTask(new Timer.Task() {
 
 			@Override
 			public void run() {
-				final Hitbox hitbox = state.newHitbox(ForwardAirAttack.this, 50f, 50f);
+				final Hitbox hitbox = temp.newHitbox(ForwardAirAttack.this, 50f, 50f);
 		        hitbox.angle = angle;
 		        if (facingRight) {
 		        	hitbox.position.add(20f, 0f);

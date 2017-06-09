@@ -253,6 +253,9 @@ public abstract class Player implements Renderable, Loggable {
             velocity.y = 0;
             acceleration.y = 0;
             if (!wasOnPlatform) {
+            	if (state.action instanceof AirAttack) {
+            		Timer.instance().clear();
+            	}
                 stop();
             }
         } else {
