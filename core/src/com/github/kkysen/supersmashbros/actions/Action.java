@@ -56,16 +56,16 @@ public class Action extends Executable implements Loggable {
     
     @Override
     public final State execute(final Player player) {
-       /* if (elapsedTime < cooldown || isImpossiblePreState(player.state)) {
+        if (/*elapsedTime < cooldown || */isImpossiblePreState(player.state)) {
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
-        }*/
+        }
         
         error("someone called " + this);
         
         if (!alreadyUsed && !(this instanceof Stop)) {
         	player.state.setPlayer(null);
-        	System.out.println("lol");
+        	if (this instanceof ForwardAirAttack) System.out.println("lol");
         	elapsedTime = 0;
         	state.setPlayer(player);
         	alreadyUsed = true;
@@ -87,5 +87,6 @@ public class Action extends Executable implements Loggable {
     public void reset() {
         alreadyUsed = false;
         elapsedTime = 0;
+        state.setPlayer(state.player);
     }
 }

@@ -219,7 +219,6 @@ public abstract class Player implements Renderable, Loggable {
             	//System.out.println("elapsed: " + box.elapsedTime);
             	//if (box.elapsedTime >= 0 && box.elapsedTime <= Game.deltaTime) {
             		//box.bounds.setPosition(position);
-            		System.out.println("1");
             	//}
                 log(boxes.get(i) + " deleted");
                 Pools.free(boxes.removeIndex(i--));
@@ -227,11 +226,8 @@ public abstract class Player implements Renderable, Loggable {
             else {
             	//box.bounds.setPosition(position);
         		//System.out.println("wohgowihgoagh");
-            	//(268.35648,746.1651) player
-            	//(288.35648,684.4514) box
             	if (box.elapsedTime >= 0 && box.elapsedTime <= Game.deltaTime) {
             		box.bounds.setPosition(position);
-            		System.out.println("2");
             	}
             }
         }
@@ -255,7 +251,10 @@ public abstract class Player implements Renderable, Loggable {
             if (!wasOnPlatform) {
             	if (state.action instanceof AirAttack) {
             		Timer.instance().clear();
+            		//state.action.reset();
+            		state.resetTime();
             	}
+            	
                 stop();
             }
         } else {
