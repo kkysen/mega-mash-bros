@@ -25,7 +25,7 @@ public abstract class Box implements Renderable, Poolable, Loggable {
     
     public final Player player;
     
-    private float elapsedTime;
+    public float elapsedTime;
     private final float lifetime;
     
     public Box(final Player player, final float width, final float height, final float lifetime,
@@ -36,7 +36,8 @@ public abstract class Box implements Renderable, Poolable, Loggable {
         bounds.width = width;
         bounds.height = height;
         this.lifetime = lifetime;
-        elapsedTime = -warmupTime;
+        //elapsedTime = -warmupTime;
+        elapsedTime = 0;
     }
     
     @Override
@@ -76,6 +77,7 @@ public abstract class Box implements Renderable, Poolable, Loggable {
         if (elapsedTime > lifetime || !player.world.bounds.contains(bounds.x, bounds.y)) {
             return false;
         }
+        //System.out.println("derrr");
         return subUpdate();
     }
     
@@ -85,8 +87,10 @@ public abstract class Box implements Renderable, Poolable, Loggable {
     @Override
     public void render(final ShapeRenderer lineRenderer) {
         if (isWarmingUp()) { // still starting up
+        	//System.out.println("warming up");
             return;
         }
+        //System.out.println("rendering");
         lineRenderer.setColor(getColor());
         lineRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
     }

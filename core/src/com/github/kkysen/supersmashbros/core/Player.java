@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
@@ -26,6 +28,11 @@ import com.github.kkysen.supersmashbros.ai.AI;
 import com.github.kkysen.supersmashbros.app.Game;
 
 import lombok.experimental.ExtensionMethod;
+
+/* instaed of delaying creation in the execute->hitbox.render, delay the 
+ * creation here
+ * 
+ * */
 
 /**
  * The {@link Player} class contains a {@link #name} and {@link #id} (unused
@@ -207,9 +214,25 @@ public abstract class Player implements Renderable, Loggable {
     
     private void updateBoxes(final Array<? extends Box> boxes) {
         for (int i = 0; i < boxes.size; i++) {
-            if (!boxes.get(i).update()) {
+        	Box box = boxes.get(i);
+            if (!box.update()) {
+            	//System.out.println("elapsed: " + box.elapsedTime);
+            	//if (box.elapsedTime >= 0 && box.elapsedTime <= Game.deltaTime) {
+            		//box.bounds.setPosition(position);
+            		System.out.println("1");
+            	//}
                 log(boxes.get(i) + " deleted");
                 Pools.free(boxes.removeIndex(i--));
+            }
+            else {
+            	//box.bounds.setPosition(position);
+        		//System.out.println("wohgowihgoagh");
+            	//(268.35648,746.1651) player
+            	//(288.35648,684.4514) box
+            	if (box.elapsedTime >= 0 && box.elapsedTime <= Game.deltaTime) {
+            		box.bounds.setPosition(position);
+            		System.out.println("2");
+            	}
             }
         }
     }
@@ -310,6 +333,15 @@ public abstract class Player implements Renderable, Loggable {
             	
             	//if ((executable instanceof AirAttack && !wasOnPlatform) || 
             	//		!(executable instanceof AirAttack)) {
+            	//Timer time = Timer.instance();
+//            	(new Timer()).scheduleTask(new Timer.Task() {
+//
+//					@Override
+//					public void run() {
+//						state = executable.execute(Player.this);
+//					}
+//            		
+//            	}, ((Action)executable).startup);
             		state = executable.execute(this);
             	//}
                 

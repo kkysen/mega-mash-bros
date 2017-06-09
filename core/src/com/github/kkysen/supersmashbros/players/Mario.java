@@ -197,11 +197,11 @@ public class Mario extends Player {
             new MoveLeft(moveLeftState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 500f),
-            new RangeAttack(idleRight, 0, 10f, 1f, 5f, 5f),
+            new RangeAttack(idleRight, 0, 1f, 1f, 5f, 5f),
             new ForwardTiltAttack(forwardTiltState, 0.1f, 0.1f, .5f, 5f, 5f),
             new Message(KeyBinding.P, player -> player.position),
             new DownTiltAttack(downTiltState, 0.1f, 0.1f, 0.3f, 3f, 1f),
-            new ForwardAirAttack(forwardAirState, 0.5f, 0.1f, .8f, 3f, 1f)
+            new ForwardAirAttack(forwardAirState, 0.6f, 0.1f, .8f, 3f, 1f)
         });
     }
     

@@ -47,6 +47,7 @@ public class Hitbox extends Box {
     public boolean subUpdate() {
         log("updated vectors");
         //System.out.println(join(acceleration, velocity, position));
+        //System.out.println("fewfewg");
         acceleration.accelerate(velocity, position);
         bounds.x = position.x;
         bounds.y = position.y;

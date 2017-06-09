@@ -56,10 +56,10 @@ public class Action extends Executable implements Loggable {
     
     @Override
     public final State execute(final Player player) {
-        if (elapsedTime < cooldown || isImpossiblePreState(player.state)) {
+       /* if (elapsedTime < cooldown || isImpossiblePreState(player.state)) {
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
-        }
+        }*/
         
         error("someone called " + this);
         
