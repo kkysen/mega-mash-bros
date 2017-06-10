@@ -16,10 +16,10 @@ public class RangeAttack extends Attack {
     @Override
     protected void attack(final State state, final boolean facingRight) {
         final Hitbox hitbox = state.newHitbox(this, 50f, 50f);
-        hitbox.velocity.set(facingRight ? 300f : -300f, 0f);
-        hitbox.angle = (float)((facingRight) ? angle : Math.PI-angle);
-        System.out.println("\tSmashAttack created " + hitbox + ", " + hitbox.motion());
+        hitbox.velocity.x += facingRight ? 300f : -300f;
+        hitbox.angle = facingRight ? angle : PI - angle;
         state.addHitbox(hitbox);
+        System.out.println("\tSmashAttack created " + hitbox + ", " + hitbox.motion());
     }
     
 }

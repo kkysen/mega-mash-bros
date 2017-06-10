@@ -28,7 +28,7 @@ public class State implements Renderable, Loggable, Cloneable {
     public boolean resetJustCalled;
     private float elapsedTime;
     private final Animation<TextureRegion> animation;
-    private TextureRegion lastFrame;
+    private TextureRegion lastFrame; // TODO why, unused
     
     public State(final String name, final Animation<TextureRegion> animation) {
         this.name = name;
@@ -39,29 +39,30 @@ public class State implements Renderable, Loggable, Cloneable {
     public State clone() {
         final State clone = new State(name, animation);
         clone.player = player;
+        clone.action = action;
         clone.position = position;
+        clone.resetJustCalled = resetJustCalled;
         clone.elapsedTime = elapsedTime;
+        clone.lastFrame = lastFrame;
         return clone;
     }
     
     @Override
     public String toString() {
-        return name + " @ " + position;
+        return name + " state @ " + position;
+    }
+    
+    public void setPlayer(final Player player, final boolean resetTime) {
+        this.player = player;
+        error(this + " set player to " + player);
+        position = player == null ? null : player.position;
+        if (resetTime) {
+            resetTime();
+        }
     }
     
     public void setPlayer(final Player player) {
-        this.player = player;
-        error(this + " set player to " + player);
-        position = player == null ? null : player.position;
-        elapsedTime = 0;
-        //elapsedTime = player == null ? 0 : elapsedTime;
-    }
-    
-    public void setPlayer(final Player player, boolean resetTime) {
-        this.player = player;
-        error(this + " set player to " + player);
-        position = player == null ? null : player.position;
-        if (resetTime) elapsedTime = 0;
+        setPlayer(player, true);
     }
     
     @Override
@@ -74,7 +75,6 @@ public class State implements Renderable, Loggable, Cloneable {
         //if (player.facingRight) frame.flip(true, false);
         
         batch.draw(frame, position.x, position.y);
-        // TODO
     }
     
     public Hitbox newHitbox(final Attack attack, final float width, final float height) {
@@ -90,7 +90,7 @@ public class State implements Renderable, Loggable, Cloneable {
     }
     
     public void resetTime() {
-    	elapsedTime = 0;
+        elapsedTime = 0;
     }
     
 }

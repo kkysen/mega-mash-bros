@@ -2,7 +2,6 @@ package com.github.kkysen.supersmashbros.actions;
 
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.core.Hitbox;
-import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.State;
 
 /**
@@ -21,13 +20,9 @@ public class ForwardTiltAttack extends GroundAttack {
     @Override
     protected void attack(final State state, final boolean facingRight) {
         final Hitbox hitbox = state.newHitbox(this, 50f, 30f);
-        hitbox.angle = (float)((facingRight) ? angle : Math.PI-angle);
-        if (facingRight) {
-        	hitbox.position.add(20f, 7f);
-        }
-        else {
-        	hitbox.position.add(-20f, 7f);
-        }
+        hitbox.angle = facingRight ? angle : PI - angle;
+        hitbox.position.y += 7f;
+        hitbox.position.x += facingRight ? 20f : -20f;
         state.addHitbox(hitbox);
     }
     

@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.Timer.Task;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
@@ -19,8 +18,6 @@ import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.AirAttack;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
-import com.github.kkysen.supersmashbros.actions.ForwardAirAttack;
-import com.github.kkysen.supersmashbros.actions.ForwardTiltAttack;
 import com.github.kkysen.supersmashbros.actions.GroundAttack;
 import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.actions.Move;
@@ -29,10 +26,11 @@ import com.github.kkysen.supersmashbros.app.Game;
 
 import lombok.experimental.ExtensionMethod;
 
-/* instaed of delaying creation in the execute->hitbox.render, delay the 
+/*
+ * instaed of delaying creation in the execute->hitbox.render, delay the
  * creation here
  * 
- * */
+ */
 
 /**
  * The {@link Player} class contains a {@link #name} and {@link #id} (unused
@@ -205,7 +203,7 @@ public abstract class Player implements Renderable, Loggable {
                     System.out.println(this + " attacked by " + hitbox + ", inflicting " + damage
                             + " damage and "
                             + attack.knockback + " knockback at "
-                            + MathUtils.radiansToDegrees * attack.angle + "°");
+                            + MathUtils.radiansToDegrees * hitbox.angle + "°");
                     knockback(damage, hitbox.angle, attack.knockback);
                 }
             }
@@ -214,31 +212,25 @@ public abstract class Player implements Renderable, Loggable {
     
     private void updateBoxes(final Array<? extends Box> boxes) {
         for (int i = 0; i < boxes.size; i++) {
-        	Box box = boxes.get(i);
-            if (!box.update()) {
-            	//System.out.println("elapsed: " + box.elapsedTime);
-            	//if (box.elapsedTime >= 0 && box.elapsedTime <= Game.deltaTime) {
-            		//box.bounds.setPosition(position);
-            	//}
-                log(boxes.get(i) + " deleted");
+            final Box box = boxes.get(i);
+            if (!box.update()) { // box has expired, so delete
+                log(box + " deleted");
                 Pools.free(boxes.removeIndex(i--));
-            }
-            else {
-            	//box.bounds.setPosition(position);
-        		//System.out.println("wohgowihgoagh");
-            	if (box.elapsedTime >= 0 && box.elapsedTime <= Game.deltaTime) {
-            		box.bounds.setPosition(position);
-            	}
+            } else {
+                // FIXME finish this
+                if (box.elapsedTime >= 0 && box.elapsedTime <= Game.deltaTime) {
+                    box.bounds.setPosition(position);
+                }
             }
         }
     }
     
-    public final boolean isOnPlatform() {
-        return world.platform.bounds.contains(position);
-    }
-    
     private void stop() {
         state = executables[KeyBinding.STOP.ordinal()].execute(this);
+    }
+    
+    public final boolean isOnPlatform() {
+        return world.platform.bounds.contains(position);
     }
     
     private void checkIfOnPlatform() {
@@ -248,13 +240,14 @@ public abstract class Player implements Renderable, Loggable {
             position.y = world.platform.bounds.maxY();
             velocity.y = 0;
             acceleration.y = 0;
+            // FIXME is this right, wasOnPlatform hasn't been updated yet
             if (!wasOnPlatform) {
-            	if (state.action instanceof AirAttack) {
-            		Timer.instance().clear();
-            		//state.action.reset();
-            		state.resetTime();
-            	}
-            	
+                if (state.action instanceof AirAttack) {
+                    // FIXME don't cancel all tasks, because other, non-attack tasks may be scheduled
+                    Timer.instance().clear();
+                    //state.action.reset();
+                    state.resetTime();
+                }
                 stop();
             }
         } else {
@@ -269,100 +262,87 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     private void executeExecutables() {
-        if (stunTime > 0) {
+        if (stunTime > 0) { // still stunned, so lower stunTime and skip all actions
             stunTime -= Game.deltaTime;
             return;
         }
-        if (state.action instanceof Attack && 
-        		moveTime < (state.action.duration + 
-        				state.action.cooldown + state.action.startup)) {
-        	moveTime += Game.deltaTime;
-        	return;
+        final Action action = state.action;
+        if (action instanceof Attack) {
+            if (moveTime < action.totalTime()) {
+                moveTime += Game.deltaTime;
+                return;
+            } else {
+                state.resetTime();
+                stop();
+                state.resetTime(); // FIXME why two calls to this
+            }
         }
-        else if (state.action instanceof Attack && 
-        		moveTime >= (state.action.duration + 
-        				state.action.cooldown + state.action.startup) ){
-        	state.resetTime();
-//        	if (!isOnPlatform())  {
-//        		stop();
-//        		state.resetTime();
-//        	}
-        	//if (wasOnPlatform) {
-        		stop();
-        		state.resetTime();
-        	//}
-        	
-        }
-        //System.out.println(moveTime);
-        
         
         // just finished hitstun
-        moveTime = 0;
         stunTime = 0;
+        moveTime = 0;
         actionTimer = 0;
         acceleration.x = 0;
         log(this + " checking for called executables");
-        //System.out.println(controller);
         boolean noMovesCalled = true;
         for (int i = 0; i < executables.length; i++) {
             final Executable executable = executables[i];
-            if (executable instanceof Action) {
+            final boolean isAction = executable instanceof Action;
+            if (isAction) {
                 ((Action) executable).update();
             }
             if (executable.keyBinding.isPressed(controller)) {
-//            	if (executable instanceof AirAttack && isOnPlatform()) {
-//            		continue;
-//            	}
-            	
-            	//Since aerials and ground attacks share same buttons,
-            	//this distinguishes which one should be used
-            	if (executable instanceof AirAttack && !(Math.abs(velocity.y) > 0)) {
-            		System.out.println("skipping air");
-            		continue;
-            	}
-            	if (executable instanceof GroundAttack && Math.abs(velocity.y) > 0) {
-            		System.out.println("skipping ground");
-            		continue;
-            	}
-            	
-            	if (executable instanceof Move) {
-                    noMovesCalled = false;
-                    //moveTime = 0;
+                if (!isAction) {
+                    continue;
                 }
-            	
+                if (executable instanceof Jump) {
+                    if (((Jump) executable).jumpPressed) {
+                        continue;
+                    }
+                }
+                if (executable instanceof Move) {
+                    noMovesCalled = false;
+                } else {
+                    //Since aerials and ground attacks share same buttons,
+                    //this distinguishes which one should be used
+                    if (executable instanceof AirAttack && velocity.y == 0) {
+                        System.out.println("skipping air");
+                        continue;
+                    }
+                    if (executable instanceof GroundAttack && velocity.y != 0) {
+                        System.out.println("skipping ground");
+                        continue;
+                    }
+                }
+                
                 //System.out.println(this + " pressed " + KeyBinding.get(i));
                 //System.out.println(this + " tried calling " + action);
-            	if (executable instanceof Jump) {
-            		if (((Jump) executable).jumpPressed) continue;
-                }
-            	
-            	//if ((executable instanceof AirAttack && !wasOnPlatform) || 
-            	//		!(executable instanceof AirAttack)) {
-            	//Timer time = Timer.instance();
-//            	(new Timer()).scheduleTask(new Timer.Task() {
-//
-//					@Override
-//					public void run() {
-//						state = executable.execute(Player.this);
-//					}
-//            		
-//            	}, ((Action)executable).startup);
-            		state = executable.execute(this);
-            	//}
                 
-            }
-            else if (executable instanceof Action) {
-            	//if (executable instanceof ForwardAirAttack) System.out.println("hi");
-                ((Action)executable).reset();
+                //                if (executable instanceof AirAttack && !wasOnPlatform) {
+                //                    //final Timer time = Timer.instance();
+                //                    Timer.schedule(new Task() {
+                //
+                //                        @Override
+                //                        public void run() {
+                //                            state = executable.execute(Player.this);
+                //                        }
+                //
+                //                    }, ((Action) executable).startup);
+                //                }
+                state = executable.execute(this);
+                
+            } else if (isAction) {
+                //if (executable instanceof ForwardAirAttack) System.out.println("hi");
+                ((Action) executable).reset();
             }
         }
         if (noMovesCalled) {
-        	if (wasOnPlatform && !(state.action instanceof GroundAttack)) {
-        		stop();
-        	}
+            if (wasOnPlatform && !(state.action instanceof GroundAttack)) {
+                stop();
+            }
         }
         if (wasOnPlatform) {
-        	numMidairJumps = 1;
+            numMidairJumps = 1;
         }
     }
     

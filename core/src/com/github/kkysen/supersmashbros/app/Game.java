@@ -58,7 +58,7 @@ public class Game extends ApplicationAdapter {
         players[0] = Mario.userControlled();
         for (int i = 1; i < players.length; i++) {
             players[i] = Mario.frozen();
-        	//players[i] = Mario.jump();
+            //players[i] = Mario.jump();
             //players[i] = Mario.randomlyControlled();
             //players[i] = Mario.smart();
             //players[i] = (i & 1) == 1 ? Mario.randomlyControlled() : Mario.frozen();
@@ -124,6 +124,7 @@ public class Game extends ApplicationAdapter {
         batch.dispose();
         world.dispose();
         Textures.dispose();
+        Mario.dispose();
     }
     
 }

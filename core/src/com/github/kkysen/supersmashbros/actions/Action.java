@@ -17,6 +17,8 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public class Action extends Executable implements Loggable {
     
+    protected static final float PI = (float) Math.PI;
+    
     private final State state;
     
     private final State[] impossiblePreStates;
@@ -41,6 +43,10 @@ public class Action extends Executable implements Loggable {
         this.cooldown = cooldown;
     }
     
+    public float totalTime() {
+        return startup + duration + cooldown;
+    }
+    
     public void update() {
         elapsedTime += Game.deltaTime;
     }
@@ -56,6 +62,7 @@ public class Action extends Executable implements Loggable {
     
     @Override
     public final State execute(final Player player) {
+        // FIXME why did you change this
         if (/*elapsedTime < cooldown || */isImpossiblePreState(player.state)) {
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
@@ -64,15 +71,16 @@ public class Action extends Executable implements Loggable {
         error("someone called " + this);
         
         if (!alreadyUsed /*&& !(this instanceof Stop)*/) {
-        	player.state.setPlayer(null);
-        	if (this instanceof ForwardAirAttack) System.out.println("lol");
-        	elapsedTime = 0;
-        	state.setPlayer(player);
-        	alreadyUsed = true;
-        }
-        else {
-        	player.state.setPlayer(null, false);
-        	state.setPlayer(player, false);
+            player.state.setPlayer(null);
+            if (this instanceof ForwardAirAttack) {
+                System.out.println("lol");
+            }
+            elapsedTime = 0;
+            state.setPlayer(player);
+            alreadyUsed = true;
+        } else {
+            player.state.setPlayer(null, false);
+            state.setPlayer(player, false);
         }
         
         tryAttack(state, player.facingRight);
@@ -87,6 +95,8 @@ public class Action extends Executable implements Loggable {
     public void reset() {
         alreadyUsed = false;
         elapsedTime = 0;
-        state.setPlayer(state.player);
+        state.resetTime();
+        // I don't know what you were trying to do here before,
+        // but this should do the same and is clearer
     }
 }

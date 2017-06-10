@@ -2,7 +2,6 @@ package com.github.kkysen.supersmashbros.players;
 
 import static com.github.kkysen.supersmashbros.app.Game.asset;
 
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
@@ -24,7 +23,7 @@ import com.github.kkysen.supersmashbros.actions.RangeAttack;
 import com.github.kkysen.supersmashbros.actions.Stop;
 import com.github.kkysen.supersmashbros.actions.UpTiltAttack;
 import com.github.kkysen.supersmashbros.ai.FrozenAI;
-import com.github.kkysen.supersmashbros.ai.JumpAI;
+import com.github.kkysen.supersmashbros.ai.JumpingAI;
 import com.github.kkysen.supersmashbros.ai.RandomAI;
 import com.github.kkysen.supersmashbros.ai.SmartAI;
 import com.github.kkysen.supersmashbros.core.Player;
@@ -37,107 +36,105 @@ import com.github.kkysen.supersmashbros.core.State;
  */
 public class Mario extends Player {
     
-    private static final FileHandle sprites = asset("sprites_transparent.png");
-    private static Array<TextureRegion> temp;
+    private static final String NAME = Mario.class.getSimpleName();
+    private static final Texture SPRITES = new Texture(asset("sprites_transparent.png"));
     
-    
-    
-    private static final State idleRight = new State("Mario idle state",
-            new Animation<>(
-                    0.2f,
-                    Textures.getFrames(
-                            new Texture(sprites),
-                            6,
-                            16, 24, 27, 38),
-                    PlayMode.LOOP_PINGPONG));
-    
-    static {
-    	temp = Textures.getFrames(
-                new Texture(sprites),
-                6,
-                16, 24, 27, 38);
-    	temp.forEach((x) -> x.flip(true, false));
+    public static void dispose() {
+        SPRITES.dispose();
     }
     
-    private static final State idleLeft = new State("Mario idle state",
-            new Animation<>(
-                    0.2f,
-                    temp,
-                    PlayMode.LOOP_PINGPONG));
+    private static State newState(final String name, final Animation<TextureRegion> animation) {
+        return new State(NAME + " " + name, animation);
+    }
     
-    private static final State moveRightState = new State("Mario move right state",
-            new Animation<>(
-                    0.1f,
-                    Textures.getFrames(
-                            new Texture(sprites),
-                            8,
-                            10, 147, 32, 38),
-                    PlayMode.LOOP));
+    private static State newState(final String name, final float frameDuration,
+            final Array<TextureRegion> textureRegions, final PlayMode playMode) {
+        return newState(name, new Animation<>(frameDuration, textureRegions, playMode));
+    }
+    
+    private static State newState(final String name, final float frameDuration,
+            final Array<TextureRegion> textureRegions) {
+        return newState(name, frameDuration, textureRegions, PlayMode.NORMAL);
+    }
+    
+    private static final State idleRight = newState("idleRight", 0.2f,
+            Textures.getFrames(
+                    SPRITES,
+                    6,
+                    16, 24, 27, 38),
+            PlayMode.LOOP_PINGPONG);
+    
+    private static Array<TextureRegion> temp;
+    static {
+        temp = Textures.getFrames(
+                SPRITES,
+                6,
+                16, 24, 27, 38);
+        temp.forEach((x) -> x.flip(true, false));
+    }
+    
+    private static final State idleLeft = newState("idleLeft", 0.2f, temp, PlayMode.LOOP_PINGPONG);
+    
+    private static final State moveRightState = newState("moveRight", 0.1f,
+            Textures.getFrames(
+                    SPRITES,
+                    8,
+                    10, 147, 32, 38),
+            PlayMode.LOOP);
     
     //I know this is dirty
     static {
-    	temp = Textures.getFrames(
-                new Texture(asset("sprites_transparent.png")),
+        temp = Textures.getFrames(
+                SPRITES,
                 8,
                 10, 147, 32, 38);
-    	
-    	temp.forEach((x) -> x.flip(true, false));
-    }   
+        temp.forEach((x) -> x.flip(true, false));
+    }
     
-    private static final State moveLeftState = new State("Mario move right state",
-            new Animation<>(
-                    0.1f,
-                    temp,
-                    PlayMode.LOOP));
+    private static final State moveLeftState = newState("moveRight", 0.1f, temp, PlayMode.LOOP);
     
-    private static final State jumpState = new State("Mario jump state",
-            new Animation<>(
-                    0.5f,
-                    Textures.getFrames(
-                            new Texture(sprites),
-                            17, 84,
-                            new int[][] {
-                                {28, 42},
-                                {31, 42},
-                                {33, 44}
-                            })));
+    private static final State jumpState = newState("jump", 0.5f,
+            Textures.getFrames(
+                    SPRITES,
+                    17, 84,
+                    new int[][] {
+                        {28, 42},
+                        {31, 42},
+                        {33, 44}
+                    }));
     
-    private static final State forwardTiltState = new State("Mario forward tilt state",
-            new Animation<>(
-                    0.1f,
-                    Textures.getFrames(
-                            new Texture(sprites),
-                            11, 998,
-                            new int[][] {
-                                {32, 38},
-                                {51, 38},
-                                {45, 38},
-                                {42, 38},
-                                {40, 38},
-                                {38, 44},
-                                {39, 38},
-                                {39, 38},
-                                {31, 38}
-                            })));
+    private static final State forwardTiltState = newState("forward tilt", 0.1f,
+            Textures.getFrames(
+                    SPRITES,
+                    11, 998,
+                    new int[][] {
+                        {32, 38},
+                        {51, 38},
+                        {45, 38},
+                        {42, 38},
+                        {40, 38},
+                        {38, 44},
+                        {39, 38},
+                        {39, 38},
+                        {31, 38}
+                    }));
     
-    private static final State downTiltState = new State("Mario down tilt state",
-            new Animation<>(
-                    0.1f,
-                    Textures.getFrames(
-                            new Texture(sprites),
-                            12, 788,
-                            new int[][] {
-                                {29, 36},
-                                {56, 36},
-                                {39, 36},
-                                {43, 36},
-                                {33, 36},
-                                {34, 36}
-                            })));
+    private static final State downTiltState = newState("down tilt", 0.1f,
+            Textures.getFrames(
+                    SPRITES,
+                    12, 788,
+                    new int[][] {
+                        {29, 36},
+                        {56, 36},
+                        {39, 36},
+                        {43, 36},
+                        {33, 36},
+                        {34, 36}
+                    }));
     
     static {
-    	temp = Textures.getFrames(
-                new Texture(sprites),
+        temp = Textures.getFrames(
+                SPRITES,
                 14, 1068,
                 new int[][] {
                     {38, 40},
@@ -152,12 +149,12 @@ public class Mario extends Player {
                     {40, 40},
                     {42, 40}
                 });
-    	
-        Array<TextureRegion> temp2 = Textures.getFrames(
-                new Texture(sprites),
+        
+        final Array<TextureRegion> temp2 = Textures.getFrames(
+                SPRITES,
                 12, 1120,
                 new int[][] {
-                	{41, 40},
+                    {41, 40},
                     {41, 40},
                     {42, 40},
                     {42, 40},
@@ -166,26 +163,20 @@ public class Mario extends Player {
         temp.addAll(temp2);
     }
     
-    private static final State forwardAirState = new State("Mario forward air state",
-            new Animation<>(
-                    0.1f,
-                    temp));
+    private static final State forwardAirState = newState("forward air", 0.1f, temp);
     
-    private static final State upTiltState = new State("Mario up tilt state",
-            new Animation<>(
-                    0.1f,
-                    Textures.getFrames(
-                            new Texture(sprites),
-                            11, 535,
-                            new int[][] {
-                                {40, 53},
-                                {41, 53},
-                                {30, 53},
-                                {29, 53},
-                                {29, 53},
-                                {28, 53}
-                            })));
-    		
+    private static final State upTiltState = newState("up tilt state", 0.1f,
+            Textures.getFrames(
+                    SPRITES,
+                    11, 535,
+                    new int[][] {
+                        {40, 53},
+                        {41, 53},
+                        {30, 53},
+                        {29, 53},
+                        {29, 53},
+                        {28, 53}
+                    }));
     
     public static Mario userControlled() {
         return new Mario(User.get());
@@ -199,8 +190,8 @@ public class Mario extends Player {
         return new Mario(new FrozenAI());
     }
     
-    public static Mario jump() {
-        return new Mario(new JumpAI());
+    public static Mario jumping() {
+        return new Mario(new JumpingAI());
     }
     
     public static Mario smart() {
@@ -208,7 +199,7 @@ public class Mario extends Player {
     }
     
     public Mario(final Controller controller) {
-        super("Mario", controller, idleRight, 1, new Executable[] {
+        super(NAME, controller, idleRight, 1, new Executable[] {
             new Stop(idleRight),
             new MoveLeft(moveLeftState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
