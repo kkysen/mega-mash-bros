@@ -22,6 +22,7 @@ import com.github.kkysen.supersmashbros.actions.MoveLeft;
 import com.github.kkysen.supersmashbros.actions.MoveRight;
 import com.github.kkysen.supersmashbros.actions.RangeAttack;
 import com.github.kkysen.supersmashbros.actions.Stop;
+import com.github.kkysen.supersmashbros.actions.UpTiltAttack;
 import com.github.kkysen.supersmashbros.ai.FrozenAI;
 import com.github.kkysen.supersmashbros.ai.JumpAI;
 import com.github.kkysen.supersmashbros.ai.RandomAI;
@@ -169,6 +170,21 @@ public class Mario extends Player {
             new Animation<>(
                     0.1f,
                     temp));
+    
+    private static final State upTiltState = new State("Mario up tilt state",
+            new Animation<>(
+                    0.1f,
+                    Textures.getFrames(
+                            new Texture(sprites),
+                            11, 535,
+                            new int[][] {
+                                {40, 53},
+                                {41, 53},
+                                {30, 53},
+                                {29, 53},
+                                {29, 53},
+                                {28, 53}
+                            })));
     		
     
     public static Mario userControlled() {
@@ -200,8 +216,9 @@ public class Mario extends Player {
             new RangeAttack(idleRight, 0, 1f, 1f, 5f, 5f),
             new ForwardTiltAttack(forwardTiltState, 0.1f, 0.1f, .5f, 5f, 5f),
             new Message(KeyBinding.P, player -> player.position),
-            new DownTiltAttack(downTiltState, 0.1f, 0.1f, 0.3f, 3f, 1f),
-            new ForwardAirAttack(forwardAirState, 0.6f, 0.1f, .8f, 3f, 1f)
+            new DownTiltAttack(downTiltState, 0.1f, 0.1f, 0.3f, 3f, 3f),
+            new ForwardAirAttack(forwardAirState, 0.6f, 0.1f, .8f, 3f, 6f),
+            new UpTiltAttack(upTiltState, .15f, .3f, .1f, 1f, 7f)
         });
     }
     

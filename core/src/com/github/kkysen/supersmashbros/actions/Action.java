@@ -63,7 +63,7 @@ public class Action extends Executable implements Loggable {
         
         error("someone called " + this);
         
-        if (!alreadyUsed && !(this instanceof Stop)) {
+        if (!alreadyUsed /*&& !(this instanceof Stop)*/) {
         	player.state.setPlayer(null);
         	if (this instanceof ForwardAirAttack) System.out.println("lol");
         	elapsedTime = 0;

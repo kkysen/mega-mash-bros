@@ -17,6 +17,8 @@ public enum KeyBinding {
     P(Key.P),
     FORWARD_TILT(Key.L),
     DOWN_TILT(Key.K),
+    UP_TILT(Key.I),
+    //NONE()
     ;
     
     final Key[] keys;

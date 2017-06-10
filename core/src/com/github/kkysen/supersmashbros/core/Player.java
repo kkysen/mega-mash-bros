@@ -313,6 +313,9 @@ public abstract class Player implements Renderable, Loggable {
 //            	if (executable instanceof AirAttack && isOnPlatform()) {
 //            		continue;
 //            	}
+            	
+            	//Since aerials and ground attacks share same buttons,
+            	//this distinguishes which one should be used
             	if (executable instanceof AirAttack && !(Math.abs(velocity.y) > 0)) {
             		System.out.println("skipping air");
             		continue;
