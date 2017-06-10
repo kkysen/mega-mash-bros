@@ -19,6 +19,11 @@ public class Jump extends Move {
     }
     
     @Override
+    protected boolean dontExecute(final Player player) {
+        return jumpPressed;
+    }
+    
+    @Override
     protected void move(final Player player) {
         //if (alreadyUsed) return;
         

@@ -47,6 +47,7 @@ public class Action extends Executable implements Loggable {
         return startup + duration + cooldown;
     }
     
+    @Override
     public void update() {
         elapsedTime += Game.deltaTime;
     }
@@ -60,10 +61,21 @@ public class Action extends Executable implements Loggable {
         return false;
     }
     
+    /**
+     * allows subclasses to stop the execution
+     * 
+     * @param player the player executing this action
+     * @return true if the execution shouldn't happen
+     */
+    protected boolean dontExecute(final Player player) {
+        return false;
+    }
+    
     @Override
     public final State execute(final Player player) {
         // FIXME why did you change this
-        if (/*elapsedTime < cooldown || */isImpossiblePreState(player.state)) {
+        if (/*elapsedTime < cooldown || */isImpossiblePreState(player.state)
+                || dontExecute(player)) {
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
         }
@@ -92,6 +104,7 @@ public class Action extends Executable implements Loggable {
     
     protected void move(final Player player) {}
     
+    @Override
     public void reset() {
         alreadyUsed = false;
         elapsedTime = 0;

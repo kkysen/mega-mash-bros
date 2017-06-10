@@ -24,4 +24,8 @@ public abstract class Executable {
     
     public abstract State execute(Player player);
     
+    public void update() {}
+    
+    public void reset() {}
+    
 }

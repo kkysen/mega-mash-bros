@@ -19,7 +19,6 @@ import com.github.kkysen.supersmashbros.actions.AirAttack;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.GroundAttack;
-import com.github.kkysen.supersmashbros.actions.Jump;
 import com.github.kkysen.supersmashbros.actions.Move;
 import com.github.kkysen.supersmashbros.ai.AI;
 import com.github.kkysen.supersmashbros.app.Game;
@@ -287,33 +286,14 @@ public abstract class Player implements Renderable, Loggable {
         boolean noMovesCalled = true;
         for (int i = 0; i < executables.length; i++) {
             final Executable executable = executables[i];
-            final boolean isAction = executable instanceof Action;
-            if (isAction) {
-                ((Action) executable).update();
-            }
+            executable.update();
             if (executable.keyBinding.isPressed(controller)) {
-                if (!isAction) {
-                    continue;
-                }
-                if (executable instanceof Jump) {
-                    if (((Jump) executable).jumpPressed) {
-                        continue;
-                    }
-                }
                 if (executable instanceof Move) {
                     noMovesCalled = false;
-                } else {
-                    //Since aerials and ground attacks share same buttons,
-                    //this distinguishes which one should be used
-                    if (executable instanceof AirAttack && velocity.y == 0) {
-                        System.out.println("skipping air");
-                        continue;
-                    }
-                    if (executable instanceof GroundAttack && velocity.y != 0) {
-                        System.out.println("skipping ground");
-                        continue;
-                    }
                 }
+                // Since aerials and ground attacks share same buttons,
+                // this distinguishes which one should be used
+                // moved this stuff into Action#dontExecute(Player)
                 
                 //System.out.println(this + " pressed " + KeyBinding.get(i));
                 //System.out.println(this + " tried calling " + action);
@@ -330,10 +310,8 @@ public abstract class Player implements Renderable, Loggable {
                 //                    }, ((Action) executable).startup);
                 //                }
                 state = executable.execute(this);
-                
-            } else if (isAction) {
-                //if (executable instanceof ForwardAirAttack) System.out.println("hi");
-                ((Action) executable).reset();
+            } else {
+                executable.reset();
             }
         }
         if (noMovesCalled) {
