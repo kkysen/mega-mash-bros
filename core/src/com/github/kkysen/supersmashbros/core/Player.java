@@ -20,6 +20,7 @@ import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.GroundAttack;
 import com.github.kkysen.supersmashbros.actions.Move;
+import com.github.kkysen.supersmashbros.actions.Stop;
 import com.github.kkysen.supersmashbros.ai.AI;
 import com.github.kkysen.supersmashbros.app.Game;
 
@@ -80,6 +81,7 @@ public abstract class Player implements Renderable, Debuggable {
     
     public final Controller controller;
     private final Executable[] executables;
+    private final Stop stop;
     
     private final String name;
     public final int id;
@@ -120,9 +122,18 @@ public abstract class Player implements Renderable, Debuggable {
         
         // EnumMap was throwing some weird errors because of some Eclipse compiler error,
         // so I just made my own "EnumMap"
-        this.executables = new Executable[KeyBinding.COUNT];
+        this.executables = executables;
+        Stop stop = null;
         for (final Executable executable : executables) {
-            this.executables[executable.keyBinding.ordinal()] = executable;
+            if (executable instanceof Stop) {
+                stop = (Stop) executable;
+                break;
+            }
+        }
+        if (stop == null) {
+            throw new IllegalArgumentException("one executable must be a Stop");
+        } else {
+            this.stop = stop;
         }
         
         hurtboxes.add(new Hurtbox(this));
@@ -230,7 +241,7 @@ public abstract class Player implements Renderable, Debuggable {
     }
     
     private void stop() {
-        state = executables[KeyBinding.STOP.ordinal()].execute(this);
+        state = stop.execute(this);
     }
     
     public final boolean isOnPlatform() {
@@ -266,7 +277,7 @@ public abstract class Player implements Renderable, Debuggable {
     }
     
     private void executeExecutables() {
-        System.out.println(this + "'s state is " + state);
+        //System.out.println(this + "'s state is " + state);
         
         if (stunTime > 0) { // still stunned, so lower stunTime and skip all actions
             stunTime -= Game.deltaTime;
@@ -293,9 +304,6 @@ public abstract class Player implements Renderable, Debuggable {
         boolean noMovesCalled = true;
         for (int i = 0; i < executables.length; i++) {
             final Executable executable = executables[i];
-            if (executable == null) {
-                continue;
-            }
             executable.update();
             if (executable.keyBinding.isPressed(controller)) {
                 if (executable instanceof Move) {
@@ -305,8 +313,7 @@ public abstract class Player implements Renderable, Debuggable {
                 // this distinguishes which one should be used
                 // moved this stuff into Action#dontExecute(Player)
                 
-                System.out.println(
-                        this + " pressed " + KeyBinding.get(i) + ", calling " + executable);
+                //System.out.println(this + " pressed " + KeyBinding.get(i) + ", calling " + executable);
                 state = executable.execute(this);
             } else {
                 executable.reset();

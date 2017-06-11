@@ -17,6 +17,7 @@ import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.User;
 import com.github.kkysen.supersmashbros.ai.AI;
 
+import lombok.Getter;
 import lombok.experimental.ExtensionMethod;
 
 /**
@@ -47,7 +48,7 @@ public class World implements Renderable, Disposable, Debuggable {
     
     public boolean gameOver = false;
     
-    private boolean paused = false;
+    private @Getter boolean paused = false;
     
     public World(final int width, final int height, final Texture background,
             final Sprite platformSprite,
@@ -73,7 +74,6 @@ public class World implements Renderable, Disposable, Debuggable {
     }
     
     public void removePlayers() {
-        Player.numPlayers = 0;
         players.clear();
     }
     

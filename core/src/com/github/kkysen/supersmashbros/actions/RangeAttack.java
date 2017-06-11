@@ -9,7 +9,7 @@ public class RangeAttack extends Attack {
     public RangeAttack(final State state, final float startup, final float duration,
             final float cooldown,
             final float damage, final float knockback) {
-        super(state, KeyBinding.MAIN_ATTACK, new State[] {}, startup, duration, cooldown, damage,
+        super(state, KeyBinding.RANGE_ATTACK, new State[] {}, startup, duration, cooldown, damage,
                 75, knockback);
     }
     

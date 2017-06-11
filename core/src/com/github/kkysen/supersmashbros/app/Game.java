@@ -54,6 +54,7 @@ public class Game extends ApplicationAdapter {
     private static final int numAIs = 1;
     
     private Player[] createPlayers(final int numAIs) {
+        Player.numPlayers = 0;
         final Player[] players = new Player[numAIs + 1];
         players[0] = Mario.userControlled();
         for (int i = 1; i < players.length; i++) {

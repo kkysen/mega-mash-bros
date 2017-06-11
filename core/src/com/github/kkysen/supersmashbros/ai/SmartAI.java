@@ -63,6 +63,10 @@ public class SmartAI extends AI {
     private boolean target(final Player self, final Array<Player> enemies) {
         final Vector2 position = self.position;
         final float[] distances = new float[Player.numPlayers];
+        if (Game.instance.world.isPaused() || Player.numPlayers == 0) {
+            final int i = 1;
+            final int j = i;
+        }
         for (final Player enemy : enemies) {
             distances[enemy.id] = position.dst(enemy.position);
         }
@@ -74,7 +78,7 @@ public class SmartAI extends AI {
             if (distances[enemy.id] > cycles * 2) {
                 continue;
             }
-            pressKeys(KeyBinding.MAIN_ATTACK);
+            pressKeys(KeyBinding.RANGE_ATTACK);
             break;
         }
         final float x = position.x;

@@ -14,7 +14,7 @@ public enum KeyBinding {
     LEFT(Key.A),
     RIGHT(Key.D),
     JUMP(Key.W),
-    MAIN_ATTACK(Key.SPACE),
+    RANGE_ATTACK(Key.SPACE),
     FORWARD_TILT(Key.L),
     DOWN_TILT(Key.K),
     UP_TILT(Key.I),
