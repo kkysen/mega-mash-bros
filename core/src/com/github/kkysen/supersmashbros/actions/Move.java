@@ -26,6 +26,11 @@ public abstract class Move extends Action {
         flyingAcceleration = runningAcceleration * FLYING_ACCELERATION_FACTOR;
     }
     
+    @Override
+    protected boolean isContinuous() {
+        return true;
+    }
+    
     protected float adjustSpeed(final Player player) {
         return player.wasOnPlatform ? runningAcceleration : flyingAcceleration;
     }

@@ -19,6 +19,11 @@ public class Jump extends Move {
     }
     
     @Override
+    protected boolean isContinuous() {
+        return false;
+    }
+    
+    @Override
     protected boolean dontExecute(final Player player) {
         return jumpPressed;
     }

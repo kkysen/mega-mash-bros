@@ -75,6 +75,10 @@ public class Action extends Executable implements Debuggable {
         return false;
     }
     
+    protected boolean isContinuous() {
+        return false;
+    }
+    
     @Override
     public final State execute(final Player player) {
         if (elapsedTime < cooldown || isImpossiblePreState(player.state) || dontExecute(player)) {
@@ -82,8 +86,9 @@ public class Action extends Executable implements Debuggable {
             return player.state;
         }
         elapsedTime = 0;
-        player.state.setPlayer(null);
-        state.setPlayer(player);
+        final boolean resetTime = !isContinuous();
+        player.state.setPlayer(null, resetTime);
+        state.setPlayer(player, resetTime);
         if (warmupTime == 0) {
             if (!(this instanceof Stop)) {
                 System.out.println("calling " + this + " right away");

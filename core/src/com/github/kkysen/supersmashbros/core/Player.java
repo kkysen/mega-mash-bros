@@ -314,7 +314,8 @@ public abstract class Player implements Renderable, Debuggable {
             if (executable.keyBinding.isPressed(controller)) {
                 if (executable instanceof Move) {
                     noMovesCalled = false;
-                }//System.out.println(this + " pressed " + KeyBinding.get(i) + ", calling " + executable);
+                }
+                //System.out.println(this + " pressed " + KeyBinding.get(i) + ", calling " + executable);
                 state = executable.execute(this);
             } else {
                 executable.reset();
