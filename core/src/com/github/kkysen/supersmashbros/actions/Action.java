@@ -90,18 +90,17 @@ public class Action extends Executable implements Debuggable {
         player.state.setPlayer(null, resetTime);
         state.setPlayer(player, resetTime);
         if (warmupTime == 0) {
-            if (!(this instanceof Stop)) {
-                System.out.println("calling " + this + " right away");
-            }
             attack(state, player.facingRight);
             move(player);
         } else {
-            System.out.println("calling " + this + " after " + warmupTime + " sec");
             player.tasks.clear();
             player.schedule(warmupTime, new Task() {
                 
                 @Override
                 public void run() {
+                    if (state.player == null) {
+                        return;
+                    }
                     attack(state, player.facingRight);
                     move(player);
                 }

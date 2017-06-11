@@ -284,8 +284,12 @@ public abstract class Player implements Renderable, Debuggable {
         //System.out.println(this + "'s state is " + state);
         
         if (stunTime > 0) { // still stunned, so lower stunTime and skip all actions
-            stunTime -= Game.deltaTime;
-            System.out.println(this + " stunned");
+            if (stunTime < Game.deltaTime) {
+                stunTime = 0;
+            } else {
+                stunTime -= Game.deltaTime;
+            }
+            //System.out.println(this + " stunned");
             tryStopping();
             return;
         }
