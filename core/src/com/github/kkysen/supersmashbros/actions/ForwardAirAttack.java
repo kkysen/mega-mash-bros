@@ -8,7 +8,7 @@ public class ForwardAirAttack extends AirAttack {
     
     public ForwardAirAttack(final State state, final float startup, final float duration,
             final float cooldown, final float damage, final float knockback) {
-        super(state, KeyBinding.FORWARD_TILT, new State[] {}, startup, duration, cooldown, damage,
+        super(state, KeyBinding.ATTACK_FORWARD, new State[] {}, startup, duration, cooldown, damage,
                 270, knockback);
     }
     
