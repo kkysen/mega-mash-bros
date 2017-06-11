@@ -9,8 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
+import com.github.kkysen.libgdx.util.Debuggable;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
-import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
@@ -68,7 +68,7 @@ import lombok.experimental.ExtensionMethod;
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)
-public abstract class Player implements Renderable, Loggable {
+public abstract class Player implements Renderable, Debuggable {
     
     private static final float KNOCKBACK_MULTIPLIER = 0.001f;
     private static final float PERCENTAGE_MULTIPLIER = 0.08f;
@@ -117,9 +117,14 @@ public abstract class Player implements Renderable, Loggable {
         state.setPlayer(this);
         System.out.println(state);
         this.lives = lives;
+        
         // EnumMap was throwing some weird errors because of some Eclipse compiler error,
         // so I just made my own "EnumMap"
-        this.executables = executables;
+        this.executables = new Executable[KeyBinding.COUNT];
+        for (final Executable executable : executables) {
+            this.executables[executable.keyBinding.ordinal()] = executable;
+        }
+        
         hurtboxes.add(new Hurtbox(this));
     }
     
@@ -261,6 +266,8 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     private void executeExecutables() {
+        System.out.println(this + "'s state is " + state);
+        
         if (stunTime > 0) { // still stunned, so lower stunTime and skip all actions
             stunTime -= Game.deltaTime;
             return;
@@ -286,6 +293,9 @@ public abstract class Player implements Renderable, Loggable {
         boolean noMovesCalled = true;
         for (int i = 0; i < executables.length; i++) {
             final Executable executable = executables[i];
+            if (executable == null) {
+                continue;
+            }
             executable.update();
             if (executable.keyBinding.isPressed(controller)) {
                 if (executable instanceof Move) {
@@ -295,19 +305,8 @@ public abstract class Player implements Renderable, Loggable {
                 // this distinguishes which one should be used
                 // moved this stuff into Action#dontExecute(Player)
                 
-                System.out.println(this + " pressed " + KeyBinding.get(i) + ", calling " + action);
-                
-                //                if (executable instanceof AirAttack && !wasOnPlatform) {
-                //                    //final Timer time = Timer.instance();
-                //                    Timer.schedule(new Task() {
-                //
-                //                        @Override
-                //                        public void run() {
-                //                            state = executable.execute(Player.this);
-                //                        }
-                //
-                //                    }, ((Action) executable).startup);
-                //                }
+                System.out.println(
+                        this + " pressed " + KeyBinding.get(i) + ", calling " + executable);
                 state = executable.execute(this);
             } else {
                 executable.reset();
@@ -324,8 +323,6 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     public final void update(final Array<Player> enemies) {
-        System.out.println(this + "'s state is " + state);
-        
         controller.update();
         log(this + " updating hitboxes");
         updateBoxes(hitboxes);

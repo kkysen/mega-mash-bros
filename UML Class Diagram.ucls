@@ -130,8 +130,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="14" language="java" name="com.github.kkysen.libgdx.util.Loggable" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/libgdx/util/Loggable.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="14" language="java" name="com.github.kkysen.libgdx.util.Debuggable" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/libgdx/util/Debuggable.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="962" y="-994"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -902,19 +902,23 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <dependency id="191">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="192">    
     <end type="SOURCE" refId="17"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="192">    
+  <dependency id="193">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
-  <association id="193">    
+  <association id="194">    
     <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="194" name="moveLeftState">        
+      <attribute id="195" name="moveLeftState">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="195" minimum="0" maximum="1">        
+      <multiplicity id="196" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    

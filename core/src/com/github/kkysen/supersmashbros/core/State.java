@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
-import com.github.kkysen.libgdx.util.Loggable;
+import com.github.kkysen.libgdx.util.Debuggable;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
@@ -17,7 +17,7 @@ import lombok.experimental.ExtensionMethod;
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)
-public class State implements Renderable, Loggable, Cloneable {
+public class State implements Renderable, Debuggable, Cloneable {
     
     private final String name;
     

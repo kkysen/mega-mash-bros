@@ -12,6 +12,7 @@ public class DesktopLauncher {
         config.width = Game.WIDTH;
         config.height = Game.HEIGHT;
         config.resizable = true;
+        //config.foregroundFPS = 6;
         new LwjglApplication(new Game(), config);
     }
     

@@ -10,8 +10,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import com.github.kkysen.libgdx.util.Debuggable;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
-import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.User;
@@ -32,7 +32,7 @@ import lombok.experimental.ExtensionMethod;
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)
-public class World implements Renderable, Disposable, Loggable {
+public class World implements Renderable, Disposable, Debuggable {
     
     private final int width;
     private final int height;
@@ -43,7 +43,7 @@ public class World implements Renderable, Disposable, Loggable {
     
     public final float gravity = -500; // FIXME
     
-    private final Array<Player> players = new Array<>();
+    private final Array<Player> players = new Array<>(Player.class);
     
     public boolean gameOver = false;
     
@@ -95,6 +95,15 @@ public class World implements Renderable, Disposable, Loggable {
             }
         }
         return numAlive < 2;
+    }
+    
+    @Override
+    public void pause() {
+        paused = true;
+    }
+    
+    public void resume() {
+        paused = false;
     }
     
     private void updatePlayers(final Batch batch) {

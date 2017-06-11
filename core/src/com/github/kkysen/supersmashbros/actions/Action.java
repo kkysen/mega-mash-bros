@@ -1,7 +1,7 @@
 package com.github.kkysen.supersmashbros.actions;
 
+import com.github.kkysen.libgdx.util.Debuggable;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
-import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.app.Game;
 import com.github.kkysen.supersmashbros.core.Player;
@@ -15,7 +15,7 @@ import lombok.experimental.ExtensionMethod;
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)
-public class Action extends Executable implements Loggable {
+public class Action extends Executable implements Debuggable {
     
     protected static final float PI = (float) Math.PI;
     
@@ -41,6 +41,11 @@ public class Action extends Executable implements Loggable {
         startup = warmupTime;
         this.duration = duration;
         this.cooldown = cooldown;
+    }
+    
+    @Override
+    public String toString() {
+        return name() + " w/ state = " + state;
     }
     
     public float totalTime() {

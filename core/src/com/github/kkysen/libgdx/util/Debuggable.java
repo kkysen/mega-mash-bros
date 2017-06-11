@@ -1,13 +1,14 @@
 package com.github.kkysen.libgdx.util;
 
 import com.badlogic.gdx.Gdx;
+import com.github.kkysen.supersmashbros.app.Game;
 
 /**
  * 
  * 
  * @author Khyber Sen
  */
-public interface Loggable {
+public interface Debuggable {
     
     public default String name() {
         return getClass().getSimpleName();
@@ -35,6 +36,11 @@ public interface Loggable {
             sb.append(',');
             sb.append(' ');
         }
+    }
+    
+    public default void pause() {
+        System.out.println("pausing");
+        Game.instance.world.pause();
     }
     
 }

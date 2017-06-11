@@ -91,7 +91,7 @@ public class Mario extends Player {
         temp.forEach((x) -> x.flip(true, false));
     }
     
-    private static final State moveLeftState = newState("moveRight", 0.1f, temp, PlayMode.LOOP);
+    private static final State moveLeftState = newState("moveLeft", 0.1f, temp, PlayMode.LOOP);
     
     private static final State jumpState = newState("jump", 0.5f,
             Textures.getFrames(

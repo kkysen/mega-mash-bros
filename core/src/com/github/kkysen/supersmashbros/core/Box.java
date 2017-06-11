@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 import com.badlogic.gdx.utils.Pools;
-import com.github.kkysen.libgdx.util.Loggable;
+import com.github.kkysen.libgdx.util.Debuggable;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.supersmashbros.app.Game;
 
@@ -17,7 +17,7 @@ import com.github.kkysen.supersmashbros.app.Game;
  * 
  * @author Khyber Sen
  */
-public abstract class Box implements Renderable, Poolable, Loggable {
+public abstract class Box implements Renderable, Poolable, Debuggable {
     
     private static final Pool<Rectangle> pool = Pools.get(Rectangle.class);
     

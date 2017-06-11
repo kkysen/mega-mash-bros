@@ -49,7 +49,7 @@ public class Game extends ApplicationAdapter {
     private SpriteBatch batch;
     private ShapeRenderer lineRenderer;
     
-    private World world;
+    public World world;
     
     private static final int numAIs = 1;
     
@@ -57,10 +57,10 @@ public class Game extends ApplicationAdapter {
         final Player[] players = new Player[numAIs + 1];
         players[0] = Mario.userControlled();
         for (int i = 1; i < players.length; i++) {
-            players[i] = Mario.frozen();
-            //players[i] = Mario.jump();
+            //players[i] = Mario.frozen();
+            //players[i] = Mario.jumping();
             //players[i] = Mario.randomlyControlled();
-            //players[i] = Mario.smart();
+            players[i] = Mario.smart();
             //players[i] = (i & 1) == 1 ? Mario.randomlyControlled() : Mario.frozen();
         }
         return players;
