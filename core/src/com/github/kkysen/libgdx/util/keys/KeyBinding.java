@@ -9,16 +9,20 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public enum KeyBinding {
     
+    RESTART(Key.R),
     STOP(Key.S),
     LEFT(Key.A),
     RIGHT(Key.D),
     JUMP(Key.W),
     MAIN_ATTACK(Key.SPACE),
-    P(Key.P),
     FORWARD_TILT(Key.L),
     DOWN_TILT(Key.K),
     UP_TILT(Key.I),
     //NONE()
+    PRINT(Key.P),
+    PRINT_STATE(Key.CONTROL_LEFT, Key.P),
+    PAUSE(Key.CONTROL_LEFT, Key.SPACE),
+    RESUME(Key.CONTROL_RIGHT, Key.SPACE),
     ;
     
     final Key[] keys;

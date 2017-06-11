@@ -17,6 +17,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.github.kkysen.libgdx.util.Textures;
+import com.github.kkysen.libgdx.util.keys.KeyBinding;
+import com.github.kkysen.libgdx.util.keys.User;
 import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.World;
 import com.github.kkysen.supersmashbros.players.Mario;
@@ -49,11 +51,9 @@ public class Game extends ApplicationAdapter {
     
     private World world;
     
-    private World createWorld() {
-        final Texture background = new Texture(asset("background.jpg"));
-        System.out.println(background.getHeight() + ", " + background.getWidth());
-        final Sprite platform = new Sprite(new Texture(asset("platform.png")));
-        final int numAIs = 1;
+    private static final int numAIs = 1;
+    
+    private Player[] createPlayers(final int numAIs) {
         final Player[] players = new Player[numAIs + 1];
         players[0] = Mario.userControlled();
         for (int i = 1; i < players.length; i++) {
@@ -63,7 +63,14 @@ public class Game extends ApplicationAdapter {
             //players[i] = Mario.smart();
             //players[i] = (i & 1) == 1 ? Mario.randomlyControlled() : Mario.frozen();
         }
-        return new World(WIDTH, HEIGHT, background, platform, players);
+        return players;
+    }
+    
+    private World createWorld() {
+        final Texture background = new Texture(asset("background.jpg"));
+        System.out.println(background.getHeight() + ", " + background.getWidth());
+        final Sprite platform = new Sprite(new Texture(asset("platform.png")));
+        return new World(WIDTH, HEIGHT, background, platform, createPlayers(numAIs));
     }
     
     @Override
@@ -99,6 +106,11 @@ public class Game extends ApplicationAdapter {
         readSpeed();
         deltaTime = Gdx.graphics.getDeltaTime() * speed;
         
+        if (KeyBinding.RESTART.isPressed(User.get())) {
+            world.replacePlayers(createPlayers(numAIs));
+            world.gameOver = false;
+        }
+        
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
@@ -113,10 +125,6 @@ public class Game extends ApplicationAdapter {
         lineRenderer.begin(ShapeType.Line);
         world.render(lineRenderer);
         lineRenderer.end();
-        
-        if (world.gameOver) {
-            pause();
-        }
     }
     
     @Override

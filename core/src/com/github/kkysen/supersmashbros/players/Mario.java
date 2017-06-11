@@ -44,7 +44,7 @@ public class Mario extends Player {
     }
     
     private static State newState(final String name, final Animation<TextureRegion> animation) {
-        return new State(NAME + " " + name, animation);
+        return new State(NAME + "'s " + name, animation);
     }
     
     private static State newState(final String name, final float frameDuration,
@@ -206,10 +206,11 @@ public class Mario extends Player {
             new Jump(jumpState, 1f, 0.1f, 500f),
             new RangeAttack(idleRight, 0, 1f, 1f, 5f, 5f),
             new ForwardTiltAttack(forwardTiltState, 0.1f, 0.1f, .5f, 5f, 5f),
-            new Message(KeyBinding.P, player -> player.position),
             new DownTiltAttack(downTiltState, 0.1f, 0.1f, 0.3f, 3f, 3f),
             new ForwardAirAttack(forwardAirState, 0.6f, 0.1f, .8f, 3f, 6f),
-            new UpTiltAttack(upTiltState, .15f, .3f, .1f, 1f, 7f)
+            new UpTiltAttack(upTiltState, .15f, .3f, .1f, 1f, 7f),
+            new Message(KeyBinding.PRINT, player -> player),
+            new Message(KeyBinding.PRINT_STATE, player -> player.state),
         });
     }
     

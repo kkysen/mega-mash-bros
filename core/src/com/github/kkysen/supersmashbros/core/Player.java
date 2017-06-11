@@ -295,8 +295,7 @@ public abstract class Player implements Renderable, Loggable {
                 // this distinguishes which one should be used
                 // moved this stuff into Action#dontExecute(Player)
                 
-                //System.out.println(this + " pressed " + KeyBinding.get(i));
-                //System.out.println(this + " tried calling " + action);
+                System.out.println(this + " pressed " + KeyBinding.get(i) + ", calling " + action);
                 
                 //                if (executable instanceof AirAttack && !wasOnPlatform) {
                 //                    //final Timer time = Timer.instance();
@@ -325,6 +324,8 @@ public abstract class Player implements Renderable, Loggable {
     }
     
     public final void update(final Array<Player> enemies) {
+        System.out.println(this + "'s state is " + state);
+        
         controller.update();
         log(this + " updating hitboxes");
         updateBoxes(hitboxes);

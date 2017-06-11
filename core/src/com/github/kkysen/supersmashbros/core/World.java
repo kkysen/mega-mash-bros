@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Loggable;
 import com.github.kkysen.libgdx.util.Renderable;
+import com.github.kkysen.libgdx.util.keys.KeyBinding;
+import com.github.kkysen.libgdx.util.keys.User;
 import com.github.kkysen.supersmashbros.ai.AI;
 
 import lombok.experimental.ExtensionMethod;
@@ -41,9 +43,11 @@ public class World implements Renderable, Disposable, Loggable {
     
     public final float gravity = -500; // FIXME
     
-    private final Array<Player> players;
+    private final Array<Player> players = new Array<>();
     
     public boolean gameOver = false;
+    
+    private boolean paused = false;
     
     public World(final int width, final int height, final Texture background,
             final Sprite platformSprite,
@@ -55,13 +59,27 @@ public class World implements Renderable, Disposable, Loggable {
         platformSprite.setSize(width * 0.75f, height * 0.1f);
         platformSprite.setCenter(width * 0.5f, height * 0.25f);
         platform = new Platform(platformSprite);
-        this.players = new Array<>(players);
+        addPlayers(players);
+    }
+    
+    public void addPlayers(final Player[] players) {
+        this.players.addAll(players);
         for (final Player player : players) {
             player.world = this;
             player.position.x = MathUtils.random(platform.leftMargin,
                     player.isAI() ? platform.rightMargin : platform.rightMargin * 0.25f);
             player.position.y = platform.top + MathUtils.random(10f);
         }
+    }
+    
+    public void removePlayers() {
+        Player.numPlayers = 0;
+        players.clear();
+    }
+    
+    public void replacePlayers(final Player[] players) {
+        removePlayers();
+        addPlayers(players);
     }
     
     @Override
@@ -76,10 +94,19 @@ public class World implements Renderable, Disposable, Loggable {
                 numAlive++;
             }
         }
-        return numAlive == 1;
+        return numAlive < 2;
     }
     
-    private void updateAndRenderPlayers(final Batch batch) {
+    private void updatePlayers(final Batch batch) {
+        if (KeyBinding.PAUSE.isPressed(User.get())) {
+            paused = true;
+        }
+        if (KeyBinding.RESUME.isPressed(User.get())) {
+            paused = false;
+        }
+        if (paused) {
+            return; // don't update players if paused
+        }
         for (int i = 0; i < players.size; i++) {
             final Player player = players.removeIndex(i);
             log("updating " + player);
@@ -101,7 +128,11 @@ public class World implements Renderable, Disposable, Loggable {
                 // already removed from array
                 player.kill();
             }
-            log(player + " rendered");
+        }
+    }
+    
+    private void renderPlayers(final Batch batch) {
+        for (final Player player : players) {
             player.render(batch);
         }
     }
@@ -127,7 +158,8 @@ public class World implements Renderable, Disposable, Loggable {
             finishGame();
             return;
         }
-        updateAndRenderPlayers(batch);
+        updatePlayers(batch);
+        renderPlayers(batch);
     }
     
     @Override
@@ -145,7 +177,8 @@ public class World implements Renderable, Disposable, Loggable {
     @Override
     public void dispose() {
         Gdx.input.setInputProcessor(null);
-        //background.dispose();
+        background.getTexture().dispose();
+        platform.dispose();
     }
     
 }

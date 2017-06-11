@@ -3,6 +3,7 @@ package com.github.kkysen.supersmashbros.core;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Disposable;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Renderable;
 
@@ -14,7 +15,7 @@ import lombok.experimental.ExtensionMethod;
  * @author Khyber Sen
  */
 @ExtensionMethod(ExtensionMethods.class)
-public class Platform implements Renderable {
+public class Platform implements Renderable, Disposable {
     
     private static final float DEFAULT_FRICTION = 0.5f; // FIXME
     private static final float MARGIN_PERCENTAGE = 0.01f;
@@ -74,6 +75,11 @@ public class Platform implements Renderable {
         } else {
             return Relation.OFF_RIGHT;
         }
+    }
+    
+    @Override
+    public void dispose() {
+        sprite.getTexture().dispose();
     }
     
 }
