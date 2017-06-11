@@ -50,9 +50,6 @@ public abstract class Attack extends Action {
     
     @Override
     public void reset() {
-        if (alreadyUsed) {
-            System.out.println("resetting " + this);
-        }
         alreadyUsed = false;
     }
     

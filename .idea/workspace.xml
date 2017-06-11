@@ -2,48 +2,57 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="731c3fe6-4d5a-4d63-b146-584528ff993b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/Loggable.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/Renderable.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules/Super Smash Bros.iml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/RenderableAt.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/Textures.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/misc/Misc.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Actions.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/app/StartScreen.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Platform.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/desktop/bin/com/github/kkysen/supersmashbros/desktop/DesktopLauncher.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/Debuggable.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/Debuggable.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/ExtensionMethods.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/ExtensionMethods.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/Renderable.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/Renderable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/Textures.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/Textures.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/keys/Controller.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/keys/Controller.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/keys/Key.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/keys/Key.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/keys/KeyBinding.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/keys/KeyBinding.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/keys/User.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/libgdx/util/keys/User.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Action$1.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Action$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Action.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Action.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/AirAttack.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/AirAttack.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Attack.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Attack.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/DownTiltAttack.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/DownTiltAttack.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Executable.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Executable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/ForwardAirAttack.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/ForwardAirAttack.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/ForwardTiltAttack.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/ForwardTiltAttack.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/GroundAttack.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/GroundAttack.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Jump.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Jump.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Message.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Message.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Move.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Move.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/MoveLeft.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/MoveLeft.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/MoveRight.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/MoveRight.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/SmashAttack.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/SmashAttack.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/RangeAttack.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/RangeAttack.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Stop.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/Stop.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/UpTiltAttack.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/actions/UpTiltAttack.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/ai/AI.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/ai/AI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/ai/FrozenAI.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/ai/FrozenAI.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/ai/JumpingAI.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/ai/JumpingAI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/ai/RandomAI.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/ai/RandomAI.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/ai/SmartAI.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/ai/SmartAI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Box.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Box.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Hitbox.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Hitbox.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Hurtbox.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Hurtbox.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Player.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Player.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Platform$Relation.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Platform$Relation.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Platform.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/Platform.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/State.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/State.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/World.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/core/World.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/players/Mario.class" afterPath="$PROJECT_DIR$/core/bin/com/github/kkysen/supersmashbros/players/Mario.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/github/kkysen/libgdx/util/ExtensionMethods.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/github/kkysen/libgdx/util/ExtensionMethods.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/github/kkysen/libgdx/util/keys/Controller.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/github/kkysen/libgdx/util/keys/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/github/kkysen/libgdx/util/keys/Key.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/github/kkysen/libgdx/util/keys/Key.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/github/kkysen/supersmashbros/core/State.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/github/kkysen/supersmashbros/core/State.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/bin/com/github/kkysen/supersmashbros/desktop/DesktopLauncher.class" afterPath="$PROJECT_DIR$/desktop/bin/com/github/kkysen/supersmashbros/desktop/DesktopLauncher.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/core/core.iml" afterPath="$PROJECT_DIR$/.idea/modules/core/core.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/core/core_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/core/core_main.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/core/core_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/core/core_test.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/desktop/desktop.iml" afterPath="$PROJECT_DIR$/.idea/modules/desktop/desktop.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/desktop/desktop_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/desktop/desktop_main.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/desktop/desktop_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/desktop/desktop_test.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/ExtensionMethods.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/ExtensionMethods.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/Controller.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/Key.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/Key.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java" afterPath="$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <ignored path="$PROJECT_DIR$/core/bin/" />
@@ -85,7 +94,7 @@
       <file leaf-file-name="State.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2080">
+            <state relative-caret-position="1920">
               <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
               <folding />
             </state>
@@ -95,8 +104,8 @@
       <file leaf-file-name="ExtensionMethods.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/ExtensionMethods.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+            <state relative-caret-position="1080">
+              <caret line="65" column="47" lean-forward="true" selection-start-line="65" selection-start-column="47" selection-end-line="65" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,11 +126,9 @@
       <file leaf-file-name="Key.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/Key.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1400">
+            <state relative-caret-position="1440">
               <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,8 +136,8 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+            <state relative-caret-position="560">
+              <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -163,7 +170,7 @@
         <entry>
           <key>
             <ExternalProjectPojo>
-              <option name="name" value="Super Smash Bros" />
+              <option name="name" value="Mega-Mash-Bros" />
               <option name="path" value="$PROJECT_DIR$" />
             </ExternalProjectPojo>
           </key>
@@ -178,7 +185,7 @@
                 <option name="path" value="$PROJECT_DIR$/desktop" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value="Super Smash Bros" />
+                <option name="name" value="Mega-Mash-Bros" />
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
             </list>
@@ -192,12 +199,12 @@
           <value>
             <list>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by root project 'Super Smash Bros'. [incubating]" />
+                <option name="description" value="Displays the components produced by root project 'Mega-Mash-Bros'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="components" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of root project 'Super Smash Bros'." />
+                <option name="description" value="Displays the sub-projects of root project 'Mega-Mash-Bros'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="projects" />
               </ExternalTaskPojo>
@@ -221,7 +228,7 @@
                 <option name="name" value="classes" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in root project 'Super Smash Bros'." />
+                <option name="description" value="Displays all buildscript dependencies declared in root project 'Mega-Mash-Bros'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildEnvironment" />
               </ExternalTaskPojo>
@@ -258,7 +265,7 @@
                 <option name="name" value="eclipseClasspath" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of root project 'Super Smash Bros'. [incubating]" />
+                <option name="description" value="Displays the configuration model of root project 'Mega-Mash-Bros'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="model" />
               </ExternalTaskPojo>
@@ -273,7 +280,7 @@
                 <option name="name" value="processResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from root project 'Super Smash Bros' (some of the displayed tasks may belong to subprojects)." />
+                <option name="description" value="Displays the tasks runnable from root project 'Mega-Mash-Bros' (some of the displayed tasks may belong to subprojects)." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="tasks" />
               </ExternalTaskPojo>
@@ -306,7 +313,7 @@
                 <option name="name" value="compileJava" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in root project 'Super Smash Bros'." />
+                <option name="description" value="Displays the insight into a specific dependency in root project 'Mega-Mash-Bros'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencyInsight" />
               </ExternalTaskPojo>
@@ -331,7 +338,7 @@
                 <option name="name" value="compileTestJava" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in root project 'Super Smash Bros'." />
+                <option name="description" value="Displays all dependencies declared in root project 'Mega-Mash-Bros'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencies" />
               </ExternalTaskPojo>
@@ -371,7 +378,7 @@
                 <option name="name" value="eclipseProject" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of root project 'Super Smash Bros'." />
+                <option name="description" value="Displays the properties of root project 'Mega-Mash-Bros'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="properties" />
               </ExternalTaskPojo>
@@ -725,7 +732,6 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="8975418510493" />
         <entry key="$PROJECT_DIR$/build.gradle" value="1644273468" />
       </map>
     </option>
@@ -1022,6 +1028,7 @@
     <property name="LombokPluginIS_LOMBOK_VERSION_CHECK_Enabled" value="false" />
     <property name="LombokPluginIS_MISSING_LOMBOK_CHECK_Enabled" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -1445,11 +1452,12 @@
       <workItem from="1496540438960" duration="788000" />
       <workItem from="1496541258193" duration="902000" />
       <workItem from="1496542704730" duration="81000" />
+      <workItem from="1497224525011" duration="492000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9920000" />
+    <option name="totallyTimeSpent" value="10412000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3232" height="1732" extended-state="6" />
@@ -1528,6 +1536,48 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1920">
+          <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2560">
+          <caret line="64" column="5" lean-forward="false" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/Key.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="14" column="4" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/ExtensionMethods.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1400">
+          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2080">
           <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
           <folding />
@@ -1546,9 +1596,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1440">
           <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1600,9 +1648,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
           <caret line="21" column="14" lean-forward="true" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1673,7 +1719,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/supersmashbros/core/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2080">
+        <state relative-caret-position="1920">
           <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
           <folding />
         </state>
@@ -1681,8 +1727,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+        <state relative-caret-position="560">
+          <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1703,11 +1749,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/keys/Key.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1400">
+        <state relative-caret-position="1440">
           <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1728,8 +1772,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/github/kkysen/libgdx/util/ExtensionMethods.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+        <state relative-caret-position="1080">
+          <caret line="65" column="47" lean-forward="true" selection-start-line="65" selection-start-column="47" selection-end-line="65" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
