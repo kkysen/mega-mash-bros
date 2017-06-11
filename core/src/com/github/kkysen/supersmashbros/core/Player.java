@@ -26,12 +26,6 @@ import com.github.kkysen.supersmashbros.app.Game;
 
 import lombok.experimental.ExtensionMethod;
 
-/*
- * instaed of delaying creation in the execute->hitbox.render, delay the
- * creation here
- * 
- */
-
 /**
  * The {@link Player} class contains a {@link #name} and {@link #id} (unused
  * right now), a {@link Map}&lt;{@link KeyBinding}, {@link Action}&gt; for all

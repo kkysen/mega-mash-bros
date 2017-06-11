@@ -1,0 +1,27 @@
+{
+    "self": {
+        "character": "Mario"
+    },
+    "enemies": [
+        {
+            "number": 1,
+            "character": "Mario",
+            "controller": "SmartAI"
+        }
+        {
+            "number": 0,
+            "character": "Mario",
+            "controller": "JumpingAI"
+        }
+        {
+            "number": 0,
+            "character": "Mario",
+            "controller": "FrozenAI"
+        }
+        {
+            "number": 0,
+            "character": "Mario",
+            "controller": "RandomAI"
+        }
+    ]
+}
