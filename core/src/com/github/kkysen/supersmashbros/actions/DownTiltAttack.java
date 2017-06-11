@@ -9,7 +9,7 @@ public class DownTiltAttack extends GroundAttack {
     public DownTiltAttack(final State state, final float startup, final float duration,
             final float cooldown,
             final float damage, final float knockback) {
-        super(state, KeyBinding.DOWN_TILT, new State[] {}, startup, duration, cooldown,
+        super(state, KeyBinding.ATTACK_DOWN, new State[] {}, startup, duration, cooldown,
                 damage, 88, knockback);
     }
     

@@ -21,6 +21,7 @@ import com.github.kkysen.supersmashbros.actions.MoveLeft;
 import com.github.kkysen.supersmashbros.actions.MoveRight;
 import com.github.kkysen.supersmashbros.actions.RangeAttack;
 import com.github.kkysen.supersmashbros.actions.Stop;
+import com.github.kkysen.supersmashbros.actions.UpAirAttack;
 import com.github.kkysen.supersmashbros.actions.UpTiltAttack;
 import com.github.kkysen.supersmashbros.ai.FrozenAI;
 import com.github.kkysen.supersmashbros.ai.JumpingAI;
@@ -57,7 +58,7 @@ public class Mario extends Player {
         return newState(name, frameDuration, textureRegions, PlayMode.NORMAL);
     }
     
-    private static final State idleRight = newState("idleRight", 0.2f,
+    private static final State idleRight = newState("idleRight", 0.1f,
             Textures.getFrames(
                     SPRITES,
                     6,
@@ -178,6 +179,21 @@ public class Mario extends Player {
                         {28, 53}
                     }));
     
+    private static final State upAirState = newState("up air state", 0.1f,
+            Textures.getFrames(
+                    SPRITES,
+                    11, 612,
+                    new int[][] {
+                        {43, 77},
+                        {56, 77},
+                        {43, 77},
+                        {44, 77},
+                        {44, 77},
+                        {43, 77},
+                        {29, 77},
+                        {35, 77}
+                    }));
+    
     public static Mario userControlled() {
         return new Mario(User.get());
     }
@@ -204,13 +220,14 @@ public class Mario extends Player {
             new MoveLeft(moveLeftState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 500f),
-            new RangeAttack(idleRight, 0, 1f, 1f, 5f, 5f),
+            new RangeAttack(idleRight, 0, 1f, 1f, 1f, 2f),
             new ForwardTiltAttack(forwardTiltState, 0.1f, 0.1f, .5f, 5f, 5f),
             new DownTiltAttack(downTiltState, 0.1f, 0.1f, 0.3f, 3f, 3f),
             new ForwardAirAttack(forwardAirState, 0.6f, 0.1f, .8f, 3f, 6f),
-            new UpTiltAttack(upTiltState, .15f, .3f, .1f, 1f, 7f),
+            new UpTiltAttack(upTiltState, .15f, .3f, .1f, 1f, 10f),
             new Message(KeyBinding.PRINT, player -> player),
             new Message(KeyBinding.PRINT_STATE, player -> player.state),
+            new UpAirAttack(upAirState, .15f, .25f, .05f, 1.5f, 8f),
         });
     }
     
