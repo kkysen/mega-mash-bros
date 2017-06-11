@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Debuggable;
+import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
@@ -52,6 +52,10 @@ public class State implements Renderable, Debuggable, Cloneable {
         return name + " state @ " + position;
     }
     
+    public void resetTime() {
+        elapsedTime = 0;
+    }
+    
     public void setPlayer(final Player player, final boolean resetTime) {
         this.player = player;
         error(this + " set player to " + player);
@@ -68,13 +72,7 @@ public class State implements Renderable, Debuggable, Cloneable {
     @Override
     public void render(final Batch batch) {
         elapsedTime += Game.deltaTime;
-        //System.out.println(elapsedTime);
-        final TextureRegion frame = animation.getKeyFrame(elapsedTime);
-        
-        //spazes if you use this
-        //if (player.facingRight) frame.flip(true, false);
-        
-        batch.draw(frame, position.x, position.y);
+        batch.draw(animation.getKeyFrame(elapsedTime), position.x, position.y);
     }
     
     public Hitbox newHitbox(final Attack attack, final float width, final float height) {
@@ -87,10 +85,6 @@ public class State implements Renderable, Debuggable, Cloneable {
     
     public void addHurtbox(final Hurtbox hurtbox) {
         player.hurtboxes.add(hurtbox);
-    }
-    
-    public void resetTime() {
-        elapsedTime = 0;
     }
     
 }

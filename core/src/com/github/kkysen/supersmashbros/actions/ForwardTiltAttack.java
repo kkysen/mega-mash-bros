@@ -19,6 +19,7 @@ public class ForwardTiltAttack extends GroundAttack {
     
     @Override
     protected void attack(final State state, final boolean facingRight) {
+        super.attack(state, facingRight);
         final Hitbox hitbox = state.newHitbox(this, 50f, 30f);
         hitbox.angle = facingRight ? angle : PI - angle;
         hitbox.position.y += 7f;

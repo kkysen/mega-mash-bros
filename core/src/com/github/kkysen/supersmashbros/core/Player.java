@@ -9,13 +9,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
 import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.github.kkysen.libgdx.util.Debuggable;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.actions.Action;
-import com.github.kkysen.supersmashbros.actions.AirAttack;
 import com.github.kkysen.supersmashbros.actions.Attack;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.GroundAttack;
@@ -71,8 +71,8 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod(ExtensionMethods.class)
 public abstract class Player implements Renderable, Debuggable {
     
-    private static final float KNOCKBACK_MULTIPLIER = 0.001f;
-    private static final float PERCENTAGE_MULTIPLIER = 0.08f;
+    private static final float KNOCKBACK_MULTIPLIER = 0.1f;
+    private static final float PERCENTAGE_MULTIPLIER = 0.001f;
     private static final float HITSTUN_MULTIPLIER = 0.00001f;
     
     public static int numPlayers = 0;
@@ -96,6 +96,8 @@ public abstract class Player implements Renderable, Debuggable {
      */
     public final Array<Hitbox> hitboxes = new Array<>();
     public final Array<Hurtbox> hurtboxes = new Array<>();
+    
+    public final Timer tasks = new Timer();
     
     public final Vector2 acceleration = new Vector2();
     public final Vector2 velocity = new Vector2();
@@ -227,15 +229,8 @@ public abstract class Player implements Renderable, Debuggable {
     
     private void updateBoxes(final Array<? extends Box> boxes) {
         for (int i = 0; i < boxes.size; i++) {
-            final Box box = boxes.get(i);
-            if (!box.update()) { // box has expired, so delete
-                log(box + " deleted");
+            if (!boxes.get(i).update()) { // box has expired, so delete
                 Pools.free(boxes.removeIndex(i--));
-            } else {
-                // FIXME finish this
-                if (box.elapsedTime >= 0 && box.elapsedTime <= Game.deltaTime) {
-                    box.bounds.setPosition(position);
-                }
             }
         }
     }
@@ -255,14 +250,13 @@ public abstract class Player implements Renderable, Debuggable {
             position.y = world.platform.bounds.maxY();
             velocity.y = 0;
             acceleration.y = 0;
-            // FIXME is this right, wasOnPlatform hasn't been updated yet
             if (!wasOnPlatform) {
-                if (state.action instanceof AirAttack) {
-                    // FIXME don't cancel all tasks, because other, non-attack tasks may be scheduled
-                    Timer.instance().clear();
-                    //state.action.reset();
-                    state.resetTime();
-                }
+                //                if (state.action instanceof AirAttack) {
+                //                    // FIXME don't cancel all tasks, because other, non-attack tasks may be scheduled
+                //                    tasks.clear();
+                //                    //state.action.reset();
+                //                    state.resetTime();
+                //                }
                 stop();
             }
         } else {
@@ -276,11 +270,23 @@ public abstract class Player implements Renderable, Debuggable {
         acceleration.accelerate(velocity, position);
     }
     
+    private void tryStopping() {
+        if (wasOnPlatform && !(state.action instanceof GroundAttack)) {
+            stop();
+        }
+    }
+    
+    public void schedule(final float delaySeconds, final Task task) {
+        tasks.scheduleTask(task, delaySeconds);
+    }
+    
     private void executeExecutables() {
         //System.out.println(this + "'s state is " + state);
         
         if (stunTime > 0) { // still stunned, so lower stunTime and skip all actions
             stunTime -= Game.deltaTime;
+            System.out.println(this + " stunned");
+            tryStopping();
             return;
         }
         final Action action = state.action;
@@ -308,21 +314,14 @@ public abstract class Player implements Renderable, Debuggable {
             if (executable.keyBinding.isPressed(controller)) {
                 if (executable instanceof Move) {
                     noMovesCalled = false;
-                }
-                // Since aerials and ground attacks share same buttons,
-                // this distinguishes which one should be used
-                // moved this stuff into Action#dontExecute(Player)
-                
-                //System.out.println(this + " pressed " + KeyBinding.get(i) + ", calling " + executable);
+                }//System.out.println(this + " pressed " + KeyBinding.get(i) + ", calling " + executable);
                 state = executable.execute(this);
             } else {
                 executable.reset();
             }
         }
         if (noMovesCalled) {
-            if (wasOnPlatform && !(state.action instanceof GroundAttack)) {
-                stop();
-            }
+            tryStopping();
         }
         if (wasOnPlatform) {
             numMidairJumps = 1;
@@ -346,7 +345,7 @@ public abstract class Player implements Renderable, Debuggable {
         hitboxes.clear();
         hurtboxes.clear();
         executables.clear();
-        // TODO
+        tasks.clear();
     }
     
     @Override

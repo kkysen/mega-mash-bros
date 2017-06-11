@@ -13,12 +13,12 @@ public class Hurtbox extends Box {
     private static final float DAMAGE_MULTIPLIER = 0.1f; // FIXME
     
     public Hurtbox(final Player player, final float width, final float height,
-            final float lifetime, final float warmupTime) {
-        super(player, width, height, lifetime, warmupTime);
+            final float lifetime) {
+        super(player, width, height, lifetime);
     }
     
     public Hurtbox(final Player player) {
-        this(player, player.normalWidth(), player.normalHeight(), Float.MAX_VALUE, 0);
+        this(player, player.normalWidth(), player.normalHeight(), Float.MAX_VALUE);
     }
     
     @Override
@@ -36,9 +36,6 @@ public class Hurtbox extends Box {
     }
     
     public float collide(final Hitbox hitbox) {
-        if (isWarmingUp() || hitbox.isWarmingUp()) {
-            return 0;
-        }
         log(this + " collided with " + hitbox);
         return damageTakenBy(hitbox);
     }

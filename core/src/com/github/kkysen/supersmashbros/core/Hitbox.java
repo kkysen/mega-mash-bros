@@ -24,7 +24,7 @@ public class Hitbox extends Box {
     public float angle;
     
     public Hitbox(final Player player, final Attack attack, final float width, final float height) {
-        super(player, width, height, attack.duration, attack.startup);
+        super(player, width, height, attack.duration);
         this.attack = attack;
         position = player.position.cpy();
     }

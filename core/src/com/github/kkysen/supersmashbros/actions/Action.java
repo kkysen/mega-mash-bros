@@ -1,5 +1,6 @@
 package com.github.kkysen.supersmashbros.actions;
 
+import com.badlogic.gdx.utils.Timer.Task;
 import com.github.kkysen.libgdx.util.Debuggable;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
@@ -23,13 +24,11 @@ public class Action extends Executable implements Debuggable {
     
     private final State[] impossiblePreStates;
     
-    public final float startup;
+    public final float warmupTime;
     public final float duration;
     public final float cooldown;
     
     protected float elapsedTime;
-    
-    public boolean alreadyUsed = false;
     
     protected Action(final State state, final KeyBinding keyBinding,
             final State[] impossiblePreStates, final float warmupTime, final float duration,
@@ -38,7 +37,7 @@ public class Action extends Executable implements Debuggable {
         this.state = state.clone();
         this.state.action = this;
         this.impossiblePreStates = impossiblePreStates;
-        startup = warmupTime;
+        this.warmupTime = warmupTime;
         this.duration = duration;
         this.cooldown = cooldown;
     }
@@ -49,7 +48,7 @@ public class Action extends Executable implements Debuggable {
     }
     
     public float totalTime() {
-        return startup + duration + cooldown;
+        return warmupTime + duration + cooldown;
     }
     
     @Override
@@ -78,43 +77,37 @@ public class Action extends Executable implements Debuggable {
     
     @Override
     public final State execute(final Player player) {
-        // FIXME why did you change this
-        if (/*elapsedTime < cooldown || */isImpossiblePreState(player.state)
-                || dontExecute(player)) {
+        if (elapsedTime < cooldown || isImpossiblePreState(player.state) || dontExecute(player)) {
             error(this + " still in cooldown, " + (cooldown - elapsedTime) + " left");
             return player.state;
         }
-        
-        error("someone called " + this);
-        
-        if (!alreadyUsed /*&& !(this instanceof Stop)*/) {
-            player.state.setPlayer(null);
-            if (this instanceof ForwardAirAttack) {
-                System.out.println("lol");
+        elapsedTime = 0;
+        player.state.setPlayer(null);
+        state.setPlayer(player);
+        if (warmupTime == 0) {
+            if (!(this instanceof Stop)) {
+                System.out.println("calling " + this + " right away");
             }
-            elapsedTime = 0;
-            state.setPlayer(player);
-            alreadyUsed = true;
+            attack(state, player.facingRight);
+            move(player);
         } else {
-            player.state.setPlayer(null, false);
-            state.setPlayer(player, false);
+            System.out.println("calling " + this + " after " + warmupTime + " sec");
+            player.tasks.clear();
+            player.schedule(warmupTime, new Task() {
+                
+                @Override
+                public void run() {
+                    attack(state, player.facingRight);
+                    move(player);
+                }
+                
+            });
         }
-        
-        tryAttack(state, player.facingRight);
-        move(player);
         return state;
     }
     
-    protected void tryAttack(final State state, final boolean facingRight) {}
+    protected void attack(final State state, final boolean facingRight) {}
     
     protected void move(final Player player) {}
     
-    @Override
-    public void reset() {
-        alreadyUsed = false;
-        elapsedTime = 0;
-        state.resetTime();
-        // I don't know what you were trying to do here before,
-        // but this should do the same and is clearer
-    }
 }

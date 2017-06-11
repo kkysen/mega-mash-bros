@@ -1,5 +1,7 @@
 package com.github.kkysen.supersmashbros.actions;
 
+import java.util.function.Function;
+
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.supersmashbros.core.Player;
 import com.github.kkysen.supersmashbros.core.State;
@@ -9,7 +11,7 @@ import com.github.kkysen.supersmashbros.core.State;
  * 
  * @author Khyber Sen
  */
-public abstract class Executable {
+public abstract class Executable implements Function<Player, State> {
     
     public final KeyBinding keyBinding;
     
@@ -23,6 +25,11 @@ public abstract class Executable {
     }
     
     public abstract State execute(Player player);
+    
+    @Override
+    public State apply(final Player player) {
+        return execute(player);
+    }
     
     public void update() {}
     

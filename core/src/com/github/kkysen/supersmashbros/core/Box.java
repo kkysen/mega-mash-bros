@@ -25,28 +25,21 @@ public abstract class Box implements Renderable, Poolable, Debuggable {
     
     public final Player player;
     
-    public float elapsedTime;
+    public float elapsedTime = 0;
     private final float lifetime;
     
-    public Box(final Player player, final float width, final float height, final float lifetime,
-            final float warmupTime) {
+    public Box(final Player player, final float width, final float height, final float lifetime) {
         this.player = player;
         bounds.x = player.position.x;
         bounds.y = player.position.y;
         bounds.width = width;
         bounds.height = height;
         this.lifetime = lifetime;
-        //elapsedTime = -warmupTime;
-        elapsedTime = 0;
     }
     
     @Override
     public void reset() {
         pool.free(bounds);
-    }
-    
-    public boolean isWarmingUp() {
-        return elapsedTime < 0;
     }
     
     public final boolean overlaps(final Box box) {
@@ -86,10 +79,6 @@ public abstract class Box implements Renderable, Poolable, Debuggable {
     
     @Override
     public void render(final ShapeRenderer lineRenderer) {
-        if (isWarmingUp()) { // still starting up
-        	//System.out.println("warming up");
-            return;
-        }
         //System.out.println("rendering");
         lineRenderer.setColor(getColor());
         lineRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);

@@ -10,7 +10,6 @@ import com.github.kkysen.supersmashbros.core.State;
  * 
  * @author Khyber Sen
  */
-//An attack has hitboxes
 public abstract class Attack extends Action {
     
     public final float damage;
@@ -24,7 +23,8 @@ public abstract class Attack extends Action {
      * @param keyBinding the key binding used to call this attack
      * @param impossiblePreStates the states the player cannot be in when
      *            calling this attack
-     * @param startup the time between calling this attack and it being executed
+     * @param warmupTime the time between calling this attack and it being
+     *            executed
      * @param duration the duration of this attack
      * @param cooldown the cooldown period before being able to use this attack
      *            again
@@ -44,20 +44,22 @@ public abstract class Attack extends Action {
     }
     
     @Override
+    protected boolean dontExecute(final Player player) {
+        return alreadyUsed;
+    }
+    
+    @Override
     public void reset() {
+        if (alreadyUsed) {
+            System.out.println("resetting " + this);
+        }
         alreadyUsed = false;
     }
     
     @Override
-    protected void tryAttack(final State state, final boolean facingRight) {
-        if (alreadyUsed) {
-            return;
-        }
+    protected void attack(final State state, final boolean facingRight) {
         alreadyUsed = true;
-        attack(state, facingRight);
     }
-    
-    protected abstract void attack(State state, boolean facingRight);
     
     @Override
     protected void move(final Player player) {}

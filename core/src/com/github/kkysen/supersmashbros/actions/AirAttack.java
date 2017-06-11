@@ -18,7 +18,7 @@ public abstract class AirAttack extends Attack {
         if (player.velocity.y == 0) {
             System.out.println("skipping air");
         }
-        return player.velocity.y == 0;
+        return super.dontExecute(player) || player.velocity.y == 0;
     }
     
 }
