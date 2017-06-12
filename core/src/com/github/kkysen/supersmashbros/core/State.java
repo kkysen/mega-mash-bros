@@ -1,6 +1,7 @@
 package com.github.kkysen.supersmashbros.core;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -10,6 +11,9 @@ import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
+import com.github.kkysen.supersmashbros.actions.Move;
+import com.github.kkysen.supersmashbros.actions.MoveLeft;
+import com.github.kkysen.supersmashbros.actions.Stop;
 import com.github.kkysen.supersmashbros.app.Game;
 
 import lombok.experimental.ExtensionMethod;
@@ -49,7 +53,9 @@ public class State implements Renderable, Debuggable, Cloneable {
     		//temp[x].flip(true, false);
     		temp.get(x).flip(true, false);
     	}
-    	return new Animation<TextureRegion>(0.1f, temp);
+    	
+    	return new Animation<TextureRegion>(
+    			right.getFrameDuration(), temp, right.getPlayMode());
     }
     
     @Override

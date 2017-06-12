@@ -243,7 +243,7 @@ public class Mario extends Player {
             new Message(KeyBinding.PRINT, player -> player),
             new Message(KeyBinding.PRINT_STATE, player -> player.state),
             new UpAirAttack(upAirState, .15f, .25f, .05f, 1.5f, 8f),
-            new DownAirAttack(downAirState, .05f, .2f, .2f, 1.5f, 8f),
+            new DownAirAttack(downAirState, .05f, .2f, .2f, 1.5f, 6f),
         });
     }
     
