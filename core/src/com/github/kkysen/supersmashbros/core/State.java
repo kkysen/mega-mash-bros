@@ -1,7 +1,6 @@
 package com.github.kkysen.supersmashbros.core;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -11,9 +10,6 @@ import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Renderable;
 import com.github.kkysen.supersmashbros.actions.Action;
 import com.github.kkysen.supersmashbros.actions.Attack;
-import com.github.kkysen.supersmashbros.actions.Move;
-import com.github.kkysen.supersmashbros.actions.MoveLeft;
-import com.github.kkysen.supersmashbros.actions.Stop;
 import com.github.kkysen.supersmashbros.app.Game;
 
 import lombok.experimental.ExtensionMethod;
@@ -30,32 +26,36 @@ public class State implements Renderable, Debuggable, Cloneable {
     public Action action;
     public Vector2 position;
     
+    public Vector2 size;
+    
     public boolean resetJustCalled;
     private float elapsedTime;
     private final Animation<TextureRegion> animationRight;
     private final Animation<TextureRegion> animationLeft;
-    private boolean alreadyFlipped = false;	//false for not yet right, true for not yet left
+    private final boolean alreadyFlipped = false;	//false for not yet right, true for not yet left
     
     public State(final String name,
-    		final Animation<TextureRegion> animationRight) {
+            final Animation<TextureRegion> animationRight) {
         this.name = name;
         this.animationRight = animationRight;
-        this.animationLeft = flipFrames(animationRight);
+        animationLeft = flipFrames(animationRight);
+        final TextureRegion firstFrame = animationRight.getKeyFrame(0);
+        final float maxSide = Math.max(firstFrame.getRegionWidth(), firstFrame.getRegionHeight());
+        size = new Vector2(maxSide, maxSide);
     }
     
-    private Animation<TextureRegion> flipFrames(Animation<TextureRegion> right) {
-    	Array<TextureRegion> temp = new Array<>();
-    	for (Object r : right.getKeyFrames()) {
-    		temp.add(new TextureRegion((TextureRegion)r));
-    	}
-    	
-    	for (int x = 0; x < temp.size; x++) {
-    		//temp[x].flip(true, false);
-    		temp.get(x).flip(true, false);
-    	}
-    	
-    	return new Animation<TextureRegion>(
-    			right.getFrameDuration(), temp, right.getPlayMode());
+    private Animation<TextureRegion> flipFrames(final Animation<TextureRegion> right) {
+        final Array<TextureRegion> temp = new Array<>();
+        for (final Object r : right.getKeyFrames()) {
+            temp.add(new TextureRegion((TextureRegion) r));
+        }
+        
+        for (int x = 0; x < temp.size; x++) {
+            //temp[x].flip(true, false);
+            temp.get(x).flip(true, false);
+        }
+        
+        return new Animation<>(right.getFrameDuration(), temp, right.getPlayMode());
     }
     
     @Override
@@ -94,15 +94,10 @@ public class State implements Renderable, Debuggable, Cloneable {
     
     @Override
     public void render(final Batch batch) {
-    	TextureRegion t;
+        final Animation<TextureRegion> animation = player.facingRight ? animationRight
+                : animationLeft;
         elapsedTime += Game.deltaTime;
-        if (player.facingRight) {
-        	t = animationRight.getKeyFrame(elapsedTime);
-        }
-        else {
-        	t = animationLeft.getKeyFrame(elapsedTime);
-        }
-        batch.draw(t, position.x, position.y);
+        batch.draw(animation.getKeyFrame(elapsedTime), position.x, position.y);
     }
     
     public Hitbox newHitbox(final Attack attack, final float width, final float height) {

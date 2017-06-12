@@ -134,16 +134,12 @@ public abstract class Player implements Renderable, Debuggable {
         hurtboxes.add(new Hurtbox(this));
     }
     
-    // these should be replaced by something better, but will do for now
-    
-    @Deprecated
-    public float normalWidth() {
-        return 50f; // FIXME
+    public float width() {
+        return state.size.x;
     }
     
-    @Deprecated
-    public float normalHeight() {
-        return 50f; // FIXME
+    public float height() {
+        return state.size.y;
     }
     
     @Override

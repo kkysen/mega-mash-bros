@@ -26,7 +26,9 @@ public class Textures {
         textures.add(texture);
         final Array<TextureRegion> regions = new Array<>();
         for (int i = 0; i < numFrames; i++) {
-            regions.add(new TextureRegion(texture, x + width * i, y, width, height));
+            final TextureRegion region = new TextureRegion(texture, x + width * i, y, width,
+                    height);
+            regions.add(region);
         }
         return regions;
     }

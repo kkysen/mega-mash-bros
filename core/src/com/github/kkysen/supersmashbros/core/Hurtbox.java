@@ -18,7 +18,7 @@ public class Hurtbox extends Box {
     }
     
     public Hurtbox(final Player player) {
-        this(player, player.normalWidth(), player.normalHeight(), Float.MAX_VALUE);
+        this(player, player.width(), player.height(), Float.MAX_VALUE);
     }
     
     @Override
