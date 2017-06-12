@@ -29,8 +29,19 @@ public class Game extends ApplicationAdapter {
     public static final int WIDTH = 1600;
     public static final int HEIGHT = 900;
     
-    static final Path ASSETS = Paths.get("").toAbsolutePath().getParent()
-            .resolve("core/assets");
+    private static boolean isRunningFromJar() {
+        return Game.class.getResource("Game.class").toString().startsWith("jar");
+    }
+    
+    private static Path findAssets() {
+        Path path = Paths.get("").toAbsolutePath();
+        if (!isRunningFromJar()) {
+            path = path.getParent();
+        }
+        return path.resolve("core").resolve("assets");
+    }
+    
+    static final Path ASSETS = findAssets();
     
     public static FileHandle open(final Path path) {
         return Gdx.files.internal(path.toString());

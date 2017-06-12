@@ -192,8 +192,8 @@ public abstract class Player implements Renderable, Debuggable {
         final float accelerationMagnitude = knockback * damage * (percentage + 1)
                 * /* * massReciprocal*/ KNOCKBACK_MULTIPLIER;
         System.out.println(this + " knocked back by " + accelerationMagnitude + " at "
-                + MathUtils.radiansToDegrees * angle + "°, increasing percentage to " + percentage
-                + "%");
+                + MathUtils.radiansToDegrees * angle + " degrees, increasing percentage to "
+                + percentage + "%");
         percentage += damage * PERCENTAGE_MULTIPLIER;
         acceleration.setAngleAndLength(angle, accelerationMagnitude);
         stunTime += accelerationMagnitude * HITSTUN_MULTIPLIER;
@@ -214,7 +214,7 @@ public abstract class Player implements Renderable, Debuggable {
                     System.out.println(this + " attacked by " + hitbox + ", inflicting " + damage
                             + " damage and "
                             + attack.knockback + " knockback at "
-                            + MathUtils.radiansToDegrees * hitbox.angle + "°");
+                            + MathUtils.radiansToDegrees * hitbox.angle + " degrees");
                     knockback(damage, hitbox.angle, attack.knockback);
                 }
             }

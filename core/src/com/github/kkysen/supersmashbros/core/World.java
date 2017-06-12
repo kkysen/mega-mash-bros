@@ -67,8 +67,7 @@ public class World implements Renderable, Disposable, Debuggable {
         this.players.addAll(players);
         for (final Player player : players) {
             player.world = this;
-            player.position.x = MathUtils.random(platform.leftMargin,
-                    player.isAI() ? platform.rightMargin : platform.rightMargin * 0.25f);
+            player.position.x = MathUtils.random(platform.leftMargin, platform.rightMargin);
             player.position.y = platform.top + MathUtils.random(10f);
         }
     }
