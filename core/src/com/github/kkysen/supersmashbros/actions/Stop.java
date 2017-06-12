@@ -17,8 +17,11 @@ public class Stop extends Move {
     
     @Override
     protected void move(final Player player) {
-        player.velocity.x = 0;
-        player.acceleration.x = 0;
+    	if (player.wasOnPlatform) {
+    		player.velocity.x = 0;
+            player.acceleration.x = 0;
+    	}
+        
     }
     
 }

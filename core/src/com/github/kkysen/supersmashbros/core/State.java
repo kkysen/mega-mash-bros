@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.github.kkysen.libgdx.util.Debuggable;
 import com.github.kkysen.libgdx.util.ExtensionMethods;
 import com.github.kkysen.libgdx.util.Renderable;
@@ -27,23 +28,39 @@ public class State implements Renderable, Debuggable, Cloneable {
     
     public boolean resetJustCalled;
     private float elapsedTime;
-    private final Animation<TextureRegion> animation;
-    private TextureRegion lastFrame; // TODO why, unused
+    private final Animation<TextureRegion> animationRight;
+    private final Animation<TextureRegion> animationLeft;
+    private boolean alreadyFlipped = false;	//false for not yet right, true for not yet left
     
-    public State(final String name, final Animation<TextureRegion> animation) {
+    public State(final String name,
+    		final Animation<TextureRegion> animationRight) {
         this.name = name;
-        this.animation = animation;
+        this.animationRight = animationRight;
+        this.animationLeft = flipFrames(animationRight);
+    }
+    
+    private Animation<TextureRegion> flipFrames(Animation<TextureRegion> right) {
+    	Array<TextureRegion> temp = new Array<>();
+    	for (Object r : right.getKeyFrames()) {
+    		temp.add(new TextureRegion((TextureRegion)r));
+    	}
+    	
+    	for (int x = 0; x < temp.size; x++) {
+    		//temp[x].flip(true, false);
+    		temp.get(x).flip(true, false);
+    	}
+    	return new Animation<TextureRegion>(0.1f, temp);
     }
     
     @Override
     public State clone() {
-        final State clone = new State(name, animation);
+        final State clone = new State(name, animationRight);
         clone.player = player;
         clone.action = action;
         clone.position = position;
         clone.resetJustCalled = resetJustCalled;
         clone.elapsedTime = elapsedTime;
-        clone.lastFrame = lastFrame;
+        //clone.lastFrame = lastFrame;
         return clone;
     }
     
@@ -71,8 +88,15 @@ public class State implements Renderable, Debuggable, Cloneable {
     
     @Override
     public void render(final Batch batch) {
+    	TextureRegion t;
         elapsedTime += Game.deltaTime;
-        batch.draw(animation.getKeyFrame(elapsedTime), position.x, position.y);
+        if (player.facingRight) {
+        	t = animationRight.getKeyFrame(elapsedTime);
+        }
+        else {
+        	t = animationLeft.getKeyFrame(elapsedTime);
+        }
+        batch.draw(t, position.x, position.y);
     }
     
     public Hitbox newHitbox(final Attack attack, final float width, final float height) {

@@ -15,7 +15,7 @@ public class ForwardAirAttack extends AirAttack {
     @Override
     protected void attack(final State state, final boolean facingRight) {
         super.attack(state, facingRight);
-        final Hitbox hitbox = state.newHitbox(this, 50f, 50f);
+        final Hitbox hitbox = state.newHitbox(this, 40f, 50f);
         hitbox.angle = angle;
         hitbox.position.x += facingRight ? 20f : -20f;
         state.addHitbox(hitbox);

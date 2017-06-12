@@ -11,6 +11,7 @@ import com.github.kkysen.libgdx.util.Textures;
 import com.github.kkysen.libgdx.util.keys.Controller;
 import com.github.kkysen.libgdx.util.keys.KeyBinding;
 import com.github.kkysen.libgdx.util.keys.User;
+import com.github.kkysen.supersmashbros.actions.DownAirAttack;
 import com.github.kkysen.supersmashbros.actions.DownTiltAttack;
 import com.github.kkysen.supersmashbros.actions.Executable;
 import com.github.kkysen.supersmashbros.actions.ForwardAirAttack;
@@ -194,6 +195,20 @@ public class Mario extends Player {
                         {35, 77}
                     }));
     
+    private static final State downAirState = newState("up air state", 0.1f,
+            Textures.getFrames(
+                    SPRITES,
+                    10, 853,
+                    new int[][] {
+                        {37, 40},
+                        {29, 40},
+                        {32, 40},
+                        {35, 40},
+                        {33, 40},
+                        {34, 40},
+                        {36, 40}
+                    }));
+    
     public static Mario userControlled() {
         return new Mario(User.get());
     }
@@ -217,7 +232,7 @@ public class Mario extends Player {
     public Mario(final Controller controller) {
         super(NAME, controller, idleRight, 1, new Executable[] {
             new Stop(idleRight),
-            new MoveLeft(moveLeftState, 0f, 200f),
+            new MoveLeft(moveRightState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 500f),
             new RangeAttack(idleRight, 0, 1f, 1f, 1f, 2f),
@@ -228,6 +243,7 @@ public class Mario extends Player {
             new Message(KeyBinding.PRINT, player -> player),
             new Message(KeyBinding.PRINT_STATE, player -> player.state),
             new UpAirAttack(upAirState, .15f, .25f, .05f, 1.5f, 8f),
+            new DownAirAttack(downAirState, .05f, .2f, .2f, 1.5f, 8f),
         });
     }
     
