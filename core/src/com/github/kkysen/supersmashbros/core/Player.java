@@ -113,7 +113,6 @@ public abstract class Player implements Renderable, Debuggable {
         this.controller = controller;
         state = initialState.clone();
         state.setPlayer(this);
-        System.out.println(state);
         this.lives = lives;
         
         // EnumMap was throwing some weird errors because of some Eclipse compiler error,

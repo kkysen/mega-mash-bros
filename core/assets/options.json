@@ -4,7 +4,7 @@
     },
     "enemies": [
         {
-            "number": 1,
+            "number": 0,
             "character": "Mario",
             "controller": "SmartAI"
         }
@@ -14,7 +14,7 @@
             "controller": "JumpingAI"
         }
         {
-            "number": 0,
+            "number": 1,
             "character": "Mario",
             "controller": "FrozenAI"
         }

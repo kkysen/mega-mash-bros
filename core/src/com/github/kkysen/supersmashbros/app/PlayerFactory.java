@@ -73,7 +73,8 @@ public class PlayerFactory {
         final Constructor<? extends Player> playerConstructor = playerConstructors.get(playerName);
         if (playerConstructor == null) {
             throw new IllegalArgumentException(
-                    playerConstructor + " is not a valid Player class, choose another player");
+                    playerName + " is not a valid Player class, choose another character: "
+                            + playerConstructors.keySet());
         }
         
         final Controller controller;
@@ -84,7 +85,8 @@ public class PlayerFactory {
             final Class<? extends AI> aiClass = aiClasses.get(aiName);
             if (aiClass == null) {
                 throw new IllegalArgumentException(
-                        aiName + " is not a valid AI class, choose another AI controller");
+                        aiName + " is not a valid AI class, choose another AI controller: "
+                                + aiClasses.keySet());
             }
             try {
                 controller = aiClass.newInstance();
