@@ -7,6 +7,7 @@ Super Smash Bros is a type of platform fighting game where the objective is not 
 * A unified game experience, meaning all these other features work in harmony
 * Characters playable by both the user and an AI
 * Various moves, aerial and ground
+* Platform movement
 * A simple AI (not the main focus)
 
 ### Description

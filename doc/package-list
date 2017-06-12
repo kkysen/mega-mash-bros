@@ -1,6 +1,5 @@
 com.github.kkysen.libgdx.util
-com.github.kkysen.supersmashbros.actions
-com.github.kkysen.supersmashbros.app
-com.github.kkysen.supersmashbros.core
-com.github.kkysen.supersmashbros.desktop
-com.github.kkysen.supersmashbros.players
+com.github.kkysen.megamashbros.actions
+com.github.kkysen.megamashbros.app
+com.github.kkysen.megamashbros.core
+com.github.kkysen.megamashbros.players

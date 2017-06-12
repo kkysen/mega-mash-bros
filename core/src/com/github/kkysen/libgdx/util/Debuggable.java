@@ -1,7 +1,7 @@
 package com.github.kkysen.libgdx.util;
 
 import com.badlogic.gdx.Gdx;
-import com.github.kkysen.supersmashbros.app.Game;
+import com.github.kkysen.megamashbros.app.Game;
 
 /**
  * 

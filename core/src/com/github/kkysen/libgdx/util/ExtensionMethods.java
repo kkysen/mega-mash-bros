@@ -6,7 +6,7 @@ import java.util.Comparator;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pools;
-import com.github.kkysen.supersmashbros.app.Game;
+import com.github.kkysen.megamashbros.app.Game;
 
 import lombok.experimental.ExtensionMethod;
 

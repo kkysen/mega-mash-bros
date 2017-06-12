@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.0" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.github.kkysen.supersmashbros.core.Player" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/core/Player.java" binary="false" 
+  <class id="1" language="java" name="com.github.kkysen.megamashbros.core.Player" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/core/Player.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="462" y="3"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -11,9 +11,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="com.github.kkysen.supersmashbros.core.Box" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/core/Box.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="com.github.kkysen.megamashbros.core.Box" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/core/Box.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="845" y="-683"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -21,8 +20,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.github.kkysen.supersmashbros.core.Hitbox" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/core/Hitbox.java" binary="false" 
+  <class id="3" language="java" name="com.github.kkysen.megamashbros.core.Hitbox" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/core/Hitbox.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="871" y="-352"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -31,8 +30,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.github.kkysen.supersmashbros.core.Hurtbox" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/core/Hurtbox.java" binary="false" 
+  <class id="4" language="java" name="com.github.kkysen.megamashbros.core.Hurtbox" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/core/Hurtbox.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="840" y="-38"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -41,8 +40,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.github.kkysen.supersmashbros.core.State" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/core/State.java" binary="false" 
+  <class id="5" language="java" name="com.github.kkysen.megamashbros.core.State" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/core/State.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="519" y="682"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -51,8 +50,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="com.github.kkysen.supersmashbros.actions.Action" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/Action.java" binary="false" 
+  <class id="6" language="java" name="com.github.kkysen.megamashbros.actions.Action" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/Action.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="944" y="333"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -61,8 +60,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="com.github.kkysen.supersmashbros.core.World" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/core/World.java" binary="false" 
+  <class id="7" language="java" name="com.github.kkysen.megamashbros.core.World" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/core/World.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1704" y="-916"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -71,9 +70,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="com.github.kkysen.supersmashbros.app.Game" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/app/Game.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="com.github.kkysen.megamashbros.app.Game" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/app/Game.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1316" y="755"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -90,8 +88,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="10" language="java" name="com.github.kkysen.supersmashbros.core.Platform" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/core/Platform.java" binary="false" 
+  <class id="10" language="java" name="com.github.kkysen.megamashbros.core.Platform" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/core/Platform.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="941" y="768"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -100,8 +98,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="com.github.kkysen.supersmashbros.actions.Attack" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/Attack.java" binary="false" 
+  <class id="11" language="java" name="com.github.kkysen.megamashbros.actions.Attack" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/Attack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1352" y="143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -129,9 +127,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="com.github.kkysen.supersmashbros.actions.RangeAttack" 
+  <class id="14" language="java" name="com.github.kkysen.megamashbros.actions.RangeAttack" 
     project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/RangeAttack.java" binary="false" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/RangeAttack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1912" y="604"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -140,8 +138,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="com.github.kkysen.supersmashbros.actions.Jump" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/Jump.java" binary="false" 
+  <class id="15" language="java" name="com.github.kkysen.megamashbros.actions.Jump" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/Jump.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1628" y="620"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -150,8 +148,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="com.github.kkysen.supersmashbros.players.Mario" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/players/Mario.java" binary="false" 
+  <class id="16" language="java" name="com.github.kkysen.megamashbros.players.Mario" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/players/Mario.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="514" y="1124"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -162,7 +160,7 @@
   </class>  
   <enumeration id="17" language="java" name="com.github.kkysen.libgdx.util.keys.Key" project="super-smash-bros-core" 
     file="/super-smash-bros-core/src/com/github/kkysen/libgdx/util/keys/Key.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="136" y="280"/>    
+    <position height="-1" width="-1" x="2604" y="300"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -198,8 +196,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="com.github.kkysen.supersmashbros.ai.AI" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/ai/AI.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="21" language="java" name="com.github.kkysen.megamashbros.ai.AI" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/ai/AI.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1272" y="-390"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -207,8 +205,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="com.github.kkysen.supersmashbros.actions.Move" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/Move.java" binary="false" 
+  <class id="22" language="java" name="com.github.kkysen.megamashbros.actions.Move" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/Move.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1270" y="-132"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -217,9 +215,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="com.github.kkysen.supersmashbros.actions.MoveLeft" 
-    project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/MoveLeft.java" binary="false" 
+  <class id="23" language="java" name="com.github.kkysen.megamashbros.actions.MoveLeft" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/MoveLeft.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1756" y="314"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -228,9 +225,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="com.github.kkysen.supersmashbros.actions.MoveRight" 
-    project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/MoveRight.java" binary="false" 
+  <class id="24" language="java" name="com.github.kkysen.megamashbros.actions.MoveRight" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/MoveRight.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1738" y="58"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -239,8 +235,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="com.github.kkysen.supersmashbros.ai.RandomAI" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/ai/RandomAI.java" binary="false" 
+  <class id="25" language="java" name="com.github.kkysen.megamashbros.ai.RandomAI" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/ai/RandomAI.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1758" y="438"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -258,9 +254,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="27" language="java" name="com.github.kkysen.supersmashbros.actions.AirAttack" 
-    project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/AirAttack.java" binary="false" 
+  <class id="27" language="java" name="com.github.kkysen.megamashbros.actions.AirAttack" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/AirAttack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="970" y="1032"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -269,9 +264,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="28" language="java" name="com.github.kkysen.supersmashbros.actions.DownAirAttack" 
+  <class id="28" language="java" name="com.github.kkysen.megamashbros.actions.DownAirAttack" 
     project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/DownAirAttack.java" binary="false" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/DownAirAttack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2010" y="-188"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -280,9 +275,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="29" language="java" name="com.github.kkysen.supersmashbros.actions.DownTiltAttack" 
+  <class id="29" language="java" name="com.github.kkysen.megamashbros.actions.DownTiltAttack" 
     project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/DownTiltAttack.java" binary="false" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/DownTiltAttack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1978" y="754"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -291,9 +286,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="30" language="java" name="com.github.kkysen.supersmashbros.actions.Executable" 
+  <class id="30" language="java" name="com.github.kkysen.megamashbros.actions.Executable" 
     project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/Executable.java" binary="false" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/Executable.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1334" y="1128"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -302,9 +297,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="31" language="java" name="com.github.kkysen.supersmashbros.actions.ForwardAirAttack" 
+  <class id="31" language="java" name="com.github.kkysen.megamashbros.actions.ForwardAirAttack" 
     project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/ForwardAirAttack.java" binary="false" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/ForwardAirAttack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1964" y="1184"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -313,9 +308,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="com.github.kkysen.supersmashbros.actions.ForwardTiltAttack" 
+  <class id="32" language="java" name="com.github.kkysen.megamashbros.actions.ForwardTiltAttack" 
     project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/ForwardTiltAttack.java" binary="false" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/ForwardTiltAttack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1640" y="1052"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -324,9 +319,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="33" language="java" name="com.github.kkysen.supersmashbros.actions.GroundAttack" 
+  <class id="33" language="java" name="com.github.kkysen.megamashbros.actions.GroundAttack" 
     project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/GroundAttack.java" binary="false" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/GroundAttack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="970" y="1188"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -335,8 +330,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="34" language="java" name="com.github.kkysen.supersmashbros.actions.Message" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/Message.java" binary="false" 
+  <class id="34" language="java" name="com.github.kkysen.megamashbros.actions.Message" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/Message.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1614" y="1192"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -345,8 +340,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="35" language="java" name="com.github.kkysen.supersmashbros.actions.Stop" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/Stop.java" binary="false" 
+  <class id="35" language="java" name="com.github.kkysen.megamashbros.actions.Stop" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/Stop.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1636" y="778"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -355,9 +350,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="36" language="java" name="com.github.kkysen.supersmashbros.actions.UpAirAttack" 
+  <class id="36" language="java" name="com.github.kkysen.megamashbros.actions.UpAirAttack" 
     project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/UpAirAttack.java" binary="false" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/UpAirAttack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1984" y="1050"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -366,9 +361,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="37" language="java" name="com.github.kkysen.supersmashbros.actions.UpTiltAttack" 
+  <class id="37" language="java" name="com.github.kkysen.megamashbros.actions.UpTiltAttack" 
     project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/actions/UpTiltAttack.java" binary="false" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/actions/UpTiltAttack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1978" y="912"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -377,8 +372,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="38" language="java" name="com.github.kkysen.supersmashbros.ai.FrozenAI" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/ai/FrozenAI.java" binary="false" 
+  <class id="38" language="java" name="com.github.kkysen.megamashbros.ai.FrozenAI" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/ai/FrozenAI.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1628" y="904"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -387,8 +382,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="39" language="java" name="com.github.kkysen.supersmashbros.ai.JumpingAI" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/ai/JumpingAI.java" binary="false" 
+  <class id="39" language="java" name="com.github.kkysen.megamashbros.ai.JumpingAI" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/ai/JumpingAI.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1750" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -397,8 +392,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="40" language="java" name="com.github.kkysen.supersmashbros.ai.SmartAI" project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/ai/SmartAI.java" binary="false" 
+  <class id="40" language="java" name="com.github.kkysen.megamashbros.ai.SmartAI" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/ai/SmartAI.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1666" y="-130"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -407,9 +402,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="41" language="java" name="com.github.kkysen.supersmashbros.app.PlayerFactory" 
-    project="super-smash-bros-core" 
-    file="/super-smash-bros-core/src/com/github/kkysen/supersmashbros/app/PlayerFactory.java" binary="false" 
+  <class id="41" language="java" name="com.github.kkysen.megamashbros.app.PlayerFactory" project="super-smash-bros-core" 
+    file="/super-smash-bros-core/src/com/github/kkysen/megamashbros/app/PlayerFactory.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1772" y="-468"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
@@ -1001,10 +995,10 @@
   <association id="191">    
     <end type="SOURCE" refId="18" navigable="false">      
       <attribute id="192" name="keys">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="2468" y="20"/>      
       </attribute>      
       <multiplicity id="193" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="2468" y="20"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="17" navigable="true"/>    
@@ -1207,250 +1201,270 @@
     <end type="TARGET" refId="1"/>  
   </dependency>  
   <dependency id="243">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="41"/>  
+  </dependency>  
+  <dependency id="244">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="20"/>  
   </dependency>  
-  <dependency id="244">    
+  <dependency id="245">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="18"/>  
   </dependency>  
-  <dependency id="245">    
+  <dependency id="246">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="35"/>  
   </dependency>  
-  <realization id="246">    
+  <realization id="247">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="12"/>  
   </realization>  
-  <realization id="247">    
+  <realization id="248">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="12"/>  
   </realization>  
-  <dependency id="248">    
+  <dependency id="249">    
     <end type="SOURCE" refId="28"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <dependency id="249">    
+  <dependency id="250">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="13"/>  
   </dependency>  
-  <dependency id="250">    
+  <dependency id="251">    
     <end type="SOURCE" refId="24"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="251">    
+  <dependency id="252">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="23"/>  
   </dependency>  
-  <dependency id="252">    
+  <dependency id="253">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="24"/>  
   </dependency>  
-  <dependency id="253">    
+  <dependency id="254">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="254">    
+  <dependency id="255">    
     <end type="SOURCE" refId="22"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <association id="255">    
+  <association id="256">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="256" name="state">        
+      <attribute id="257" name="state">        
         <position height="0" width="0" x="27" y="781"/>      
       </attribute>      
-      <multiplicity id="257" minimum="0" maximum="1">        
+      <multiplicity id="258" minimum="0" maximum="1">        
         <position height="0" width="0" x="27" y="781"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="258">    
+  <dependency id="259">    
     <end type="SOURCE" refId="33"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="259">    
+  <dependency id="260">    
     <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="18"/>  
   </dependency>  
-  <generalization id="260">    
+  <generalization id="261">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="11"/>  
   </generalization>  
-  <realization id="261">    
+  <realization id="262">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="9"/>  
   </realization>  
-  <dependency id="262">    
+  <dependency id="263">    
     <end type="SOURCE" refId="28"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="263">    
+  <dependency id="264">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <dependency id="264">    
+  <dependency id="265">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
-  <dependency id="265">    
+  <dependency id="266">    
     <end type="SOURCE" refId="40"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="266">    
+  <dependency id="267">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="20"/>  
   </dependency>  
-  <dependency id="267">    
+  <dependency id="268">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <association id="268">    
+  <association id="269">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="269" name="controller">        
+      <attribute id="270" name="controller">        
         <position height="0" width="0" x="10" y="-30"/>      
       </attribute>      
-      <multiplicity id="270" minimum="0" maximum="1">        
+      <multiplicity id="271" minimum="0" maximum="1">        
         <position height="0" width="0" x="10" y="-30"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="19" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="271">    
+  <dependency id="272">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="28"/>  
+  </dependency>  
+  <dependency id="273">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="272">    
+  <dependency id="274">    
     <end type="SOURCE" refId="41"/>    
     <end type="TARGET" refId="40"/>  
   </dependency>  
-  <dependency id="273">    
+  <dependency id="275">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <dependency id="274">    
+  <dependency id="276">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="277">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="32"/>  
   </dependency>  
-  <association id="275">    
+  <association id="278">    
     <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="276" name="jumpState">        
+      <attribute id="279" name="jumpState">        
         <position height="0" width="0" x="-330" y="298"/>      
       </attribute>      
-      <multiplicity id="277" minimum="0" maximum="1">        
+      <multiplicity id="280" minimum="0" maximum="1">        
         <position height="0" width="0" x="-330" y="298"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="278">    
+  <dependency id="281">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="33"/>  
+  </dependency>  
+  <realization id="282">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="12"/>  
   </realization>  
-  <dependency id="279">    
+  <dependency id="283">    
     <end type="SOURCE" refId="40"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <dependency id="280">    
+  <dependency id="284">    
     <end type="SOURCE" refId="35"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="281">    
+  <dependency id="285">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="282">    
+  <dependency id="286">    
     <end type="SOURCE" refId="25"/>    
     <end type="TARGET" refId="18"/>  
   </dependency>  
-  <generalization id="283">    
+  <generalization id="287">    
     <end type="SOURCE" refId="28"/>    
     <end type="TARGET" refId="27"/>  
   </generalization>  
-  <dependency id="284">    
+  <dependency id="288">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="289">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="40"/>  
   </dependency>  
-  <dependency id="285">    
+  <dependency id="290">    
     <end type="SOURCE" refId="40"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
-  <dependency id="286">    
+  <dependency id="291">    
     <end type="SOURCE" refId="35"/>    
     <end type="TARGET" refId="18"/>  
   </dependency>  
-  <dependency id="287">    
+  <dependency id="292">    
     <end type="SOURCE" refId="27"/>    
     <end type="TARGET" refId="18"/>  
   </dependency>  
-  <dependency id="288">    
+  <dependency id="293">    
     <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="13"/>  
   </dependency>  
-  <dependency id="289">    
+  <dependency id="294">    
     <end type="SOURCE" refId="34"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <association id="290">    
+  <association id="295">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="291" name="state">        
+      <attribute id="296" name="state">        
         <position height="0" width="0" x="106" y="621"/>      
       </attribute>      
-      <multiplicity id="292" minimum="0" maximum="1">        
+      <multiplicity id="297" minimum="0" maximum="1">        
         <position height="0" width="0" x="106" y="621"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="293">    
+  <dependency id="298">    
     <end type="SOURCE" refId="33"/>    
     <end type="TARGET" refId="18"/>  
   </dependency>  
-  <generalization id="294">    
+  <generalization id="299">    
     <end type="SOURCE" refId="31"/>    
     <end type="TARGET" refId="27"/>  
   </generalization>  
-  <dependency id="295">    
+  <dependency id="300">    
     <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="17"/>  
   </dependency>  
-  <generalization id="296">    
+  <generalization id="301">    
     <end type="SOURCE" refId="22"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <dependency id="297">    
+  <dependency id="302">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="18"/>  
   </dependency>  
-  <dependency id="298">    
+  <dependency id="303">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="8"/>  
   </dependency>  
-  <dependency id="299">    
+  <dependency id="304">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <association id="300">    
+  <association id="305">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="301" name="impossiblePreStates">        
+      <attribute id="306" name="impossiblePreStates">        
         <position height="0" width="0" x="58" y="244"/>      
       </attribute>      
-      <multiplicity id="302" minimum="0" maximum="2147483647">        
+      <multiplicity id="307" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="58" y="244"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="303">    
+  <dependency id="308">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="21"/>  
   </dependency>  
-  <dependency id="304">    
+  <dependency id="309">    
     <end type="SOURCE" refId="31"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
