@@ -167,7 +167,7 @@ public class Mario extends Player {
     
     private static final State forwardAirState = newState("forward air", 0.1f, temp);
     
-    private static final State upTiltState = newState("up tilt state", 0.1f,
+    private static final State upTiltState = newState("up tilt", 0.1f,
             Textures.getFrames(
                     SPRITES,
                     11, 535,
@@ -180,7 +180,7 @@ public class Mario extends Player {
                         {28, 53}
                     }));
     
-    private static final State upAirState = newState("up air state", 0.1f,
+    private static final State upAirState = newState("up air", 0.1f,
             Textures.getFrames(
                     SPRITES,
                     11, 612,
@@ -235,7 +235,7 @@ public class Mario extends Player {
             new MoveLeft(moveRightState, 0f, 200f),
             new MoveRight(moveRightState, 0f, 200f),
             new Jump(jumpState, 1f, 0.1f, 500f),
-            new RangeAttack(idleRight, 0, 1f, 1f, 1f, 2f),
+            new RangeAttack(idleRight, 0, 1f, 1f, 3f, 3f),
             new ForwardTiltAttack(forwardTiltState, 0.1f, 0.1f, .5f, 5f, 5f),
             new DownTiltAttack(downTiltState, 0.1f, 0.1f, 0.3f, 3f, 3f),
             new ForwardAirAttack(forwardAirState, 0.6f, 0.1f, .8f, 3f, 6f),

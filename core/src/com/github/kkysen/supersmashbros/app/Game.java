@@ -29,8 +29,19 @@ public class Game extends ApplicationAdapter {
     public static final int WIDTH = 1600;
     public static final int HEIGHT = 900;
     
-    private static final Path ASSETS = Paths.get("").toAbsolutePath().getParent()
-            .resolve("core/assets");
+    private static boolean isRunningFromJar() {
+        return Game.class.getResource("Game.class").toString().startsWith("jar");
+    }
+    
+    private static Path findAssets() {
+        Path path = Paths.get("").toAbsolutePath();
+        if (!isRunningFromJar()) {
+            path = path.getParent();
+        }
+        return path.resolve("core").resolve("assets");
+    }
+    
+    static final Path ASSETS = findAssets();
     
     public static FileHandle open(final Path path) {
         return Gdx.files.internal(path.toString());
@@ -67,11 +78,21 @@ public class Game extends ApplicationAdapter {
         return players;
     }
     
+    private static final boolean useOptions = true;
+    
+    private Player[] createPlayers() {
+        if (useOptions) {
+            return PlayerFactory.fromJson();
+        } else {
+            return createPlayers(numAIs);
+        }
+    }
+    
     private World createWorld() {
         final Texture background = new Texture(asset("background.jpg"));
         System.out.println(background.getHeight() + ", " + background.getWidth());
         final Sprite platform = new Sprite(new Texture(asset("platform.png")));
-        return new World(WIDTH, HEIGHT, background, platform, createPlayers(numAIs));
+        return new World(WIDTH, HEIGHT, background, platform, createPlayers());
     }
     
     @Override
@@ -108,7 +129,7 @@ public class Game extends ApplicationAdapter {
         deltaTime = Gdx.graphics.getDeltaTime() * speed;
         
         if (KeyBinding.RESTART.isPressed(User.get())) {
-            world.replacePlayers(createPlayers(numAIs));
+            world.replacePlayers(createPlayers());
             world.gameOver = false;
         }
         
